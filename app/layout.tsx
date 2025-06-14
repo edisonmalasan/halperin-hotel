@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import DashboardNavigation from "./public/components/DashboardNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <div className="flex w-full flex-col max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
+        <nav className="hidden font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 text-6xl">
+          \<DashboardNavigation></DashboardNavigation>
+        </nav>
+      </header>
+    </div>
   );
 }
