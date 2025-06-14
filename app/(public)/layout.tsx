@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -21,10 +22,10 @@ export const metadata: Metadata = {
   description: "Welcome to Halperin Hotel",
 };
 
-export default function RootLayout({
+export default async function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <Providers>
