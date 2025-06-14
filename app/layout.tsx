@@ -56,7 +56,7 @@ export default function RootLayout({
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              {/* LogOut Component */}
+              {/* LogOut Component TBA*/}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
