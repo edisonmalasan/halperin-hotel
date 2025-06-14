@@ -1,10 +1,7 @@
-import HomePage from "./(public)/page";
+import HomePage from "./(guest)/page";
 
-export default function Home() {
-  return <HomePage></HomePage>;
+export default function RootPage() {
+  return (
+      <HomePage />
+  );
 }
-
-export const metadata = {
-  title: "Halperin Hotel",
-  description: "Welcome to Halperin Hotel",
-};
