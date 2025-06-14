@@ -33,24 +33,42 @@ export default function RootLayout({
                 <div>
                   <h3 className="font-bold mb-4">About Us</h3>
                   <p className="text-gray-600">
-                    Halperin Hotel offers luxury accommodations in the heart of the city.
+                    Halperin Hotel offers luxury accommodations in the heart of
+                    the city.
                   </p>
                 </div>
                 <div>
                   <h3 className="font-bold mb-4">Quick Links</h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="/rooms" className="text-gray-600 hover:text-blue-500">
+                      <a
+                        href="/rooms"
+                        className="text-gray-600 hover:text-blue-500"
+                      >
                         Rooms
                       </a>
                     </li>
                     <li>
-                      <a href="/amenities" className="text-gray-600 hover:text-blue-500">
-                        Amenities
+                      <a
+                        href="/suites"
+                        className="text-gray-600 hover:text-blue-500"
+                      >
+                        Suites
                       </a>
                     </li>
                     <li>
-                      <a href="/contact" className="text-gray-600 hover:text-blue-500">
+                      <a
+                        href="/dining"
+                        className="text-gray-600 hover:text-blue-500"
+                      >
+                        Dining
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/contact"
+                        className="text-gray-600 hover:text-blue-500"
+                      >
                         Contact
                       </a>
                     </li>
@@ -81,7 +99,10 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="border-t mt-8 pt-8 text-center text-gray-600">
-                <p>&copy; {new Date().getFullYear()} Halperin Hotel. All rights reserved.</p>
+                <p>
+                  &copy; {new Date().getFullYear()} Halperin Hotel. All rights
+                  reserved.
+                </p>
               </div>
             </div>
           </footer>

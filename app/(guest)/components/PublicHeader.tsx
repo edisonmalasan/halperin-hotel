@@ -10,15 +10,18 @@ export default function PublicHeader() {
     <header className="bg-white shadow">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">
-            Halperin Hotel
+          <Link href="/" className="text-xl font-thin">
+            The Halperin Hotel
           </Link>
           <div className="flex gap-4">
             <Link href="/rooms" className="hover:text-blue-500">
               Rooms
             </Link>
-            <Link href="/amenities" className="hover:text-blue-500">
-              Amenities
+            <Link href="/suites" className="hover:text-blue-500">
+              Suites
+            </Link>
+            <Link href="/dining" className="hover:text-blue-500">
+              Dining
             </Link>
             <Link href="/contact" className="hover:text-blue-500">
               Contact

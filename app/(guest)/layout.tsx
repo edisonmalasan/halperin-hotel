@@ -25,8 +25,11 @@ export default function GuestLayout({
               <Link href="/rooms" className="hover:text-blue-500">
                 Rooms
               </Link>
-              <Link href="/amenities" className="hover:text-blue-500">
-                Amenities
+              <Link href="/suites" className="hover:text-blue-500">
+                Suites
+              </Link>
+              <Link href="/dining" className="hover:text-blue-500">
+                Dining
               </Link>
               <Link href="/contact" className="hover:text-blue-500">
                 Contact
@@ -52,24 +55,42 @@ export default function GuestLayout({
             <div>
               <h3 className="font-bold mb-4">About Us</h3>
               <p className="text-gray-600">
-                Halperin Hotel offers luxury accommodations in the heart of the city.
+                Halperin Hotel offers luxury accommodations in the heart of the
+                city.
               </p>
             </div>
             <div>
               <h3 className="font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/rooms" className="text-gray-600 hover:text-blue-500">
+                  <Link
+                    href="/rooms"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
                     Rooms
                   </Link>
                 </li>
                 <li>
-                  <Link href="/amenities" className="text-gray-600 hover:text-blue-500">
-                    Amenities
+                  <Link
+                    href="/suites"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Suites
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-gray-600 hover:text-blue-500">
+                  <Link
+                    href="/dining"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Dining
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
                     Contact
                   </Link>
                 </li>
@@ -100,10 +121,13 @@ export default function GuestLayout({
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-gray-600">
-            <p>&copy; {new Date().getFullYear()} Halperin Hotel. All rights reserved.</p>
+            <p>
+              &copy; {new Date().getFullYear()} Halperin Hotel. All rights
+              reserved.
+            </p>
           </div>
         </div>
       </footer>
     </div>
   );
-} 
+}
