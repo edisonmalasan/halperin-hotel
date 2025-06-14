@@ -6,14 +6,14 @@ import Link from "next/link";
 import { use } from "react";
 
 const navigation = [
-  { name: "Dashboard", href: "/public/dashboard" },
-  { name: "Settings", href: "/public/settings" },
-  { name: "Profile", href: "/public/profile" },
-  { name: "Rooms", href: "/public/rooms" },
-  { name: "Bookings", href: "/public/bookings" },
-  { name: "Guests", href: "/public/guests" },
-  { name: "Reports", href: "/public/reports" },
-  { name: "Help", href: "/public/help" },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Settings", href: "/settings" },
+  { name: "Profile", href: "/profile" },
+  { name: "Rooms", href: "/rooms" },
+  { name: "Bookings", href: "/bookings" },
+  { name: "Guests", href: "/guests" },
+  { name: "Reports", href: "/reports" },
+  { name: "Help", href: "/help" },
 ];
 
 export default function DashboardNavigation() {
