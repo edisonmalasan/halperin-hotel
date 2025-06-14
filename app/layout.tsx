@@ -13,6 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,46 +23,53 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <div className="flex w-full flex-col max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
-        <nav className="hidden font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 text-6xl">
-          <DashboardNavigation />
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button
-              className="shrink-0 md:hidden"
-              variant="outline"
-              size={"icon"}
-            >
-              <MenuIcon className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-        </Sheet>
+    <html lang="en">
+      <body>
+        <Providers>
+          <div className="flex w-full flex-col max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
+            <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
+              <nav className="hidden font-medium md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 text-6xl">
+                <DashboardNavigation />
+              </nav>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    className="shrink-0 md:hidden"
+                    variant="outline"
+                    size={"icon"}
+                  >
+                    <MenuIcon className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+              </Sheet>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant={"secondary"}
-              size={"icon"}
-              className="rounded-full"
-            >
-              <CircleUser className="w-5 h-5 "></CircleUser>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              {/* LogOut Component TBA*/}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </header>
-    </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant={"secondary"}
+                    size={"icon"}
+                    className="rounded-full"
+                  >
+                    <CircleUser className="w-5 h-5 "></CircleUser>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    {/* LogOut Component TBA*/}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </header>
+            <Toaster />
+          </div>
+        </Providers>
+      </body>
+    </html>
   );
 }
