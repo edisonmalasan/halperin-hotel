@@ -4,23 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+} from "@/components/ui/navigation-menu";
 import MegaMenu from "./MegaMenu";
 import { rooms } from "../data/rooms";
 import { suites } from "../data/suites";
 import { dining } from "../data/dining";
 import { occasions } from "../data/occasions";
 import { more } from "../data/more";
-
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
 
 export default function DashboardNavigation() {
   const { data: session } = useSession();
@@ -33,18 +29,44 @@ export default function DashboardNavigation() {
           THE HALPERIN HOTEL
         </Link>
 
-        <div className="flex flex-1 justify-center gap-4 mx-8">
-          {/* Mega Menus */}
-          <NavigationMenu>
-            <NavigationMenuList className="flex flex-1 justify-center gap-4 mx-8">
-              <MegaMenu label="Rooms" items={rooms} />
-              <MegaMenu label="Suites" items={suites} />
-              <MegaMenu label="Dining" items={dining} />
-              <MegaMenu label="Occasions" items={occasions} />
-              <MegaMenu label="More" items={more} />
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
+        <NavigationMenu>
+          <NavigationMenuList className="flex flex-1 justify-center gap-4 mx-8">
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Rooms</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <MegaMenu items={rooms} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Suites</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <MegaMenu items={suites} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Dining</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <MegaMenu items={dining} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Occasions</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <MegaMenu items={occasions} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>More</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <MegaMenu items={more} />
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
         {/* Auth Buttons */}
         <div className="flex gap-3 flex-shrink-0">
