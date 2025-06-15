@@ -4,19 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import MegaMenu from "./MegaMenu";
+import { rooms } from "../data/rooms";
+import { suites } from "../data/suites";
+import { dining } from "../data/dining";
+import { occasions } from "../data/occasions";
+import { more } from "../data/more";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
+  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
-import { rooms } from "./../data/rooms";
-import { suites } from "./../data/suites";
-import { dining } from "./../data/dining";
-import { occasions } from "./../data/occasions";
 
 export default function DashboardNavigation() {
   const { data: session } = useSession();
@@ -30,123 +34,14 @@ export default function DashboardNavigation() {
         </Link>
 
         <div className="flex flex-1 justify-center gap-4 mx-8">
+          {/* Mega Menus */}
           <NavigationMenu>
-            <NavigationMenuList className="flex items-center gap-4">
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
-                  Rooms
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                    {rooms.map((room) => (
-                      <li key={room.href}>
-                        <Link
-                          href={room.href}
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
-                            pathname === room.href &&
-                              "bg-[#8b6d2636] text-[#8b6c26]"
-                          )}
-                        >
-                          <div className="text-xs font-medium leading-none">
-                            {room.title}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
-                  Suites
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                    {suites.map((suite) => (
-                      <li key={suite.href}>
-                        <Link
-                          href={suite.href}
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
-                            pathname === suite.href &&
-                              "bg-[#8b6d2636] text-[#8b6c26]"
-                          )}
-                        >
-                          <div className="text-xs font-medium leading-none">
-                            {suite.title}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
-                  Dining
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    {dining.map((venue) => (
-                      <li key={venue.href}>
-                        <Link
-                          href={venue.href}
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
-                            pathname === venue.href &&
-                              "bg-[#8b6d2636] text-[#8b6c26]"
-                          )}
-                        >
-                          <div className="text-xs font-medium leading-none">
-                            {venue.title}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
-                  Occasions
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    {occasions.map((occasion) => (
-                      <li key={occasion.href}>
-                        <Link
-                          href={occasion.href}
-                          className={cn(
-                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
-                            pathname === occasion.href &&
-                              "bg-[#8b6d2636] text-[#8b6c26]"
-                          )}
-                        >
-                          <div className="text-xs font-medium leading-none">
-                            {occasion.title}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link
-                  href="/contact"
-                  className={cn(
-                    "text-sm font-medium hover:text-[#8b6c26] transition-colors",
-                    pathname === "/contact" && "text-[#8b6c26]"
-                  )}
-                >
-                  Contact
-                </Link>
-              </NavigationMenuItem>
+            <NavigationMenuList>
+              <MegaMenu label="Rooms" items={rooms} />
+              <MegaMenu label="Suites" items={suites} />
+              <MegaMenu label="Dining" items={dining} />
+              <MegaMenu label="Occasions" items={occasions} />
+              <MegaMenu label="More" items={more} />
             </NavigationMenuList>
           </NavigationMenu>
         </div>
