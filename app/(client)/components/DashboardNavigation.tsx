@@ -33,19 +33,6 @@ export default function DashboardNavigation() {
           <NavigationMenu>
             <NavigationMenuList className="flex items-center gap-4">
               <NavigationMenuItem>
-                <Link href="/" passHref>
-                  <NavigationMenuLink
-                    className={cn(
-                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
-                      pathname === "/" && "text-[#8b6c26]"
-                    )}
-                  >
-                    Home
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
                 <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
                   Rooms
                 </NavigationMenuTrigger>
@@ -133,28 +120,43 @@ export default function DashboardNavigation() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/occasions" passHref>
-                  <NavigationMenuLink
-                    className={cn(
-                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
-                      pathname.startsWith("/occasions") && "text-[#8b6c26]"
-                    )}
-                  >
-                    Occasions
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
+                  Occasions
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    {occasions.map((occasion) => (
+                      <li key={occasion.href}>
+                        <Link
+                          href={occasion.href}
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
+                            pathname === occasion.href &&
+                              "bg-[#8b6d2636] text-[#8b6c26]"
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {occasion.title}
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {occasion.description}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/contact" passHref>
-                  <NavigationMenuLink
-                    className={cn(
-                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
-                      pathname === "/contact" && "text-[#8b6c26]"
-                    )}
-                  >
-                    Contact
-                  </NavigationMenuLink>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    "text-sm font-medium hover:text-[#8b6c26] transition-colors",
+                    pathname === "/contact" && "text-[#8b6c26]"
+                  )}
+                >
+                  Contact
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
