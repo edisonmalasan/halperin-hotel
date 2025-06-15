@@ -1,107 +1,164 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
   NavigationMenuContent,
+  NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import { rooms } from "./../data/rooms";
+import { suites } from "./../data/suites";
+import { dining } from "./../data/dining";
+import { occasions } from "./../data/occasions";
 
 export default function DashboardNavigation() {
   const { data: session } = useSession();
-
-  const navLinks = [
-    {
-      label: "Rooms",
-      href: "/rooms",
-      dropdown: [
-        { label: "Standard", href: "/rooms/standard" },
-        { label: "Deluxe", href: "/rooms/deluxe" },
-      ],
-    },
-    {
-      label: "Suites",
-      href: "/suites",
-      dropdown: [
-        { label: "Junior Suite", href: "/suites/junior" },
-        { label: "Presidential", href: "/suites/presidential" },
-      ],
-    },
-    {
-      label: "Dining",
-      href: "/dining",
-      dropdown: [
-        { label: "Restaurants", href: "/dining/restaurants" },
-        { label: "Bars", href: "/dining/bars" },
-      ],
-    },
-    {
-      label: "Occasions",
-      href: "/occasions",
-      dropdown: [
-        { label: "Weddings", href: "/occasions/weddings" },
-        { label: "Social Events", href: "/occasions/socialevents" },
-        { label: "Meetings", href: "/occasions/meetings" },
-        { label: "Event Spaces", href: "/occasions/eventspaces" },
-      ],
-    },
-    {
-      label: "More",
-      dropdown: [
-        { label: "Gallery", href: "/gallery" },
-        { label: "Pool", href: "/pool" },
-        { label: "Contact Us", href: "/contact" },
-      ],
-    },
-  ];
-
-  // authenticated/user logged in links
-  const authLinks = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/bookings", label: "My Bookings" },
-    { href: "/profile", label: "Profile" },
-  ];
+  const pathname = usePathname();
 
   return (
-    <nav className="container mx-auto px-4 py-4">
-      <div className="flex items-center text-sm font-thin">
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
+    <nav className="container text-sm font-thin mx-auto px-4 py-4">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="text-lg text-black">
           THE HALPERIN HOTEL
         </Link>
+
         <div className="flex flex-1 justify-center gap-4 mx-8">
-          {navLinks.map(({ label, href, dropdown }) => (
-            <NavigationMenu key={label}>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
-                    {label}
-                  </NavigationMenuTrigger>
-                  {dropdown && dropdown.length > 0 && (
-                    <NavigationMenuContent>
-                      <ul className="grid gap-2 p-4 w-[200px]">
-                        {dropdown.map((item) => (
-                          <li key={item.href}>
-                            <Link
-                              href={item.href}
-                              className="block px-2 py-1 hover:bg-gray-100 rounded-md transition"
-                            >
-                              {item.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  )}
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          ))}
+          <NavigationMenu>
+            <NavigationMenuList className="flex items-center gap-4">
+              <NavigationMenuItem>
+                <Link href="/" passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
+                      pathname === "/" && "text-[#8b6c26]"
+                    )}
+                  >
+                    Home
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
+                  Rooms
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                    {rooms.map((room) => (
+                      <li key={room.href}>
+                        <Link
+                          href={room.href}
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
+                            pathname === room.href &&
+                              "bg-[#8b6d2636] text-[#8b6c26]"
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {room.title}
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {room.description}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
+                  Suites
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                    {suites.map((suite) => (
+                      <li key={suite.href}>
+                        <Link
+                          href={suite.href}
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
+                            pathname === suite.href &&
+                              "bg-[#8b6d2636] text-[#8b6c26]"
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {suite.title}
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {suite.description}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
+                  Dining
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    {dining.map((venue) => (
+                      <li key={venue.href}>
+                        <Link
+                          href={venue.href}
+                          className={cn(
+                            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#8b6d2636] hover:text-[#8b6c26] focus:bg-[#8b6d2636] focus:text-[#8b6c26]",
+                            pathname === venue.href &&
+                              "bg-[#8b6d2636] text-[#8b6c26]"
+                          )}
+                        >
+                          <div className="text-sm font-medium leading-none">
+                            {venue.title}
+                          </div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {venue.description}
+                          </p>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link href="/occasions" passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
+                      pathname.startsWith("/occasions") && "text-[#8b6c26]"
+                    )}
+                  >
+                    Occasions
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link href="/contact" passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      "text-sm font-medium hover:text-[#8b6c26] transition-colors",
+                      pathname === "/contact" && "text-[#8b6c26]"
+                    )}
+                  >
+                    Contact
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
 
         {/* Auth Buttons */}

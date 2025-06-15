@@ -3,6 +3,7 @@ import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 import { Noto_Sans } from "next/font/google";
 import DashboardNavigation from "./(client)/components/DashboardNavigation";
+import Link from "next/link";
 import "./globals.css";
 
 const notoSans = Noto_Sans({
@@ -43,36 +44,36 @@ export default function RootLayout({
                   <h3 className="font-bold mb-4">Quick Links</h3>
                   <ul className="space-y-2">
                     <li>
-                      <a
+                      <Link
                         href="/rooms"
-                        className="text-gray-600 hover:text-blue-500"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
                       >
                         Rooms
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/suites"
-                        className="text-gray-600 hover:text-blue-500"
+                      <Link
+                        href="/occasions"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
                       >
-                        Suites
-                      </a>
+                        Occasions
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href="/dining"
-                        className="text-gray-600 hover:text-blue-500"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
                       >
                         Dining
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href="/contact"
-                        className="text-gray-600 hover:text-blue-500"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
                       >
                         Contact
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -88,15 +89,30 @@ export default function RootLayout({
                 <div>
                   <h3 className="font-bold mb-4">Follow Us</h3>
                   <div className="flex gap-4">
-                    <a href="#" className="text-gray-600 hover:text-blue-500">
+                    <Link
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
                       Facebook
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-blue-500">
+                    </Link>
+                    <Link
+                      href="https://twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
                       Twitter
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-blue-500">
+                    </Link>
+                    <Link
+                      href="https://instagram.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
                       Instagram
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
