@@ -51,9 +51,6 @@ export default function DashboardNavigation() {
                           <div className="text-xs font-medium leading-none">
                             {room.title}
                           </div>
-                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            {room.description}
-                          </p>
                         </Link>
                       </li>
                     ))}
@@ -80,9 +77,6 @@ export default function DashboardNavigation() {
                           <div className="text-xs font-medium leading-none">
                             {suite.title}
                           </div>
-                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            {suite.description}
-                          </p>
                         </Link>
                       </li>
                     ))}
@@ -109,9 +103,6 @@ export default function DashboardNavigation() {
                           <div className="text-xs font-medium leading-none">
                             {venue.title}
                           </div>
-                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            {venue.description}
-                          </p>
                         </Link>
                       </li>
                     ))}
@@ -138,9 +129,6 @@ export default function DashboardNavigation() {
                           <div className="text-xs font-medium leading-none">
                             {occasion.title}
                           </div>
-                          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-                            {occasion.description}
-                          </p>
                         </Link>
                       </li>
                     ))}
