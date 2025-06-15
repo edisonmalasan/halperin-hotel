@@ -4,7 +4,7 @@ export const rooms = [
     href: "/rooms/superior",
     description:
       "Spacious and airy, impeccably stylish with a dash of timeless Hollywood glamour.",
-    image: "/images/rooms/superior.jpg",
+    image: "/images/rooms/superior-room/superior-room-mm.png",
     features: [
       "37M²/400FT²",
       "Peaceful Location",

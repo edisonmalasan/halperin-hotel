@@ -71,7 +71,7 @@ export default function MegaMenu({
             <img
               src={selected.image}
               alt={selected.title}
-              className="rounded w-full h-[120px] object-cover"
+              className="rounded w-[316] h-[237px] object-cover"
             />
           )}
           {selected.description && (
