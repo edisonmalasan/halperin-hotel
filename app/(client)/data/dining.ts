@@ -1,17 +1,14 @@
 export const dining = [
     {
         title: "Polo Lounge",
-        href: "/dining/polo-lounge",
-        description: "Elegant lounge with signature cocktails",
+        href: "/dining/polo-lounge"
     },
     {
         title: "The Cabana Cafe",
-        href: "/dining/cabana-cafe",
-        description: "Casual dining with poolside views",
+        href: "/dining/cabana-cafe"
     },
     {
         title: "The Fountain Coffee Room",
         href: "/dining/fountain-coffee",
-        description: "Classic coffee room with traditional fare",
     },
 ]; 
