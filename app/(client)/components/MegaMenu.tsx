@@ -36,13 +36,13 @@ export default function MegaMenu({
       <NavigationMenuContent
         className="
           bg-white shadow-lg rounded-md
-          w-[700px] h-[260px] p-4
-          grid grid-cols-2 gap-4
+          p-4
+          grid grid-cols-2 gap-x-8 gap-y-2
+          min-w-[800px] max-w-[1300px]
         "
-        style={{ minWidth: 700 }}
       >
         {/* Left: List */}
-        <ul className="space-y-2 border-r pr-4 overflow-y-auto">
+        <ul className="space-y-2 border-r pr-4">
           {items.map((item) => (
             <li
               key={item.href}
