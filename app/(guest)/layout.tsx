@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Geist } from "next/font/google";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import DashboardNavigation from "@/app/components/DashboardNavigation";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -15,34 +15,8 @@ export default function GuestLayout({
   return (
     <div className={`min-h-screen ${geist.className}`}>
       {/* Guest Header */}
-      <header className="bg-white shadow">
-        <nav className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold">
-              Halperin Hotel
-            </Link>
-            <div className="flex gap-4">
-              <Link href="/rooms" className="hover:text-blue-500">
-                Rooms
-              </Link>
-              <Link href="/suites" className="hover:text-blue-500">
-                Suites
-              </Link>
-              <Link href="/dining" className="hover:text-blue-500">
-                Dining
-              </Link>
-              <Link href="/contact" className="hover:text-blue-500">
-                Contact
-              </Link>
-              <Button asChild variant="outline">
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/register">Register</Link>
-              </Button>
-            </div>
-          </div>
-        </nav>
+      <header className="bg-white shadow sticky top-0 z-50">
+        <DashboardNavigation />
       </header>
 
       {/* Main Content */}

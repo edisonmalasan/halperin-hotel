@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
 import { Geist } from "next/font/google";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { useSession, signOut } from "next-auth/react";
+import DashboardNavigation from "@/app/components/DashboardNavigation";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -16,32 +15,8 @@ export default function UserLayout({
   return (
     <div className={`min-h-screen ${geist.className}`}>
       {/* User Header */}
-      <header className="bg-white shadow">
-        <nav className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <Link href="/dashboard" className="text-xl font-bold">
-              Halperin Hotel
-            </Link>
-            <div className="flex gap-4">
-              <Link href="/dashboard" className="hover:text-blue-500">
-                Dashboard
-              </Link>
-              <Link href="/bookings" className="hover:text-blue-500">
-                My Bookings
-              </Link>
-              <Link href="/profile" className="hover:text-blue-500">
-                Profile
-              </Link>
-              <Button
-                variant="outline"
-                onClick={() => signOut()}
-                className="hover:text-blue-500"
-              >
-                Sign Out
-              </Button>
-            </div>
-          </div>
-        </nav>
+      <header className="bg-white shadow sticky top-0 z-50">
+        <DashboardNavigation />
       </header>
 
       {/* Main Content */}
@@ -54,25 +29,43 @@ export default function UserLayout({
             <div>
               <h3 className="font-bold mb-4">About Us</h3>
               <p className="text-gray-600">
-                Halperin Hotel offers luxury accommodations in the heart of the city.
+                Halperin Hotel offers luxury accommodations in the heart of the
+                city.
               </p>
             </div>
             <div>
               <h3 className="font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/dashboard" className="text-gray-600 hover:text-blue-500">
-                    Dashboard
+                  <Link
+                    href="/rooms"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Rooms
                   </Link>
                 </li>
                 <li>
-                  <Link href="/bookings" className="text-gray-600 hover:text-blue-500">
-                    My Bookings
+                  <Link
+                    href="/suites"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Suites
                   </Link>
                 </li>
                 <li>
-                  <Link href="/profile" className="text-gray-600 hover:text-blue-500">
-                    Profile
+                  <Link
+                    href="/dining"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Dining
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-gray-600 hover:text-blue-500"
+                  >
+                    Contact
                   </Link>
                 </li>
               </ul>
@@ -102,10 +95,13 @@ export default function UserLayout({
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-gray-600">
-            <p>&copy; {new Date().getFullYear()} Halperin Hotel. All rights reserved.</p>
+            <p>
+              &copy; {new Date().getFullYear()} Halperin Hotel. All rights
+              reserved.
+            </p>
           </div>
         </div>
       </footer>
     </div>
   );
-} 
+}

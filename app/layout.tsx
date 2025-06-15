@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 import { Noto_Sans } from "next/font/google";
-import PublicHeader from "./(guest)/components/PublicHeader";
+import DashboardNavigation from "./components/DashboardNavigation";
 import "./globals.css";
 
 const notoSans = Noto_Sans({
@@ -25,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSans.className} antialiased`}>
         <Providers>
-          <PublicHeader />
+          <header className="bg-white shadow sticky top-0 z-50">
+            <DashboardNavigation />
+          </header>
           <main>{children}</main>
           <footer className="bg-gray-100 mt-16">
             <div className="container mx-auto px-4 py-8">
