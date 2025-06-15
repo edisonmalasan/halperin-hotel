@@ -41,9 +41,22 @@ export default function DashboardNavigation() {
       ],
     },
     {
-      label: "Contact",
-      href: "/contact",
-      dropdown: [], // Or skip NavigationMenuContent if no dropdown
+      label: "Occasions",
+      href: "/occasions",
+      dropdown: [
+        { label: "Weddings", href: "/occasions/weddings" },
+        { label: "Social Events", href: "/occasions/socialevents" },
+        { label: "Meetings", href: "/occasions/meetings" },
+        { label: "Event Spaces", href: "/occasions/eventspaces" },
+      ],
+    },
+    {
+      label: "More",
+      dropdown: [
+        { label: "Gallery", href: "/gallery" },
+        { label: "Pool", href: "/pool" },
+        { label: "Contact Us", href: "/contact" },
+      ],
     },
   ];
 
@@ -58,7 +71,7 @@ export default function DashboardNavigation() {
     <nav className="container mx-auto px-4 py-4">
       <div className="flex items-center text-sm font-thin">
         {/* Logo */}
-        <Link href="/" className=" flex-shrink-0 ">
+        <Link href="/" className="flex-shrink-0">
           THE HALPERIN HOTEL
         </Link>
         <div className="flex flex-1 justify-center gap-4 mx-8">
@@ -69,15 +82,16 @@ export default function DashboardNavigation() {
                   <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
                     {label}
                   </NavigationMenuTrigger>
-                  {dropdown?.length > 0 && (
+                  {dropdown && dropdown.length > 0 && (
                     <NavigationMenuContent>
                       <ul className="grid gap-2 p-4 w-[200px]">
                         {dropdown.map((item) => (
                           <li key={item.href}>
-                            <Link href={item.href} passHref legacyBehavior>
-                              <NavigationMenuLink className="block px-2 py-1 hover:bg-gray-100 rounded-md transition">
-                                {item.label}
-                              </NavigationMenuLink>
+                            <Link
+                              href={item.href}
+                              className="block px-2 py-1 hover:bg-gray-100 rounded-md transition"
+                            >
+                              {item.label}
                             </Link>
                           </li>
                         ))}
@@ -97,7 +111,7 @@ export default function DashboardNavigation() {
               size={"sm"}
               variant="outline"
               onClick={() => signOut()}
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease-in-out"
             >
               Sign Out
             </Button>
@@ -107,7 +121,7 @@ export default function DashboardNavigation() {
                 asChild
                 size={"sm"}
                 variant="outline"
-                className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease-in-out "
+                className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease-in-out"
               >
                 <Link href="/login">Login</Link>
               </Button>

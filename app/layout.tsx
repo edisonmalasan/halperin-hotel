@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 import { Noto_Sans } from "next/font/google";
-import DashboardNavigation from "./components/DashboardNavigation";
+import DashboardNavigation from "./(client)/components/DashboardNavigation";
 import "./globals.css";
 
 const notoSans = Noto_Sans({

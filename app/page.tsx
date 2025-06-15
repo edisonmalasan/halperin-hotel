@@ -1,7 +1,5 @@
-import HomePage from "./(guest)/page";
+import HomePage from "./(client)/page";
 
 export default function RootPage() {
-  return (
-      <HomePage />
-  );
+  return <HomePage />;
 }
