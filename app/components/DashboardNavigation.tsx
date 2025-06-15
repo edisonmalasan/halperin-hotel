@@ -3,16 +3,48 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useSession, signOut } from "next-auth/react";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu";
 
 export default function DashboardNavigation() {
   const { data: session } = useSession();
 
-  // 🔹 Public navigation links
-  const publicLinks = [
-    { href: "/rooms", label: "Rooms" },
-    { href: "/suites", label: "Suites" },
-    { href: "/dining", label: "Dining" },
-    { href: "/contact", label: "Contact" },
+  const navLinks = [
+    {
+      label: "Rooms",
+      href: "/rooms",
+      dropdown: [
+        { label: "Standard", href: "/rooms/standard" },
+        { label: "Deluxe", href: "/rooms/deluxe" },
+      ],
+    },
+    {
+      label: "Suites",
+      href: "/suites",
+      dropdown: [
+        { label: "Junior Suite", href: "/suites/junior" },
+        { label: "Presidential", href: "/suites/presidential" },
+      ],
+    },
+    {
+      label: "Dining",
+      href: "/dining",
+      dropdown: [
+        { label: "Restaurants", href: "/dining/restaurants" },
+        { label: "Bars", href: "/dining/bars" },
+      ],
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+      dropdown: [], // Or skip NavigationMenuContent if no dropdown
+    },
   ];
 
   // authenticated/user logged in links
@@ -29,22 +61,33 @@ export default function DashboardNavigation() {
         <Link href="/" className=" flex-shrink-0 ">
           THE HALPERIN HOTEL
         </Link>
-
-        {/* Navigation Links */}
-        <div className="flex flex-1 justify-center gap-8 mx-8 ">
-          {[...publicLinks, ...(session ? authLinks : [])].map(
-            ({ href, label }) => (
-              <div key={href} className="relative group">
-                <Link
-                  href={href}
-                  className=" transition-colors duration-200 font-medium"
-                >
-                  {label}
-                </Link>
-                <div className="absolute left-0 bottom-[-6px] w-full h-[2px] bg-[#8b6c26] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"></div>
-              </div>
-            )
-          )}
+        <div className="flex flex-1 justify-center gap-4 mx-8">
+          {navLinks.map(({ label, href, dropdown }) => (
+            <NavigationMenu key={label}>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="font-medium hover:text-[#8b6c26]">
+                    {label}
+                  </NavigationMenuTrigger>
+                  {dropdown?.length > 0 && (
+                    <NavigationMenuContent>
+                      <ul className="grid gap-2 p-4 w-[200px]">
+                        {dropdown.map((item) => (
+                          <li key={item.href}>
+                            <Link href={item.href} passHref legacyBehavior>
+                              <NavigationMenuLink className="block px-2 py-1 hover:bg-gray-100 rounded-md transition">
+                                {item.label}
+                              </NavigationMenuLink>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  )}
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          ))}
         </div>
 
         {/* Auth Buttons */}
