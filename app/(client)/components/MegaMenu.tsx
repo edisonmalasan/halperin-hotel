@@ -35,11 +35,13 @@ export default function MegaMenu({
       </NavigationMenuTrigger>
       <NavigationMenuContent
         className="
+             mx-auto
           bg-white shadow-lg rounded-md
           p-4
           grid grid-cols-2 gap-x-8 gap-y-2
-          min-w-[800px] max-w-[1300px]
+          min-w-[600px] max-w-[1300px]
         "
+        style={{ left: "50%", transform: "translateX(-50%)" }}
       >
         {/* Left: List */}
         <ul className="space-y-2 border-r pr-4">
@@ -53,7 +55,7 @@ export default function MegaMenu({
               }`}
               onMouseEnter={() => setSelected(item)}
             >
-              <div className="font-medium text-sm flex items-center justify-between">
+              <div className="font-medium text-xs flex items-center justify-between">
                 {item.title}
                 {selected.title === item.title && (
                   <span className="ml-2 text-[#8b6c26]">→</span>
@@ -62,6 +64,7 @@ export default function MegaMenu({
             </li>
           ))}
         </ul>
+
         {/* Right: Preview */}
         <div className="space-y-3 flex flex-col h-full">
           {selected.image && (
@@ -72,10 +75,10 @@ export default function MegaMenu({
             />
           )}
           {selected.description && (
-            <p className="text-sm flex-1">{selected.description}</p>
+            <p className="text-xs flex-1">{selected.description}</p>
           )}
           {selected.features && (
-            <ul className="text-sm grid gap-1">
+            <ul className="text-xs grid gap-1">
               {selected.features.map((f, idx) => (
                 <li key={idx} className="flex items-center gap-2">
                   <span className="text-[#8b6c26]">◆</span> {f}
@@ -85,7 +88,7 @@ export default function MegaMenu({
           )}
           <Link
             href={selected.href}
-            className="text-sm text-blue-600 hover:underline"
+            className="text-xs text-blue-600 hover:underline"
           >
             View Details →
           </Link>

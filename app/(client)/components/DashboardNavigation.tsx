@@ -36,7 +36,7 @@ export default function DashboardNavigation() {
         <div className="flex flex-1 justify-center gap-4 mx-8">
           {/* Mega Menus */}
           <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className="flex flex-1 justify-center gap-4 mx-8">
               <MegaMenu label="Rooms" items={rooms} />
               <MegaMenu label="Suites" items={suites} />
               <MegaMenu label="Dining" items={dining} />
