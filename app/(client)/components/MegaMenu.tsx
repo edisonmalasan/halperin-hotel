@@ -23,7 +23,7 @@ export default function MegaMenu({ items }: MegaMenuProps) {
         bg-white shadow-lg rounded-md
         p-4
         grid grid-cols-2 gap-x-8 gap-y-2
-        min-w-[600px] max-w-[1300px]
+        w-[600px] h-[577px]
       "
     >
       {/* Left: List */}
@@ -53,7 +53,7 @@ export default function MegaMenu({ items }: MegaMenuProps) {
           <img
             src={selected.image}
             alt={selected.title}
-            className="rounded w-[316] h-[237px] object-cover"
+            className="rounded w-full h-[120px] object-cover"
           />
         )}
         {selected.description && (
