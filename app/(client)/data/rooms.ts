@@ -2,8 +2,7 @@ export const rooms = [
   {
     title: "Superior Room",
     href: "/rooms/superior",
-    description:
-      "Spacious and airy, impeccably stylish with a dash of timeless Hollywood glamour.",
+    description: "Spacious and airy, impeccably stylish with a dash of timeless Hollywood glamour. Perfect for the business traveler in search of some luxurious comfort and a true home from home.",
     image: "/images/rooms/superior-room/superior-room-mm.png",
     features: [
       "37M²/400FT²",
@@ -17,7 +16,7 @@ export const rooms = [
     href: "/rooms/superior-balcony",
     description:
       "Enjoy fresh air and charming views with your own private balcony.",
-    image: "/images/rooms/superior-balcony.jpg",
+    image: "/images/rooms/superior-room-balcony/superior-room-balcony-mm.png",
     features: ["37M²", "Private Balcony", "Outdoor Seating", "Garden Views"],
   },
   {

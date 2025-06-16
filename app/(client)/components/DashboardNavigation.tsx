@@ -68,13 +68,16 @@ export default function DashboardNavigation() {
             <li className="relative">
               <button
                 onClick={() => handleMenuClick("rooms")}
-                className={`text-sm font-medium transition-colors flex items-center gap-1 group ${
-                  activeMenu === "rooms"
-                    ? "text-[#8b6c26]"
-                    : "hover:text-[#8b6c26]"
-                }`}
+                className="text-sm font-medium flex items-center gap-1 group relative"
               >
-                Rooms
+                <span className={`relative transition-colors duration-300 ${
+                  activeMenu === "rooms" ? "text-black" : "text-gray-500 hover:text-black"
+                }`}>
+                  Rooms
+                  <span className={`absolute -bottom-1 left-0 w-full h-[1px] bg-[#8b6c26] transition-opacity duration-300 ease ${
+                    activeMenu === "rooms" ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
+                </span>
                 <span
                   className={`transition-transform duration-300 ${
                     activeMenu === "rooms" ? "rotate-180" : ""
@@ -93,7 +96,7 @@ export default function DashboardNavigation() {
                       data-v-52d273a6=""
                       d="M6 9.5C12 9.5 12 15 12 15C12 15 12 9.5 18 9.5"
                       stroke="#8B6C26"
-                      stroke-linejoin="bevel"
+                      strokeLinejoin="bevel"
                     ></path>
                   </svg>
                 </span>
@@ -103,13 +106,16 @@ export default function DashboardNavigation() {
             <li className="relative">
               <button
                 onClick={() => handleMenuClick("suites")}
-                className={`text-sm font-medium transition-colors flex items-center gap-1 group ${
-                  activeMenu === "suites"
-                    ? "text-[#8b6c26]"
-                    : "hover:text-[#8b6c26]"
-                }`}
+                className="text-sm font-medium flex items-center gap-1 group relative"
               >
-                Suites
+                <span className={`relative transition-colors duration-300 ${
+                  activeMenu === "suites" ? "text-black" : "text-gray-500 hover:text-black"
+                }`}>
+                  Suites
+                  <span className={`absolute -bottom-1 left-0 w-full h-[1px] bg-[#8b6c26] transition-opacity duration-300 ease ${
+                    activeMenu === "suites" ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
+                </span>
                 <span
                   className={`transition-transform duration-300 ${
                     activeMenu === "suites" ? "rotate-180" : ""
@@ -128,7 +134,7 @@ export default function DashboardNavigation() {
                       data-v-52d273a6=""
                       d="M6 9.5C12 9.5 12 15 12 15C12 15 12 9.5 18 9.5"
                       stroke="#8B6C26"
-                      stroke-linejoin="bevel"
+                      strokeLinejoin="bevel"
                     ></path>
                   </svg>
                 </span>
@@ -138,13 +144,16 @@ export default function DashboardNavigation() {
             <li className="relative">
               <button
                 onClick={() => handleMenuClick("dining")}
-                className={`text-sm font-medium transition-colors flex items-center gap-1 group ${
-                  activeMenu === "dining"
-                    ? "text-[#8b6c26]"
-                    : "hover:text-[#8b6c26]"
-                }`}
+                className="text-sm font-medium flex items-center gap-1 group relative"
               >
-                Dining
+                <span className={`relative transition-colors duration-300 ${
+                  activeMenu === "dining" ? "text-black" : "text-gray-500 hover:text-black"
+                }`}>
+                  Dining
+                  <span className={`absolute -bottom-1 left-0 w-full h-[1px] bg-[#8b6c26] transition-opacity duration-300 ease ${
+                    activeMenu === "dining" ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
+                </span>
                 <span
                   className={`transition-transform duration-300 ${
                     activeMenu === "dining" ? "rotate-180" : ""
@@ -163,7 +172,7 @@ export default function DashboardNavigation() {
                       data-v-52d273a6=""
                       d="M6 9.5C12 9.5 12 15 12 15C12 15 12 9.5 18 9.5"
                       stroke="#8B6C26"
-                      stroke-linejoin="bevel"
+                      strokeLinejoin="bevel"
                     ></path>
                   </svg>
                 </span>
@@ -173,13 +182,16 @@ export default function DashboardNavigation() {
             <li className="relative">
               <button
                 onClick={() => handleMenuClick("occasions")}
-                className={`text-sm font-medium transition-colors flex items-center gap-1 group ${
-                  activeMenu === "occasions"
-                    ? "text-[#8b6c26]"
-                    : "hover:text-[#8b6c26]"
-                }`}
+                className="text-sm font-medium flex items-center gap-1 group relative"
               >
-                Occasions
+                <span className={`relative transition-colors duration-300 ${
+                  activeMenu === "occasions" ? "text-black" : "text-gray-500 hover:text-black"
+                }`}>
+                  Occasions
+                  <span className={`absolute -bottom-1 left-0 w-full h-[1px] bg-[#8b6c26] transition-opacity duration-300 ease ${
+                    activeMenu === "occasions" ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
+                </span>
                 <span
                   className={`transition-transform duration-300 ${
                     activeMenu === "occasions" ? "rotate-180" : ""
@@ -198,7 +210,7 @@ export default function DashboardNavigation() {
                       data-v-52d273a6=""
                       d="M6 9.5C12 9.5 12 15 12 15C12 15 12 9.5 18 9.5"
                       stroke="#8B6C26"
-                      stroke-linejoin="bevel"
+                      strokeLinejoin="bevel"
                     ></path>
                   </svg>
                 </span>
@@ -208,13 +220,16 @@ export default function DashboardNavigation() {
             <li className="relative">
               <button
                 onClick={() => handleMenuClick("more")}
-                className={`text-sm font-medium transition-colors flex items-center gap-1 group ${
-                  activeMenu === "more"
-                    ? "text-[#8b6c26]"
-                    : "hover:text-[#8b6c26]"
-                }`}
+                className="text-sm font-medium flex items-center gap-1 group relative"
               >
-                More
+                <span className={`relative transition-colors duration-300 ${
+                  activeMenu === "more" ? "text-black" : "text-gray-500 hover:text-black"
+                }`}>
+                  More
+                  <span className={`absolute -bottom-1 left-0 w-full h-[1px] bg-[#8b6c26] transition-opacity duration-300 ease ${
+                    activeMenu === "more" ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`} />
+                </span>
                 <span
                   className={`transition-transform duration-300 ${
                     activeMenu === "more" ? "rotate-180" : ""
@@ -233,7 +248,7 @@ export default function DashboardNavigation() {
                       data-v-52d273a6=""
                       d="M6 9.5C12 9.5 12 15 12 15C12 15 12 9.5 18 9.5"
                       stroke="#8B6C26"
-                      stroke-linejoin="bevel"
+                      strokeLinejoin="bevel"
                     ></path>
                   </svg>
                 </span>
@@ -257,7 +272,7 @@ export default function DashboardNavigation() {
             {activeMenu === "suites" && <MegaMenu items={suites} />}
             {activeMenu === "dining" && <MegaMenu items={dining} />}
             {activeMenu === "occasions" && <MegaMenu items={occasions} />}
-            {activeMenu === "more" && <MegaMenu items={more} />}
+            {activeMenu === "more" && <MegaMenu items={more} singleColumn />}
           </div>
         </div>
 

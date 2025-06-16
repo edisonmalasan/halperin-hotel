@@ -12,10 +12,30 @@ type MegaMenuItem = {
 
 type MegaMenuProps = {
   items: MegaMenuItem[];
+  singleColumn?: boolean;
 };
 
-export default function MegaMenu({ items }: MegaMenuProps) {
+export default function MegaMenu({
+  items,
+  singleColumn = false,
+}: MegaMenuProps) {
   const [selected, setSelected] = useState(items[0]);
+
+  if (singleColumn) {
+    return (
+      <div className="bg-white shadow-lg rounded-md p-4 w-[300px] flex flex-col gap-2">
+        <ul>
+          {items.map((item) => (
+            <li key={item.href} className="p-2 hover:bg-[#8b6d2636] rounded">
+              <Link href={item.href} className="font-medium text-xs">
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -47,13 +67,14 @@ export default function MegaMenu({ items }: MegaMenuProps) {
           </li>
         ))}
       </ul>
+
       {/* Right: Preview */}
       <div className="space-y-3 flex flex-col h-full">
         {selected.image && (
           <img
             src={selected.image}
             alt={selected.title}
-            className="rounded w-full h-[120px] object-cover"
+            className="rounded w-[full] h-[237px] object-cover"
           />
         )}
         {selected.description && (
