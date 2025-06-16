@@ -51,18 +51,41 @@ export default function MegaMenu({
         {items.map((item) => (
           <li
             key={item.href}
-            className={`cursor-pointer p-2 rounded hover:bg-[#8b6d2636] ${
-              selected.title === item.title
-                ? "bg-[#8b6d2636] text-[#8b6c26]"
-                : ""
+            className={`cursor-pointer p-2 rounded group ${
+              selected.title === item.title ? "" : ""
             }`}
             onMouseEnter={() => setSelected(item)}
           >
-            <div className="font-medium text-xs flex items-center justify-between">
+            <div
+              className={`flex items-center justify-between text-xs transition-all duration-200 ${
+                selected.title === item.title ? "font-medium" : "font-normal"
+              } group-hover:font-medium`}
+            >
               {item.title}
-              {selected.title === item.title && (
-                <span className="ml-2 text-[#8b6c26]">→</span>
-              )}
+              <span
+                className={`ml-2 transition-opacity duration-200 ${
+                  selected.title === item.title ||
+                  (selected.title !== item.title &&
+                    false) /* placeholder for hover, see below */
+                    ? "opacity-100"
+                    : "opacity-0 group-hover:opacity-100"
+                }`}
+              >
+                <svg
+                  width="17"
+                  height="12"
+                  viewBox="0 0 17 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="long rtl:rotate-180"
+                >
+                  <path
+                    d="M10.5 12C10.5 6 16 6 16 6M16 6C16 6 10.5 6 10.5 0M16 6L0 6"
+                    stroke="#8B6C26"
+                    strokeLinejoin="bevel"
+                  ></path>
+                </svg>
+              </span>
             </div>
           </li>
         ))}
