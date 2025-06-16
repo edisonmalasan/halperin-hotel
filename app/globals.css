@@ -126,3 +126,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom animations for Navlink right preview content*/
+@layer utilities {
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(-1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .animate-fade-in-right {
+    animation: fade-in-right 0.8s cubic-bezier(0.4,0,0.2,1) both;
+  }
+}
