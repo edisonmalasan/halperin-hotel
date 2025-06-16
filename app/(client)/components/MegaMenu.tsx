@@ -21,7 +21,7 @@ export default function MegaMenu({
 }: MegaMenuProps) {
   const [selected, setSelected] = useState(items[0]);
 
-  // Helper to get the explore text and link
+  // function helper to get the explore text and link
   function getExploreAll() {
     if (items[0]?.href?.includes("rooms")) {
       return {
@@ -73,13 +73,13 @@ export default function MegaMenu({
     <div
       className="
         bg-white shadow-lg rounded-md
-        p-4
+        p-4 pb-8
         grid grid-cols-2 gap-x-8 gap-y-2
         w-[800px] h-full
       "
     >
       {/* Explore All Button */}
-      <div className="col-span-2 pb-2">
+      <div className="col-span-2 ">
         <Link
           href="/rooms"
           aria-label={getExploreAll().text}
