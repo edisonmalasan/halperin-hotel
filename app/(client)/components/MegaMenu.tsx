@@ -94,7 +94,7 @@ export default function MegaMenu({
             viewBox="0 0 56 41"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="arrowHover rtl:rotate-180 text-[#8b6c26] group-hover:text-white"
+            className="arrowHover rtl:rotate-180 text-[#8b6c26]"
           >
             <rect
               x="0.5"
@@ -104,6 +104,8 @@ export default function MegaMenu({
               rx="19.5"
               stroke="currentColor"
               strokeOpacity="0.5"
+              fill="transparent"
+              className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
             ></rect>
             <path
               d="M30.5 26.998C30.5 20.998 36 20.998 36 20.998M36 20.998C36 20.998 30.5 20.998 30.5 14.998M36 20.998H20"
