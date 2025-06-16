@@ -63,15 +63,17 @@ export default function DashboardNavigation() {
 
   return (
     <>
-      {/* Backdrop overlay rendered via portal, only after mount */}
-      {activeMenu && mounted && createPortal(
-        <div
-          className="fixed inset-0 bg-black/50 z-40"
-          onClick={() => setActiveMenu(null)}
-          aria-label="Close menu"
-        />,
-        document.body
-      )}
+      {/* backdrop overlay */}
+      {activeMenu &&
+        mounted &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setActiveMenu(null)}
+            aria-label="Close menu"
+          />,
+          document.body
+        )}
       <nav className="container text-sm font-thin mx-auto px-4 py-4 z-50 relative">
         <div className="flex items-center justify-between">
           <Link href="/" className="text-lg text-black">
@@ -311,7 +313,7 @@ export default function DashboardNavigation() {
               </li>
             </ul>
 
-            {/* Mega Menu Content */}
+            {/* Mega Menu Content (content of each nav links) */}
             <div
               className={`
                 absolute left-1/2 -translate-x-1/2 top-full mt-8 z-50
@@ -331,7 +333,7 @@ export default function DashboardNavigation() {
             </div>
           </div>
 
-          {/* Auth Buttons */}
+          {/* auth buttons */}
           <div className="flex gap-3 flex-shrink-0">
             {session ? (
               <Button
