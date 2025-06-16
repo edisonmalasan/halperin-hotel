@@ -113,7 +113,7 @@ export default function MegaMenu({
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="w-6 h-6 shrink-0"
+                    className="w-6 h-6 shrink-0"
                   >
                     <path
                       data-v-34474e68=""
