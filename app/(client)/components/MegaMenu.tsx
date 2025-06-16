@@ -58,36 +58,38 @@ export default function MegaMenu({
               <span
                 className={`transition-opacity duration-200 ${
                   selected.title === item.title
-                    ? "opacity-100 font-medium"
-                    : "opacity-80 group-hover:opacity-100"
+                    ? "opacity-100"
+                    : "opacity-90 group-hover:opacity-100"
                 }`}
               >
                 {item.title}
               </span>
-              <span
-                className={`ml-2 inline-block transition-all duration-300
-                  ${
-                    selected.title === item.title
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
-                  }
-                `}
-              >
-                <svg
-                  width="17"
-                  height="12"
-                  viewBox="0 0 17 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="long rtl:rotate-180"
+              <div className="overflow-hidden relative w-6 shrink-0">
+                <div
+                  className={`arrow-wrapper flex transition-all duration-300 ease-in-out w-8 justify-around
+                    ${
+                      selected.title === item.title
+                        ? "ml-0"
+                        : "-ml-12 group-hover:ml-0"
+                    }
+                  `}
                 >
-                  <path
-                    d="M10.5 12C10.5 6 16 6 16 6M16 6C16 6 10.5 6 10.5 0M16 6L0 6"
-                    stroke="#8B6C26"
-                    strokeLinejoin="bevel"
-                  ></path>
-                </svg>
-              </span>
+                  <svg
+                    width="17"
+                    height="12"
+                    viewBox="0 0 17 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="long rtl:rotate-180"
+                  >
+                    <path
+                      d="M10.5 12C10.5 6 16 6 16 6M16 6C16 6 10.5 6 10.5 0M16 6L0 6"
+                      stroke="#8B6C26"
+                      strokeLinejoin="bevel"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
             </div>
           </li>
         ))}
