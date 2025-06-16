@@ -43,7 +43,7 @@ export default function MegaMenu({
         bg-white shadow-lg rounded-md
         p-4
         grid grid-cols-2 gap-x-8 gap-y-2
-        w-[600px] h-[577px]
+        w-[630px] h-full
       "
     >
       {/* Left: List */}
@@ -78,7 +78,7 @@ export default function MegaMenu({
           />
         )}
         {selected.description && (
-          <p className="text-xs flex-1">{selected.description}</p>
+          <p className="text-xs">{selected.description}</p>
         )}
         {selected.features && (
           <ul className="text-xs grid gap-1">
