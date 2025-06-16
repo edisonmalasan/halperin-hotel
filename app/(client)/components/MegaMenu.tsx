@@ -65,11 +65,13 @@ export default function MegaMenu({
                 {item.title}
               </span>
               <span
-                className={`ml-2 transition-transform duration-200 ${
-                  selected.title === item.title
-                    ? "scale-100"
-                    : "scale-0 group-hover:scale-100"
-                }`}
+                className={`ml-2 inline-block transition-all duration-300
+                  ${
+                    selected.title === item.title
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                  }
+                `}
               >
                 <svg
                   width="17"
