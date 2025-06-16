@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
     function middleware(req) {
-        // Redirect authenticated users away from auth pages
+        // redirct authenticated users away from auth pages
         if (
             req.nextUrl.pathname.startsWith("/login") ||
             req.nextUrl.pathname.startsWith("/register")
@@ -13,7 +13,7 @@ export default withAuth(
             }
         }
 
-        // Redirect unauthenticated users to login
+        // redirect unauthenticated users to login
         if (
             req.nextUrl.pathname.startsWith("/dashboard") ||
             req.nextUrl.pathname.startsWith("/bookings") ||
@@ -26,7 +26,7 @@ export default withAuth(
     },
     {
         callbacks: {
-            // Allow access if the user is authenticated
+            // allow access only if the user is authenticated
             authorized: ({ token }) => !!token,
             // Redirect to the login page if not authenticated
             // TODO: Code 
