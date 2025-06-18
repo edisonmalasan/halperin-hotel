@@ -76,7 +76,7 @@ export default function DashboardNavigation() {
         )}
       <nav className="container text-sm font-thin mx-auto px-4 py-4 z-50 relative">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-lg text-black">
+          <Link href="/" className="text-xl text-black">
             THE HALPERIN HOTEL
           </Link>
 
@@ -85,7 +85,7 @@ export default function DashboardNavigation() {
               <li className="relative">
                 <button
                   onClick={() => handleMenuClick("rooms")}
-                  className="text-sm font-medium flex items-center gap-1 group relative"
+                  className="text-base font-medium flex items-center gap-1 group relative"
                 >
                   <span
                     className={`relative transition-colors duration-300 ${
@@ -131,7 +131,7 @@ export default function DashboardNavigation() {
               <li className="relative">
                 <button
                   onClick={() => handleMenuClick("suites")}
-                  className="text-sm font-medium flex items-center gap-1 group relative"
+                  className="text-base font-medium flex items-center gap-1 group relative"
                 >
                   <span
                     className={`relative transition-colors duration-300 ${
@@ -177,7 +177,7 @@ export default function DashboardNavigation() {
               <li className="relative">
                 <button
                   onClick={() => handleMenuClick("dining")}
-                  className="text-sm font-medium flex items-center gap-1 group relative"
+                  className="text-base font-medium flex items-center gap-1 group relative"
                 >
                   <span
                     className={`relative transition-colors duration-300 ${
@@ -223,7 +223,7 @@ export default function DashboardNavigation() {
               <li className="relative">
                 <button
                   onClick={() => handleMenuClick("occasions")}
-                  className="text-sm font-medium flex items-center gap-1 group relative"
+                  className="text-base font-medium flex items-center gap-1 group relative"
                 >
                   <span
                     className={`relative transition-colors duration-300 ${
@@ -269,7 +269,7 @@ export default function DashboardNavigation() {
               <li className="relative">
                 <button
                   onClick={() => handleMenuClick("more")}
-                  className="text-sm font-medium flex items-center gap-1 group relative"
+                  className="text-base font-medium flex items-center gap-1 group relative"
                 >
                   <span
                     className={`relative transition-colors duration-300 ${

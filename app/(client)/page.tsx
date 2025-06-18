@@ -20,15 +20,17 @@ import { Play, Pause, VolumeX, Volume2 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { draggableItems } from "./data/draggableItems";
 import Container from "./components/DraggableContainer";
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function GuestHomePage() {
-  const containerRef = useRef<HTMLDivElement>(
-    null
-  ) as React.RefObject<HTMLDivElement>;
+  /* SECTION 1 VARS */
+
+  // Video player state
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
+  // Autoplay video on mount
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
@@ -39,6 +41,7 @@ export default function GuestHomePage() {
     }
   }, []);
 
+  // Toggle play/pause functionality
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
@@ -50,11 +53,26 @@ export default function GuestHomePage() {
     }
   };
 
+  // Toggle mute/unmute functionality
   const toggleMute = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !videoRef.current.muted;
     setIsMuted(videoRef.current.muted);
   };
+
+  /* END OF SECTION 1 VARS */
+
+  /* SECTION 2 VARS */
+
+  // FlipWords
+  const words = ["brightest", "glamorous", "exclusive", "luxurious"];
+
+  // Draggable items for the showcase
+  const containerRef = useRef<HTMLDivElement>(
+    null
+  ) as React.RefObject<HTMLDivElement>;
+
+  /* END OF SECTION 2 VARS */
 
   return (
     <div className="min-h-screen">
@@ -102,70 +120,56 @@ export default function GuestHomePage() {
 
       {/* SECTION 2 SHOWCASE */}
       <section className="py-5 bg-gray-50">
-        <div className="container mx-auto py-5">
-          <div className="flex flex-col items-center justify-center overflow-hidden">
-            <div>
-              <h1 className=" text-center text-[#8b6c26] font-bold text-lg">
-                THE HALPERIN HOTEL
-              </h1>
-              <h2>
-                <p className="text-center text-[55px] text-black">
-                  For Hollywood's brightest lights
-                </p>
-              </h2>
-            </div>
-            <div className="max-w-3xl text-[15px] text-center pt-2">
-              She greets you like a movie star from the moment you pass the
-              iconic sign, step onto the famous red carpet and enter the grand
-              lobby. The ultimate beacon of shining glamour... where else could
-              you possibly call home in the city of angels?
-            </div>
-          </div>
-        </div>
-        {/* <DraggableCardContainer
-          ref={containerRef}
-          className="relative my-10 flex min-h-screen w-full justify-center overflow-clip"
-        >
-          <div className="grid w-full max-w-5xl grid-cols-1 items-center justify-center gap-10 md:grid-cols-3">
-            <Container>
-              <DraggableCardBody dragBoundaryRef={containerRef}>
-                <img
-                  src="https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=3634&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Some mountains"
-                  className="pointer-events-none relative z-10 h-80 w-full object-cover"
-                />
-                <p className="mt-4 text-center text-2xl font-bold text-neutral-700 dark:text-neutral-300">
-                  How
-                </p>
-              </DraggableCardBody>
-            </Container>
-          </div>
-        </DraggableCardContainer> */}
         <DraggableCardContainer
           ref={containerRef}
-          className="relative flex min-h-screen w-full items-center justify-center overflow-clip select-none"
+          className="relative flex flex-col min-h-screen w-full items-center justify-start overflow-clip select-none"
         >
-          <p className="absolute mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-400 md:text-4xl dark:text-neutral-800">
+          {/* 👑 Hotel Intro */}
+          <div className="w-full px-4 pt-10 z-20">
+            <div className="container mx-auto">
+              <div className="flex flex-col items-center justify-center overflow-hidden text-center">
+                <h1 className="text-[#8b6c26] font-bold text-lg">
+                  THE HALPERIN HOTEL
+                </h1>
+                <div className="text-5xl font-normal pt-2 text-neutral-700 dark:text-neutral-400">
+                  For Hollywood's <FlipWords words={words} /> lights
+                </div>
+                <p className="max-w-3xl text-[15px] pt-2">
+                  She greets you like a movie star from the moment you pass the
+                  iconic sign, step onto the famous red carpet and enter the
+                  grand lobby. The ultimate beacon of shining glamour... where
+                  else could you possibly call home in the city of angels?
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 📝 Floating Tagline Behind Cards */}
+          <p className="absolute top-3/5 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-500 md:text-4xl dark:text-neutral-800 z-0">
             If it’s your first stay with us, prepare to experience timeless
             elegance.
           </p>
-          {draggableItems.map((item) => (
-            <DraggableCardBody
-              dragBoundaryRef={containerRef}
-              key={item.title}
-              className={`border-2 border-[#8b6c26] rounded-xl shadow-lg ${item.className}`}
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="pointer-events-none relative z-10 h-80 w-80 object-cover"
-              />
-            </DraggableCardBody>
-          ))}
+
+          {/* 🃏 Draggable Cards Section */}
+          <div className="flex flex-wrap justify-center gap-6 pt-20 z-10">
+            {draggableItems.map((item) => (
+              <DraggableCardBody
+                dragBoundaryRef={containerRef}
+                key={item.title}
+                className={`border-2 border-[#8b6c26] rounded-xl shadow-lg ${item.className}`}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="pointer-events-none relative z-10 h-80 w-80 object-cover"
+                />
+              </DraggableCardBody>
+            ))}
+          </div>
         </DraggableCardContainer>
       </section>
 
-      {/* Features Section */}
+      {/* Section 3 */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">

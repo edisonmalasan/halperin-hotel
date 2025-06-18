@@ -75,7 +75,7 @@ export default function MegaMenu({
         bg-white shadow-lg rounded-md
         p-4 pb-8
         grid grid-cols-2 gap-x-8 gap-y-2
-        w-[800px] h-full
+        w-[1000px] h-full
       "
     >
       {/* Explore All Button */}
@@ -83,7 +83,7 @@ export default function MegaMenu({
         <Link
           href="/rooms"
           aria-label={getExploreAll().text}
-          className="pb-4 flex gap-4 items-center uppercase text-[12px] leading-[16px] font-light group"
+          className="pb-4 flex gap-4 items-center uppercase text-[16px] leading-[16px] font-semibold group"
           role="button"
           draggable="false"
         >
@@ -126,7 +126,7 @@ export default function MegaMenu({
             className={`cursor-pointer p-2 rounded group`}
             onMouseEnter={() => setSelected(item)}
           >
-            <div className="flex items-center justify-between text-xs transition-all duration-200 text-black">
+            <div className="flex items-center justify-between text-sm transition-all duration-200 text-black">
               <span
                 className={`transition-opacity duration-200 ${
                   selected.title === item.title
@@ -180,10 +180,10 @@ export default function MegaMenu({
           />
         )}
         {selected.description && (
-          <p className="text-xs">{selected.description}</p>
+          <p className="text-sm">{selected.description}</p>
         )}
         {selected.features && (
-          <ul className="text-xs grid gap-1">
+          <ul className="text-sm grid gap-1">
             {selected.features.map((f, idx) => (
               <li key={idx} className="flex items-center gap-2">
                 <span className="text-[#8b6c26]">
