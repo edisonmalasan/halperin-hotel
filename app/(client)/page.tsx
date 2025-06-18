@@ -90,93 +90,26 @@ export default function GuestHomePage() {
         </div>
       </section>
 
-      {/* Featured Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Our Featured Rooms
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Deluxe Room */}
-            <Card>
-              <div className="h-48 bg-gray-200 rounded-t-lg" />
-              <CardHeader>
-                <CardTitle>Deluxe Room</CardTitle>
-                <CardDescription>Spacious room with city view</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="secondary">King Bed</Badge>
-                  <Badge variant="secondary">City View</Badge>
-                  <Badge variant="secondary">40m²</Badge>
-                </div>
-                <p className="text-2xl font-bold">
-                  $200
-                  <span className="text-sm font-normal text-gray-500">
-                    /night
-                  </span>
+      {/* SECTION 2 SHOWCASE */}
+      <section className="py-5 bg-gray-50">
+        <div className="container mx-auto py-5">
+          <div className="flex flex-col items-center justify-center overflow-hidden">
+            <div>
+              <h1 className=" text-center text-[#8b6c26] font-bold">
+                THE HALPERIN HOTEL
+              </h1>
+              <h2>
+                <p className="text-center text-[40px] text-black pt-1">
+                  For Hollywood's brightest lights
                 </p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href="/login">Book Now</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-
-            {/* Executive Suite */}
-            <Card>
-              <div className="h-48 bg-gray-200 rounded-t-lg" />
-              <CardHeader>
-                <CardTitle>Executive Suite</CardTitle>
-                <CardDescription>Luxury suite with ocean view</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="secondary">King Bed</Badge>
-                  <Badge variant="secondary">Ocean View</Badge>
-                  <Badge variant="secondary">60m²</Badge>
-                </div>
-                <p className="text-2xl font-bold">
-                  $350
-                  <span className="text-sm font-normal text-gray-500">
-                    /night
-                  </span>
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href="/login">Book Now</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-
-            {/* Family Suite */}
-            <Card>
-              <div className="h-48 bg-gray-200 rounded-t-lg" />
-              <CardHeader>
-                <CardTitle>Family Suite</CardTitle>
-                <CardDescription>Perfect for family stays</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="secondary">2 Queen Beds</Badge>
-                  <Badge variant="secondary">City View</Badge>
-                  <Badge variant="secondary">75m²</Badge>
-                </div>
-                <p className="text-2xl font-bold">
-                  $400
-                  <span className="text-sm font-normal text-gray-500">
-                    /night
-                  </span>
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href="/login">Book Now</Link>
-                </Button>
-              </CardFooter>
-            </Card>
+              </h2>
+            </div>
+            <div className="max-w-xl text-[12px] text-center pt-4">
+              She greets you like a movie star from the moment you pass the
+              iconic sign, step onto the famous red carpet and enter the grand
+              lobby. The ultimate beacon of shining glamour... where else could
+              you possibly call home in the city of angels?
+            </div>
           </div>
         </div>
       </section>
