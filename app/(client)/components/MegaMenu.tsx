@@ -119,7 +119,7 @@ export default function MegaMenu({
       </div>
 
       {/* Left: List */}
-      <ul className="space-y-2 border-r pr-4">
+      <ul className="space-y-5 border-r pr-4">
         {items.map((item) => (
           <li
             key={item.href}
