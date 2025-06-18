@@ -124,14 +124,14 @@ export default function GuestHomePage() {
           ref={containerRef}
           className="relative flex flex-col min-h-screen w-full items-center justify-start overflow-clip select-none"
         >
-          {/* 👑 Hotel Intro */}
+          {/* Top */}
           <div className="w-full px-4 pt-10 z-20">
             <div className="container mx-auto">
               <div className="flex flex-col items-center justify-center overflow-hidden text-center">
                 <h1 className="text-[#8b6c26] font-bold text-lg">
                   THE HALPERIN HOTEL
                 </h1>
-                <div className="text-5xl font-normal pt-2 text-neutral-700 dark:text-neutral-400">
+                <div className="text-[54px] font-normal pt-2 text-neutral-700 dark:text-neutral-400">
                   For Hollywood's <FlipWords words={words} /> lights
                 </div>
                 <p className="max-w-3xl text-[15px] pt-2">
@@ -144,13 +144,13 @@ export default function GuestHomePage() {
             </div>
           </div>
 
-          {/* 📝 Floating Tagline Behind Cards */}
+          {/* back of carsd*/}
           <p className="absolute top-3/5 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-500 md:text-4xl dark:text-neutral-800 z-0">
             If it’s your first stay with us, prepare to experience timeless
             elegance.
           </p>
 
-          {/* 🃏 Draggable Cards Section */}
+          {/* draggable cards */}
           <div className="flex flex-wrap justify-center gap-6 pt-20 z-10">
             {draggableItems.map((item) => (
               <DraggableCardBody
@@ -169,7 +169,7 @@ export default function GuestHomePage() {
         </DraggableCardContainer>
       </section>
 
-      {/* Section 3 */}
+      {/* SECTION 3 */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">

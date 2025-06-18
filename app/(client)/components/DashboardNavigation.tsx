@@ -31,15 +31,17 @@ export default function DashboardNavigation() {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveMenu(null);
+        setIsVisible(false);
+        setTimeout(() => setActiveMenu(null), 300);
       }
     }
-
-    document.addEventListener("mousedown", handleClickOutside);
+    if (activeMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [activeMenu]);
 
   const handleMenuClick = (
     menu: "rooms" | "suites" | "dining" | "occasions" | "more"
@@ -56,7 +58,7 @@ export default function DashboardNavigation() {
         }, 300);
       } else {
         setActiveMenu(menu);
-        setIsVisible(true);
+        setTimeout(() => setIsVisible(true), 10);
       }
     }
   };
@@ -68,8 +70,13 @@ export default function DashboardNavigation() {
         mounted &&
         createPortal(
           <div
-            className="fixed inset-0 bg-black/50 z-40"
-            onClick={() => setActiveMenu(null)}
+            className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+              isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+            onClick={() => {
+              setIsVisible(false);
+              setTimeout(() => setActiveMenu(null), 300);
+            }}
             aria-label="Close menu"
           />,
           document.body
@@ -319,11 +326,12 @@ export default function DashboardNavigation() {
                 absolute left-1/2 -translate-x-1/2 top-full mt-8 z-50
                 transition-all duration-300 ease
                 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
+                  activeMenu && isVisible
+                    ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 -translate-y-2 pointer-events-none"
                 }
               `}
+              style={{ minWidth: 400 }}
             >
               {activeMenu === "rooms" && <MegaMenu items={rooms} />}
               {activeMenu === "suites" && <MegaMenu items={suites} />}
