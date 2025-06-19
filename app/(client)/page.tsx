@@ -171,37 +171,17 @@ export default function GuestHomePage() {
 
       {/* SECTION 3 */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Hotel Features
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Free WiFi</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">
-                  High-speed internet throughout the hotel
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Swimming Pool</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Outdoor pool with city view</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Restaurant</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">Fine dining experience</p>
-              </CardContent>
-            </Card>
+        <div className="container mx-auto">
+          <div className="flex flex-row justify-center gap-x-35 overflow-hidden">
+            <div className="text-[30px] items-start font-normal text-black ">
+              Live like true Hollywood royalty
+            </div>
+            <p className="max-w-sm text-[13px] pt-5">
+              Guest rooms and suites in the main house embody LA’s sparkling
+              elegance, while the bungalows draw inspiration from the lush
+              surrounding landscape for an effortless and modern Californian
+              design.
+            </p>
           </div>
         </div>
       </section>
