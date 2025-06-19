@@ -21,6 +21,8 @@ import { useRef, useEffect, useState } from "react";
 import { draggableItems } from "./data/draggableItems";
 import Container from "./components/DraggableContainer";
 import { FlipWords } from "@/components/ui/flip-words";
+import CardSlider from "./components/CardSlider";
+import { sliderCards } from "@/app/(client)/data/homecardslider";
 
 export default function GuestHomePage() {
   /* SECTION 1 VARS */
@@ -74,6 +76,10 @@ export default function GuestHomePage() {
 
   /* END OF SECTION 2 VARS */
 
+  /* SECTION 3 VARS */
+
+  /* END OF SECTION 3 VARS */
+
   return (
     <div className="min-h-screen">
       {/* vid section */}
@@ -119,7 +125,7 @@ export default function GuestHomePage() {
       </section>
 
       {/* SECTION 2 SHOWCASE */}
-      <section className="py-5 bg-gray-50">
+      <section className="py-5 bg-white">
         <DraggableCardContainer
           ref={containerRef}
           className="relative flex flex-col min-h-screen w-full items-center justify-start overflow-clip select-none"
@@ -146,7 +152,7 @@ export default function GuestHomePage() {
 
           {/* back of carsd*/}
           <p className="absolute top-3/5 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-500 md:text-4xl dark:text-neutral-800 z-0">
-            If it’s your first stay with us, prepare to experience timeless
+            If it's your first stay with us, prepare to experience timeless
             elegance.
           </p>
 
@@ -177,12 +183,15 @@ export default function GuestHomePage() {
               Live like true Hollywood royalty
             </div>
             <p className="max-w-sm text-[13px] pt-5">
-              Guest rooms and suites in the main house embody LA’s sparkling
+              Guest rooms and suites in the main house embody LA's sparkling
               elegance, while the bungalows draw inspiration from the lush
               surrounding landscape for an effortless and modern Californian
               design.
             </p>
           </div>
+        </div>
+        <div className="mt-20">
+          <CardSlider cards={sliderCards} />
         </div>
       </section>
     </div>
