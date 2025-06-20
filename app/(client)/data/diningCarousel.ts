@@ -7,13 +7,13 @@ export const diningSlides = [
     },
     {
         image: "/images/dining/fountain-coffee/fountain-coffee-page.png",
-        name: "Fountain Coffee Room",
+        name: "The Fountain Coffee Room",
         description:
             "A beloved Beverly Hills tradition since 1949, the Fountain Coffee Room is a classic soda fountain with a 1950s vibe, serving up legendary milkshakes, all-day breakfast, and a taste of old Hollywood.",
     },
     {
         image: "/images/dining/cabana-cafe/cabana-cafe-page.png",
-        name: "Cabana Cafe",
+        name: "The Cabana Cafe",
         description:
             "Poolside dining at its finest. The Cabana Cafe offers a relaxed, sun-soaked setting with fresh California cuisine, perfect for a leisurely breakfast, lunch, or cocktails by the pool.",
     },

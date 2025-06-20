@@ -23,7 +23,7 @@ import Container from "./components/DraggableContainer";
 import { FlipWords } from "@/components/ui/flip-words";
 import CardSlider from "./components/CardSlider";
 import { sliderCards } from "@/app/(client)/data/homecardslider";
-import DiningImageCarousel from "./components/DiningImageCarousel";
+import ImageCarousel from "./components/ImageCarousel";
 import { diningSlides } from "./data/diningCarousel";
 
 export default function GuestHomePage() {
@@ -286,7 +286,7 @@ export default function GuestHomePage() {
       {/* SECTION 5 */}
       <section className="py-10 bg-white">
         <div className="container mx-auto">
-          <DiningImageCarousel slides={diningSlides} />
+          <ImageCarousel slides={diningSlides} />
         </div>
       </section>
       {/* END OF SECTION 5 */}
