@@ -284,7 +284,7 @@ export default function GuestHomePage() {
       {/*END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-40 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>
