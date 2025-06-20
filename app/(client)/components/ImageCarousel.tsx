@@ -19,7 +19,7 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
   const goTo = (idx: number) => setCurrent(idx);
 
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col gap-6">
+    <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
       {/* Main Image Slider */}
       <div className="relative w-full aspect-[16/7] bg-black overflow-hidden">
         {slides.map((slide, idx) => (
@@ -43,7 +43,7 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
               <div className="text-3xl font-bold text-white drop-shadow-lg">
                 {slide.name}
               </div>
-              <div className="text-base text-white/90 max-w-xl drop-shadow-lg">
+              <div className="text-sm text-justify tracking-tight indent-10 text-white/90 max-w-xl drop-shadow-lg">
                 {slide.description}
               </div>
             </div>
@@ -54,30 +54,60 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
           </div>
         ))}
       </div>
-      {/* Thumbnails Row */}
-      <div className="flex flex-row gap-4 justify-center items-center mt-2">
-        {slides.map((slide, idx) => (
-          <button
-            key={idx}
-            onClick={() => goTo(idx)}
-            className={`border-2 ${
-              idx === current ? "border-[#8B6C26]" : "border-transparent"
-            } rounded-md overflow-hidden w-32 h-20 transition-all duration-200 focus:outline-none`}
-            aria-label={`Go to ${slide.name}`}
-          >
-            <img
-              src={slide.image}
-              alt={slide.name + " thumbnail"}
-              className="object-cover w-full h-full"
-              draggable={false}
-            />
+      <div className="flex flex-row justify-between items-center">
+        {/* Thumbnails Row */}
+        <div className="flex flex-row gap-4 justify-center items-center mt-2">
+          {slides.map((slide, idx) => (
+            <button
+              key={idx}
+              onClick={() => goTo(idx)}
+              className={`border-2 ${
+                idx === current ? "border-[#8B6C26]" : "border-transparent"
+              } rounded-md overflow-hidden w-42 h-25 transition-all duration-200 focus:outline-none`}
+              aria-label={`Go to ${slide.name}`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.name + " thumbnail"}
+                className="object-cover w-full h-full"
+                draggable={false}
+              />
+            </button>
+          ))}
+        </div>
+        {/* Navigation Buttons */}
+        <div className="flex flex-row justify-between gap-x-5 items-center mt-4">
+          <button aria-label="Previous" onClick={prev} className="group">
+            <span className="block rotate-180">
+              <svg
+                width="64"
+                height="65"
+                viewBox="0 0 64 65"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+              >
+                <rect
+                  x="0.5"
+                  y="1.49805"
+                  width="63"
+                  height="63"
+                  rx="31.5"
+                  stroke="#CFB67D"
+                  strokeOpacity="0.5"
+                  fill="transparent"
+                  className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                ></rect>
+                <path
+                  className="transition-colors duration-200 group-hover:stroke-white"
+                  d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                  stroke="black"
+                  strokeLinejoin="bevel"
+                ></path>
+              </svg>
+            </span>
           </button>
-        ))}
-      </div>
-      {/* Navigation Buttons */}
-      <div className="flex flex-row justify-between items-center mt-4">
-        <button aria-label="Previous" onClick={prev} className="group">
-          <span className="block rotate-180">
+          <button aria-label="Next" onClick={next} className="group">
             <svg
               width="64"
               height="65"
@@ -101,39 +131,11 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
                 className="transition-colors duration-200 group-hover:stroke-white"
                 d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
                 stroke="black"
-                stroke-linejoin="bevel"
+                strokeLinejoin="bevel"
               ></path>
             </svg>
-          </span>
-        </button>
-        <button aria-label="Next" onClick={next} className="group">
-          <svg
-            width="64"
-            height="65"
-            viewBox="0 0 64 65"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="arrowHover rtl:rotate-180 text-[#8b6c26]"
-          >
-            <rect
-              x="0.5"
-              y="1.49805"
-              width="63"
-              height="63"
-              rx="31.5"
-              stroke="#CFB67D"
-              strokeOpacity="0.5"
-              fill="transparent"
-              className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
-            ></rect>
-            <path
-              className="transition-colors duration-200 group-hover:stroke-white"
-              d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
-              stroke="black"
-              stroke-linejoin="bevel"
-            ></path>
-          </svg>
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   );

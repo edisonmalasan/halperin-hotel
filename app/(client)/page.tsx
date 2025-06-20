@@ -180,13 +180,13 @@ export default function GuestHomePage() {
       {/* END OF SECTION 2 */}
 
       {/* SECTION 3 */}
-      <section className="py-16">
-        <div className="container mx-auto">
+      <section className="py-20 bg-white">
+        <div className="container mx-auto py-10">
           <div className="flex flex-row justify-center gap-x-35 overflow-hidden">
-            <div className="text-[30px] items-start font-normal text-black ">
-              Live like true Hollywood royalty
+            <div className="text-[35px] items-start font-normal tracking-wide text-black ">
+              Living like true Hollywood royalty
             </div>
-            <p className="max-w-sm text-[13px] pt-5">
+            <p className="max-w-sm text-[14px] pt-5 tracking-wide text-justify">
               Guest rooms and suites in the main house embody LA's sparkling
               elegance, while the bungalows draw inspiration from the lush
               surrounding landscape for an effortless and modern Californian
@@ -194,19 +194,19 @@ export default function GuestHomePage() {
             </p>
           </div>
         </div>
-        <div className="mt-20">
+        <div className="mt-10">
           <CardSlider cards={sliderCards} />
         </div>
       </section>
       {/*END OF SECTION 3 */}
 
       {/* SECTION 4 */}
-      <section className="py-10 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
           <div className="flex flex-row items-between justify-between mx-45 gap-25 overflow-hidden">
             <div className="flex flex-col justify-center gap-y-10 overflow-hidden max-w-4xl">
               <div className="text-[#8b6c26] text-sm">THE ORIGINAL ICON</div>
-              <p className="text-3xl/10 indent-10 tracking-wide">
+              <p className="text-3xl/10 indent-10 tracking-wide text-justify">
                 This is the legendary LA hideaway, famous for playing host and
                 friend to Hollywood royalty for over a century. From the deals
                 made in the Polo Lounge to the romances lived out in the
@@ -284,7 +284,7 @@ export default function GuestHomePage() {
       {/*END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-10 bg-white">
+      <section className="py-40 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>
