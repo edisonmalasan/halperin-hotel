@@ -1,10 +1,10 @@
 export const draggableItems = [
-  {
-    title: "Tyler Durden",
-    image:
-      "https://images.unsplash.com/photo-1732310216648-603c0255c000?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    className: "absolute top-70 left-[20%] rotate-[-5deg]",
-  },
+  // {
+  //   title: "Tyler Durden",
+  //   image:
+  //     "https://images.unsplash.com/photo-1732310216648-603c0255c000?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  //   className: "absolute top-70 left-[20%] rotate-[-5deg]",
+  // },
   {
     title: "The Narrator",
     image:

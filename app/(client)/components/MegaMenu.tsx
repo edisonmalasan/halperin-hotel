@@ -59,7 +59,7 @@ export default function MegaMenu({
         <ul>
           {items.map((item) => (
             <li key={item.href} className="p-2 hover:bg-[#8b6d2636] rounded">
-              <Link href={item.href} className="font-medium text-xs">
+              <Link href={item.href} className="font-medium text-sm">
                 {item.title}
               </Link>
             </li>
