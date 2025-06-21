@@ -290,6 +290,12 @@ export default function GuestHomePage() {
         </div>
       </section>
       {/* END OF SECTION 5 */}
+
+      {/* SECTION 6 */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto"></div>
+      </section>
+      {/* END OF SECTION 6 */}
     </div>
   );
 }
