@@ -11,15 +11,15 @@ export const tabsData = [
                 linkText: "EXPLORE WELLNESS",
                 linkHref: "#",
             },
-            // {
-            //     label: "FITNESS",
-            //     heading: "State-of-the-art gym",
-            //     description:
-            //         "Our modern, fully-equipped fitness center offers everything you need to maintain your routine, from cardio machines to free weights, all in a bright and motivating environment.",
-            //     image: "/images/occasions/meetings/meetings-page.png",
-            //     linkText: "DISCOVER THE GYM",
-            //     linkHref: "#",
-            // },
+            {
+                label: "FITNESS",
+                heading: "State-of-the-art gym",
+                description:
+                    "Our modern, fully-equipped fitness center offers everything you need to maintain your routine, from cardio machines to free weights, all in a bright and motivating environment.",
+                image: "/images/occasions/meetings/meetings-page.png",
+                linkText: "DISCOVER THE GYM",
+                linkHref: "#",
+            },
         ],
     },
     {

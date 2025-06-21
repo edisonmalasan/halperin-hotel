@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 // structure for a single content item
 interface ContentItem {
@@ -8,8 +9,8 @@ interface ContentItem {
   heading: string;
   description: string;
   image: string;
-  linkText: string;
-  linkHref: string;
+  linkText?: string;
+  linkHref?: string;
 }
 
 // structure for a single tab
@@ -56,36 +57,40 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
             {item.heading}
           </h2>
           <p className="text-neutral-600 leading-relaxed">{item.description}</p>
-          <a
-            href={item.linkHref}
-            className="group inline-flex items-center gap-3 mt-4 text-sm font-semibold text-neutral-700 hover:text-[#8b6c26]"
-          >
-            {item.linkText}
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 56 41"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="arrowHover rtl:rotate-180 text-[#8b6c26] transition-transform group-hover:translate-x-1"
+          {item.linkHref && item.linkText && (
+            <Link
+              href={item.linkHref}
+              className="group inline-flex items-center gap-3 mt-4 text-sm font-semibold text-neutral-700"
             >
-              <rect
-                x="0.5"
-                y="1.498"
-                width="55"
-                height="39"
-                rx="19.5"
-                stroke="currentColor"
-                strokeOpacity="0.5"
-                fill="transparent"
-              ></rect>
-              <path
-                d="M30.5 27C30.5 21 36 21 36 21M36 21C36 21 30.5 21 30.5 15M36 21H20"
-                stroke="black"
-                strokeLinejoin="bevel"
-              ></path>
-            </svg>
-          </a>
+              {item.linkText}
+              <svg
+                width="56"
+                height="41"
+                viewBox="0 0 56 41"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+              >
+                <rect
+                  x="0.5"
+                  y="1.49805"
+                  width="55"
+                  height="39"
+                  rx="19.5"
+                  stroke="currentColor"
+                  strokeOpacity="0.5"
+                  fill="transparent"
+                  className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                ></rect>
+                <path
+                  d="M30.5 26.998C30.5 20.998 36 20.998 36 20.998M36 20.998C36 20.998 30.5 20.998 30.5 14.998M36 20.998H20"
+                  stroke="black"
+                  strokeLinejoin="bevel"
+                  className="transition-colors duration-200 group-hover:stroke-white"
+                ></path>
+              </svg>
+            </Link>
+          )}
         </div>
         {/* Image */}
         <div className="w-[500px] h-[500px] bg-gray-100 shadow-md">
