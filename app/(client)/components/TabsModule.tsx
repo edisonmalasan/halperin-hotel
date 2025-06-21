@@ -40,7 +40,7 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
   }, [activeTab, tabs]);
 
   const renderContentItem = (item: ContentItem, index: number) => {
-    const isReversed = index % 2 !== 0; // Alternate layout
+    const isReversed = index % 2 !== 0; // reverse layout for odd indexed items
     return (
       <div
         key={index}

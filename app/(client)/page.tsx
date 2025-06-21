@@ -28,7 +28,7 @@ import { diningSlides } from "./data/diningCarousel";
 import TabsModule from "./components/TabsModule";
 import { tabsData } from "./data/tabsData";
 
-export default function GuestHomePage() {
+export default function HomePage() {
   /* SECTION 1 VARS */
 
   // Video player state
@@ -85,7 +85,7 @@ export default function GuestHomePage() {
   /* END OF SECTION 3 VARS */
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* SECTION 1 */}
       <section className="relative h-[865px] text-white overflow-hidden">
         {/* vid layr */}
@@ -330,6 +330,22 @@ export default function GuestHomePage() {
         </div>
       </section>
       {/* END OF SECTION 7 */}
+
+      {/* SECTION 8 */}
+      <section className="bg-white">
+        <div className="container mx-auto pT-10">
+          <div className="flex flex-row justify-center gap-x-35 overflow-hidden">
+            <div className="text-[35px] items-start font-normal tracking-wide text-black ">
+              Where legends belong
+            </div>
+            <p className="max-w-sm text-[14px] pt-5 tracking-wide text-justify">
+              Extraordinary places where memorable stories continue to be
+              written and where legends are made.
+            </p>
+          </div>
+        </div>
+      </section>
+      {/*END OF SECTION 8 */}
     </div>
   );
 }
