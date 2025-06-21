@@ -25,6 +25,8 @@ import CardSlider from "./components/CardSlider";
 import { sliderCards } from "@/app/(client)/data/homecardslider";
 import ImageCarousel from "./components/ImageCarousel";
 import { diningSlides } from "./data/diningCarousel";
+import TabsModule from "./components/TabsModule";
+import { tabsData } from "./data/tabsData";
 
 export default function GuestHomePage() {
   /* SECTION 1 VARS */
@@ -293,9 +295,41 @@ export default function GuestHomePage() {
 
       {/* SECTION 6 */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto"></div>
+        <div className="container mx-auto">
+          <div className="flex flex-row items-center justify-center gap-x-16 overflow-hidden">
+            <div className="w-[180px] h-[180px] bg-gray-100 shadow-md">
+              <div className="border-8 border-white/90  overflow-hidden">
+                <img
+                  className="w-full h-full object-cover"
+                  src="/images/Amy-icon.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="flex flex-col justify-center gap-y-16 max-w-4xl">
+              <p className="text-2xl items-start font-normal tracking-wide text-justify text-black">
+                “Behind every hallway we cleared and every threat we faced,
+                there was a team that refused to give up. Halperin Hotel stands
+                today because we gave it a second chance and we’ll keep
+                defending the legacy we built.”
+              </p>
+              <div className="flex flex-row items-center gap-10 font-thin text-xs">
+                <h6>AMY VICTORS</h6>
+                <h6>SLAYER (IMMUNE)</h6>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       {/* END OF SECTION 6 */}
+
+      {/* SECTION 7 */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto">
+          <TabsModule tabs={tabsData} />
+        </div>
+      </section>
+      {/* END OF SECTION 7 */}
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
                 aria-label={imgCard.linkLabel}
                 className="block group flex-shrink-0"
               >
-                <div className="overflow-hidden shadow-lg w-[900px] h-[570px] bg-gray-100 border border-gray-200">
+                <div className="overflow-hidden w-[900px] h-[570px] bg-gray-100 border-8 border-white shadow-lg">
                   <img
                     src={imgCard.mainImage}
                     alt={imgCard.title}
@@ -61,7 +61,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
                 </div>
               </a>
               <div className="flex-shrink-0 flex items-end h-[440px]">
-                <div className="overflow-hidden shadow-lg w-[315px] h-[315px] bg-gray-100 border border-gray-200 flex items-center justify-center">
+                <div className="overflow-hidden shadow-lg w-[315px] h-[315px] bg-gray-100 border-8 border-white flex items-center justify-center">
                   <img
                     src={imgCard.secondaryImage}
                     alt={imgCard.title + " secondary"}
@@ -111,21 +111,70 @@ export default function CardSlider({ cards }: CardSliderProps) {
         <div className="flex flex-col justify-center items-end flex-1 min-w-[140px]">
           <div className="flex items-center gap-6">
             <span className="font-mono text-lg text-neutral-700">
-              {String(current + 1).padStart(2, "0")} <span className="opacity-50">- {String(total).padStart(2, "0")}</span>
+              {String(current + 1).padStart(2, "0")}{" "}
+              <span className="opacity-50">
+                - {String(total).padStart(2, "0")}
+              </span>
             </span>
-            <button
-              aria-label="Previous"
-              onClick={prev}
-              className="w-12 h-12 flex items-center justify-center rounded-full border border-[#CFB67D] text-[#8B6C26] bg-white hover:bg-[#f5f5f5] transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
+            <button aria-label="Previous" onClick={prev} className="group">
+              <span className="block rotate-180">
+                <svg
+                  width="64"
+                  height="65"
+                  viewBox="0 0 64 65"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                >
+                  <rect
+                    x="0.5"
+                    y="1.49805"
+                    width="63"
+                    height="63"
+                    rx="31.5"
+                    stroke="#CFB67D"
+                    strokeOpacity="0.5"
+                    fill="transparent"
+                    className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                  ></rect>
+                  <path
+                    className="transition-colors duration-200 group-hover:stroke-white"
+                    d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                    stroke="black"
+                    strokeLinejoin="bevel"
+                  ></path>
+                </svg>
+              </span>
             </button>
-            <button
-              aria-label="Next"
-              onClick={next}
-              className="w-12 h-12 flex items-center justify-center rounded-full border border-[#CFB67D] text-[#8B6C26] bg-white hover:bg-[#f5f5f5] transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
+            <button aria-label="Next" onClick={next} className="group">
+              <span className="block rotate-360">
+                <svg
+                  width="64"
+                  height="65"
+                  viewBox="0 0 64 65"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                >
+                  <rect
+                    x="0.5"
+                    y="1.49805"
+                    width="63"
+                    height="63"
+                    rx="31.5"
+                    stroke="#CFB67D"
+                    strokeOpacity="0.5"
+                    fill="transparent"
+                    className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                  ></rect>
+                  <path
+                    className="transition-colors duration-200 group-hover:stroke-white"
+                    d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                    stroke="black"
+                    strokeLinejoin="bevel"
+                  ></path>
+                </svg>
+              </span>
             </button>
           </div>
         </div>

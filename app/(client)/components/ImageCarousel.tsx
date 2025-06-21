@@ -21,7 +21,7 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
       {/* Main Image Slider */}
-      <div className="relative w-full aspect-[16/7] h-[638px] bg-black overflow-hidden">
+      <div className="relative w-full aspect-[16/7] h-[638px] bg-black overflow-hidden border-8 border-white/100 shadow-md">
         {slides.map((slide, idx) => (
           <div
             key={idx}
@@ -108,32 +108,34 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
             </span>
           </button>
           <button aria-label="Next" onClick={next} className="group">
-            <svg
-              width="64"
-              height="65"
-              viewBox="0 0 64 65"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="arrowHover rtl:rotate-180 text-[#8b6c26]"
-            >
-              <rect
-                x="0.5"
-                y="1.49805"
-                width="63"
-                height="63"
-                rx="31.5"
-                stroke="#CFB67D"
-                strokeOpacity="0.5"
-                fill="transparent"
-                className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
-              ></rect>
-              <path
-                className="transition-colors duration-200 group-hover:stroke-white"
-                d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
-                stroke="black"
-                strokeLinejoin="bevel"
-              ></path>
-            </svg>
+            <span className="block rotate-360">
+              <svg
+                width="64"
+                height="65"
+                viewBox="0 0 64 65"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+              >
+                <rect
+                  x="0.5"
+                  y="1.49805"
+                  width="63"
+                  height="63"
+                  rx="31.5"
+                  stroke="#CFB67D"
+                  strokeOpacity="0.5"
+                  fill="transparent"
+                  className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                ></rect>
+                <path
+                  className="transition-colors duration-200 group-hover:stroke-white"
+                  d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                  stroke="black"
+                  strokeLinejoin="bevel"
+                ></path>
+              </svg>
+            </span>
           </button>
         </div>
       </div>
