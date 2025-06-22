@@ -5,6 +5,7 @@ import { Noto_Sans } from "next/font/google";
 import DashboardNavigation from "./(client)/components/DashboardNavigation";
 import Link from "next/link";
 import "./globals.css";
+import Script from "next/script";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -25,23 +26,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${notoSans.className} antialiased`}>
+        <Script
+          src="https://cdn.lordicon.com/lordicon.js"
+          strategy="beforeInteractive"
+        />
         <Providers>
           <div className="flex flex-col min-h-screen">
             <header className="bg-white shadow sticky top-0 z-50">
               <DashboardNavigation />
             </header>
             <main className="flex-grow pb-47">{children}</main>
-            <footer className="bg-gray-500">
+            <footer className="bg-[#fafafa]">
               <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  <div>
-                    <h3 className="font-bold mb-4">About Us</h3>
-                    <p className="text-gray-600">
-                      Halperin Hotel offers luxury accommodations in the heart
-                      of the city.
-                    </p>
-                  </div>
-                  <div>
+                  {/* <div>
                     <h3 className="font-bold mb-4">Quick Links</h3>
                     <ul className="space-y-2">
                       <li>
@@ -77,50 +75,117 @@ export default function RootLayout({
                         </Link>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                   <div>
-                    <h3 className="font-bold mb-4">Contact</h3>
+                    <h3 className="font-bold mb-4">ADDRESS</h3>
                     <ul className="space-y-2 text-gray-600">
-                      <li>123 Hotel Street</li>
-                      <li>City, Country</li>
-                      <li>Phone: +1 234 567 890</li>
-                      <li>Email: info@halperinhotel.com</li>
+                      <li>The Halperin Hills Hotel,</li>
+                      <li>9641 Sunset Boulevard,</li>
+                      <li>Beverly Hills, CA 90210</li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-bold mb-4">Follow Us</h3>
+                    <h3 className="font-bold mb-4">
+                      ROOM & SUITES RESERVATIONS
+                    </h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>+1 424 421 0060</li>
+                      <li>+1 855 350 0079</li>
+                      <li>reservations.DI2@thehalperinhotel.com</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-4">GENERAL ENQUIRIES</h3>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>+1 310 276 2251</li>
+                      <li>info.DI2@thehalperinhotel.com</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-bold mb-4">FOLLOW US</h3>
                     <div className="flex gap-4">
-                      <Link
-                        href="https://facebook.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
-                      >
-                        Facebook
-                      </Link>
-                      <Link
-                        href="https://twitter.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
-                      >
-                        Twitter
-                      </Link>
-                      <Link
+                      <a
                         href="https://instagram.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-blue-500 transition-colors"
                       >
-                        Instagram
-                      </Link>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: `<lord-icon
+    src="https://cdn.lordicon.com/dbugezxr.json"
+    trigger="loop"
+    delay="1500"
+    stroke="regular"
+    state="hover-rotate"
+    colors="primary:#121331,secondary:#ffc738,tertiary:#f49cc8,quaternary:#16a9c7,quinary:#ebe6ef"
+    style="width:40px;height:40px">
+</lord-icon>`,
+                          }}
+                        />
+                      </a>
+                      <a
+                        href="https://facebook.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                      >
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: `<lord-icon
+    src="https://cdn.lordicon.com/fmwsotep.json"
+    trigger="loop"
+    delay="2000"
+    state="hover-draw"
+    colors="primary:#121331,secondary:#ebe6ef,tertiary:#16a9c7"
+    style="width:40px;height:40px">
+</lord-icon>`,
+                          }}
+                        />
+                      </a>
+                      <a
+                        href="https://twitter.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                      >
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: `<lord-icon
+    src="https://cdn.lordicon.com/qrsdbrog.json"
+    trigger="loop"
+    delay="2000"
+    state="hover-draw"
+    style="width:40px;height:40px">
+</lord-icon>`,
+                          }}
+                        />
+                      </a>
+                      <a
+                        href="https://github.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-600 hover:text-pink-500 transition-colors"
+                      >
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: `<lord-icon
+    src="https://cdn.lordicon.com/lllcnxva.json"
+    trigger="loop"
+    delay="2000"
+    state="in-reveal"
+    style="width:40px;height:40px">
+</lord-icon>`,
+                          }}
+                        />
+                      </a>
                     </div>
                   </div>
                 </div>
-                <div className="border-t mt-8 pt-8 text-center text-gray-600">
+                <div className="border-t mt-8 pt-8 text-center text-sm text-gray-600">
                   <p>
-                    &copy; {new Date().getFullYear()} Halperin Hotel. All rights
-                    reserved.
+                    &copy; {new Date().getFullYear()} Halperin Hotel . All
+                    Rights Reserved.
                   </p>
                 </div>
               </div>
