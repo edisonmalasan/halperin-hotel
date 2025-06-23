@@ -46,7 +46,7 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
         key={index}
         className={`flex ${
           isReversed ? "flex-row-reverse" : "flex-row"
-        } items-center justify-evenly gap-16 py-10`}
+        } items-center justify-evenly gap-16 py-10 pb-30`}
       >
         {/* Text Content */}
         <div className="flex flex-col gap-4 max-w-md">
