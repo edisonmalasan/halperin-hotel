@@ -12,13 +12,11 @@ export const tabsData = [
                 linkHref: "#",
             },
             {
-                label: "FITNESS",
-                heading: "State-of-the-art gym",
+                label: "GIFTS & EXPERIENCES",
+                heading: "Take the glamour home",
                 description:
-                    "Our modern, fully-equipped fitness center offers everything you need to maintain your routine, from cardio machines to free weights, all in a bright and motivating environment.",
-                image: "/images/occasions/meetings/meetings-page.png",
-                linkText: "DISCOVER THE GYM",
-                linkHref: "#",
+                    "Treat your favorite people to a piece of the ‘Pink Palace’ with luxury stays, exceptional dining experiences and signature gifts.",
+                image: "/images/homepage/TabsData/all.png",
             },
         ],
     },
@@ -34,15 +32,13 @@ export const tabsData = [
                 linkText: "EXPERIENCE THE POOL",
                 linkHref: "#",
             },
-            // {
-            //     label: "CABANA CAFE",
-            //     heading: "Poolside bites and sips",
-            //     description:
-            //         "Enjoy fresh, vibrant California cuisine and creative cocktails without leaving the comfort of your sun lounger. The Cabana Cafe offers the perfect poolside dining experience.",
-            //     image: "/images/dining/cabana-cafe/cabana-cafe-mm.png",
-            //     linkText: "VIEW THE MENU",
-            //     linkHref: "#",
-            // },
+            {
+                label: "GIFTS & EXPERIENCES",
+                heading: "Take the glamour home",
+                description:
+                    "Treat your favorite people to a piece of the ‘Pink Palace’ with luxury stays, exceptional dining experiences and signature gifts.",
+                image: "/images/homepage/TabsData/all.png",
+            },
         ],
     },
     {
@@ -57,15 +53,13 @@ export const tabsData = [
                 linkText: "PLAN YOUR WEDDING",
                 linkHref: "#",
             },
-            // {
-            //     label: "MEETINGS",
-            //     heading: "Inspiring and productive",
-            //     description:
-            //         "Host your next event in our versatile and sophisticated spaces, equipped with the latest technology and supported by our impeccable service to ensure a seamless and successful occasion.",
-            //     image: "/images/occasions/meetings/meetings-mm.png",
-            //     linkText: "EXPLORE SPACES",
-            //     linkHref: "#",
-            // },
+            {
+                label: "GIFTS & EXPERIENCES",
+                heading: "Take the glamour home",
+                description:
+                    "Treat your favorite people to a piece of the ‘Pink Palace’ with luxury stays, exceptional dining experiences and signature gifts.",
+                image: "/images/homepage/TabsData/all.png",
+            },
         ],
     },
     {
@@ -80,15 +74,13 @@ export const tabsData = [
                 linkText: "LEARN MORE",
                 linkHref: "#",
             },
-            // {
-            //     label: "INTERIORS",
-            //     heading: "A story in every room",
-            //     description:
-            //         "Our rooms, suites, and bungalows are individually designed to reflect the hotel's legendary history, offering a unique blend of comfort, style, and personality.",
-            //     image: "/images/suites/presidential/presidential-page.png",
-            //     linkText: "SEE THE ROOMS",
-            //     linkHref: "#",
-            // },
+            {
+                label: "GIFTS & EXPERIENCES",
+                heading: "Take the glamour home",
+                description:
+                    "Treat your favorite people to a piece of the ‘Pink Palace’ with luxury stays, exceptional dining experiences and signature gifts.",
+                image: "/images/homepage/TabsData/all.png",
+            },
         ],
     },
 ]; 

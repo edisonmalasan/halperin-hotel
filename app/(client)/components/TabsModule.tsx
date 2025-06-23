@@ -56,7 +56,9 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
           <h2 className="text-4xl font-normal text-neutral-800">
             {item.heading}
           </h2>
-          <p className="text-neutral-600 leading-relaxed">{item.description}</p>
+          <p className="text-neutral-600 leading-relaxed text-sm indent-10">
+            {item.description}
+          </p>
           {item.linkHref && item.linkText && (
             <Link
               href={item.linkHref}
@@ -93,14 +95,13 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
           )}
         </div>
         {/* Image */}
-        <div className="w-[500px] h-[500px] bg-gray-100 shadow-md">
-          <div className="relative w-full h-full overflow-hidden border-8 border-white/90">
+        <div className="w-[431px] h-[578px]">
+          <div className="relative w-full h-full overflow-hidden">
             <img
               src={item.image}
               alt={item.heading}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 border-4 border-black/10 pointer-events-none"></div>
           </div>
         </div>
       </div>
