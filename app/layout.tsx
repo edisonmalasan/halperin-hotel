@@ -35,7 +35,7 @@ export default function RootLayout({
             <header className="bg-white shadow sticky top-0 z-50">
               <DashboardNavigation />
             </header>
-            <main className="flex-grow pb-47">{children}</main>
+            <main className="flex-grow">{children}</main>
             <footer className="bg-[#fafafa]">
               <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm ">

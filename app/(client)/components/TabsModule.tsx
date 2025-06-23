@@ -138,16 +138,11 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
 
       {/* Tab Content */}
       <div className="mt-8">
-        {tabs.map((tab, index) => (
-          <div
-            key={index}
-            className={`transition-opacity duration-500 ${
-              activeTab === index ? "opacity-100" : "opacity-0 absolute -z-10"
-            }`}
-          >
-            {tab.content.map(renderContentItem)}
+        {tabs[activeTab] && (
+          <div className="transition-opacity duration-500 opacity-100">
+            {tabs[activeTab].content.map(renderContentItem)}
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

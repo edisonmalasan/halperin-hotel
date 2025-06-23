@@ -286,7 +286,7 @@ export default function HomePage() {
       {/*END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-30 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>
@@ -324,7 +324,7 @@ export default function HomePage() {
       {/* END OF SECTION 6 */}
 
       {/* SECTION 7 */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto">
           <TabsModule tabs={tabsData} />
         </div>
@@ -333,7 +333,7 @@ export default function HomePage() {
 
       {/* SECTION 8 */}
       <section className="bg-white">
-        <div className="container mx-auto pT-10">
+        <div className="container mx-auto pb-40">
           <div className="flex flex-row justify-center gap-x-35 overflow-hidden">
             <div className="text-[35px] items-start font-normal tracking-wide text-black ">
               Where legends belong
