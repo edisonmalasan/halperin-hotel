@@ -31,7 +31,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
   const card = cards[current];
 
   return (
-    <div className="relative w-full max-w-[1300px] mx-auto min-h-[700px] flex flex-col justify-center">
+    <div className="relative w-full max-w-[1400px] mx-auto min-h-[700px] flex flex-col justify-center">
       {/* Image Slider */}
       <div className="overflow-hidden w-full">
         <div
@@ -51,7 +51,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
                 aria-label={imgCard.linkLabel}
                 className="block group flex-shrink-0"
               >
-                <div className="overflow-hidden w-[900px] h-[570px] bg-gray-100 border-8 border-white shadow-lg">
+                <div className="overflow-hidden w-[1013px] h-[570px]">
                   <img
                     src={imgCard.mainImage}
                     alt={imgCard.title}

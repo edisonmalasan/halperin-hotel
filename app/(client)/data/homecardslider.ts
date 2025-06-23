@@ -10,9 +10,9 @@ export interface CardSliderCard {
 
 export const sliderCards: CardSliderCard[] = [
   {
-    mainImage: "/images/rooms/bungalow/bungalow-page.png",
-    secondaryImage: "/images/rooms/bungalow/bungalow-mm.png",
-    title: "Bungalow 9",
+    mainImage: "/images/homepage/CardSlider/bungalow-1.png",
+    secondaryImage: "/images/homepage/CardSlider/bungalow-2.png",
+    title: "Bungalow",
     description:
       "Charlie Chaplin's effervescent character lives on through every detail of this vibrant two bedroom bungalow. Quirky touches add depth and personality to a space that sings out with vintage Hollywood glamour and glorious comfort.",
     features: [
@@ -21,11 +21,11 @@ export const sliderCards: CardSliderCard[] = [
       { text: "Fireplace" },
     ],
     link: "#",
-    linkLabel: "Explore Bungalow 9",
+    linkLabel: "Explore Bungalow",
   },
   {
-    mainImage: "/images/suites/presidential/presidential-page.png",
-    secondaryImage: "/images/suites/presidential/presidential-mm.png",
+    mainImage: "/images/homepage/CardSlider/presidential-1.png",
+    secondaryImage: "/images/homepage/CardSlider/presidential-2.png",
     title: "Presidential Suite",
     description:
       "One of LA's finest suites. Wildly beautiful in every way, this vast suite is ideal for high-level entertaining or your own celebrity-style getaway in a legendary setting.",
@@ -38,8 +38,8 @@ export const sliderCards: CardSliderCard[] = [
     linkLabel: "Explore Presidential Suite",
   },
   {
-    mainImage: "/images/suites/crescent/crescent-page.png",
-    secondaryImage: "/images/suites/crescent/crescent-mm.png",
+    mainImage: "/images/homepage/CardSlider/crescent-1.png",
+    secondaryImage: "/images/homepage/CardSlider/crescent-2.png",
     title: "Crescent Bungalow Suite",
     description:
       "Many of Hollywood's most glamorous stars have staged legendary party scenes in these suites. There's just something about the stylish attitude that demands admiration and devotion.",
@@ -52,8 +52,8 @@ export const sliderCards: CardSliderCard[] = [
     linkLabel: "Explore Crescent Bungalow Suite",
   },
   {
-    mainImage: "/images/rooms/deluxe-patio/deluxe-patio-page.png",
-    secondaryImage: "/images/rooms/deluxe-patio/deluxe-patio-mm.png",
+    mainImage: "/images/homepage/CardSlider/deluxe-patio-1.png",
+    secondaryImage: "/images/homepage/CardSlider/deluxe-patio-2.png",
     title: "Deluxe Room with Patio",
     description:
       "When your room is surrounded by lush, tropical gardens, a private patio feels like the most wonderful way to enjoy it. This is a bright, serene space dressed in effortless Californian style and modern luxury.",

@@ -196,7 +196,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-        <div className="mt-10">
+        <div className="mt-15">
           <CardSlider cards={sliderCards} />
         </div>
       </section>
@@ -286,7 +286,7 @@ export default function HomePage() {
       {/*END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-20 bg-white">
+      <section className="py-30 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>

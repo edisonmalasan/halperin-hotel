@@ -21,7 +21,7 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
       {/* Main Image Slider */}
-      <div className="relative w-full aspect-[16/7] h-[638px] bg-black overflow-hidden border-8 border-white/100 shadow-md">
+      <div className="relative aspect-[16/7] w-[1313] h-[700px] bg-black overflow-hidden">
         {slides.map((slide, idx) => (
           <div
             key={idx}
@@ -36,7 +36,7 @@ export default function ImageCarousel({ slides }: ImageCarouselProps) {
               draggable={false}
             />
             {/* Overlay: name, description, label */}
-            <div className="absolute left-0 bottom-0 p-8 pb-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent w-full flex flex-col gap-2">
+            <div className="absolute left-0 bottom-0 p-8 pb-10 bg-gradient-to-t from-black/1 via-black/1 to-transparent w-full flex flex-col gap-2">
               <span className="text-xs text-white/80 tracking-widest uppercase mb-5">
                 Dining
               </span>
