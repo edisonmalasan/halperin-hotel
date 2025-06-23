@@ -38,44 +38,7 @@ export default function RootLayout({
             <main className="flex-grow pb-47">{children}</main>
             <footer className="bg-[#fafafa]">
               <div className="container mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  {/* <div>
-                    <h3 className="font-bold mb-4">Quick Links</h3>
-                    <ul className="space-y-2">
-                      <li>
-                        <Link
-                          href="/rooms"
-                          className="text-gray-600 hover:text-blue-500 transition-colors"
-                        >
-                          Rooms
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/occasions"
-                          className="text-gray-600 hover:text-blue-500 transition-colors"
-                        >
-                          Occasions
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/dining"
-                          className="text-gray-600 hover:text-blue-500 transition-colors"
-                        >
-                          Dining
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/contact"
-                          className="text-gray-600 hover:text-blue-500 transition-colors"
-                        >
-                          Contact
-                        </Link>
-                      </li>
-                    </ul>
-                  </div> */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm ">
                   <div>
                     <h3 className="font-bold mb-4">ADDRESS</h3>
                     <ul className="space-y-2 text-gray-600">
