@@ -1,16 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   DraggableCardBody,
   DraggableCardContainer,
@@ -286,7 +275,7 @@ export default function HomePage() {
       {/*END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-20 bg-white">
+      <section className="py-32 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>
@@ -324,7 +313,7 @@ export default function HomePage() {
       {/* END OF SECTION 6 */}
 
       {/* SECTION 7 */}
-      <section className="py-10 bg-white">
+      <section className="py-2 0 bg-white">
         <div className="container mx-auto">
           <TabsModule tabs={tabsData} />
         </div>
