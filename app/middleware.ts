@@ -1,45 +1,45 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
+import type { NextRequest } from "next/server";
+
+// ts module augmentation for kindeAuth property
+declare module "next/server" {
+    interface NextRequest {
+        kindeAuth?: {
+            isAuthenticated?: boolean;
+            user?: {
+                email?: string;
+                [key: string]: any;
+            };
+            [key: string]: any;
+        };
+    }
+}
 
 export default withAuth(
-    function middleware(req) {
-        // redirct authenticated users away from auth pages
-        if (
-            req.nextUrl.pathname.startsWith("/login") ||
-            req.nextUrl.pathname.startsWith("/register")
-        ) {
-            if (req.nextauth.token) {
-                return NextResponse.redirect(new URL("/dashboard", req.url));
+    async function middleware(req: NextRequest) {
+        // allow public access to the homepage
+        if (req.nextUrl.pathname === "/") {
+            return;
+        }
+
+        // protect admin routes only allow admin user
+        if (req.nextUrl.pathname.startsWith("/(admin)")) {
+            const user = req.kindeAuth?.user;
+            if (!user || user.email !== process.env.ADMIN_EMAIL) {
+                return Response.redirect(new URL("/", req.url));
             }
         }
 
-        // redirect unauthenticated users to login
-        if (
-            req.nextUrl.pathname.startsWith("/dashboard") ||
-            req.nextUrl.pathname.startsWith("/bookings") ||
-            req.nextUrl.pathname.startsWith("/profile")
-        ) {
-            if (!req.nextauth.token) {
-                return NextResponse.redirect(new URL("/login", req.url));
-            }
-        }
+        // (client) is public, so no protection here!
     },
     {
-        callbacks: {
-            // allow access only if the user is authenticated
-            authorized: ({ token }) => !!token,
-            // Redirect to the login page if not authenticated
-            // TODO: Code 
-        },
+        publicPaths: ["/", "/(client)"], // Homepage and all (client) pages are public
     }
 );
 
 export const config = {
     matcher: [
-        "/dashboard/:path*",
-        "/bookings/:path*",
-        "/profile/:path*",
-        "/login",
-        "/register",
+        // Run on everything but Next internals and static files
+        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     ],
-}
+};

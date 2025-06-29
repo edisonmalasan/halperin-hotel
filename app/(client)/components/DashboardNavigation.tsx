@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Button } from "@/components/ui/button";
 import MegaMenu from "./MegaMenu";
 import { rooms } from "../data/rooms";
@@ -12,9 +12,10 @@ import { occasions } from "../data/occasions";
 import { more } from "../data/more";
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { LoginLink, RegisterLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function DashboardNavigation() {
-  const { data: session } = useSession();
+  const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<
     "rooms" | "suites" | "dining" | "occasions" | "more" | null
@@ -343,32 +344,37 @@ export default function DashboardNavigation() {
 
           {/* auth buttons */}
           <div className="flex gap-3 flex-shrink-0">
-            {session ? (
-              <Button
-                size={"sm"}
-                variant="outline"
-                onClick={() => signOut()}
-                className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease"
-              >
-                Sign Out
-              </Button>
-            ) : (
-              <>
+            {isAuthenticated ? (
+              <LogoutLink>
                 <Button
-                  asChild
                   size={"sm"}
                   variant="outline"
                   className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease"
                 >
-                  <Link href="/login">Login</Link>
+                  Sign Out
                 </Button>
-                <Button
-                  asChild
-                  size={"sm"}
-                  className="relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 hover:px-5 transition-all duration-300 ease"
-                >
-                  <Link href="/register">Register</Link>
-                </Button>
+              </LogoutLink>
+            ) : (
+              <>
+                <LoginLink>
+                  <Button
+                    asChild
+                    size={"sm"}
+                    variant="outline"
+                    className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease"
+                  >
+                    Login
+                  </Button>
+                </LoginLink>
+                <RegisterLink>
+                  <Button
+                    asChild
+                    size={"sm"}
+                    className="relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 hover:px-5 transition-all duration-300 ease"
+                  >
+                    Register
+                  </Button>
+                </RegisterLink>
               </>
             )}
           </div>

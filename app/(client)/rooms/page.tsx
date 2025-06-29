@@ -1,69 +1,79 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-const rooms = [
-  {
-    id: 1,
-    name: "Standard Room",
-    description: "Comfortable room with essential amenities",
-    price: 150,
-    image: "/images/standard-room.jpg",
-    features: ["Queen bed", "Private bathroom", "Free WiFi", "TV"],
-  },
-  {
-    id: 2,
-    name: "Deluxe Room",
-    description: "Spacious room with premium amenities",
-    price: 250,
-    image: "/images/deluxe-room.jpg",
-    features: ["King bed", "Private bathroom", "Free WiFi", "TV", "Mini bar"],
-  },
-  {
-    id: 3,
-    name: "Suite",
-    description: "Luxurious suite with separate living area",
-    price: 400,
-    image: "/images/suite.jpg",
-    features: ["King bed", "Living room", "Private bathroom", "Free WiFi", "TV", "Mini bar", "Room service"],
-  },
+const roomDirs = [
+  "deluxe",
+  "bungalow",
+  "bungalow-patio",
+  "bungalow-studio",
+  "deluxe-balcony",
+  "superior-balcony",
+  "superior",
+  "deluxe-patio",
 ];
+
+const roomDisplayNames: Record<string, string> = {
+  "deluxe": "Deluxe Room",
+  "bungalow": "Bungalow",
+  "bungalow-patio": "Bungalow Patio",
+  "bungalow-studio": "Bungalow Studio",
+  "deluxe-balcony": "Deluxe Balcony Room",
+  "superior-balcony": "Superior Balcony Room",
+  "superior": "Superior Room",
+  "deluxe-patio": "Deluxe Patio Room",
+};
+
+function BookButton() {
+  const { isAuthenticated } = useKindeBrowserClient();
+  if (!isAuthenticated) {
+    return (
+      <div className="text-center mt-2">
+        <span className="block mb-2 text-sm text-red-600">You need to <LoginLink>sign in</LoginLink> or <RegisterLink>sign up</RegisterLink> to book a room.</span>
+      </div>
+    );
+  }
+  return (
+    <Button className="w-full mt-2" disabled>
+      Book Now
+    </Button>
+  );
+}
 
 export default function RoomsPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8">Our Rooms</h1>
-      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {rooms.map((room) => (
-          <Card key={room.id} className="overflow-hidden">
+        {roomDirs.map((dir) => (
+          <Card key={dir} className="overflow-hidden">
             <div className="aspect-video relative bg-gray-200">
-              {/* Add actual images later */}
               <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                 Room Image
               </div>
             </div>
             <CardHeader>
-              <CardTitle>{room.name}</CardTitle>
-              <CardDescription>{room.description}</CardDescription>
+              <CardTitle>{roomDisplayNames[dir] || dir}</CardTitle>
+              <CardDescription>Experience comfort and style in our {roomDisplayNames[dir] || dir}.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold">${room.price}</span>
-                  <span className="text-sm text-gray-500">per night</span>
-                </div>
                 <ul className="space-y-2">
-                  {room.features.map((feature) => (
-                    <li key={feature} className="flex items-center text-sm text-gray-600">
-                      <span className="mr-2">•</span>
-                      {feature}
-                    </li>
-                  ))}
+                  <li className="flex items-center text-sm text-gray-600">
+                    <span className="mr-2">•</span>
+                    Free WiFi
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <span className="mr-2">•</span>
+                    Private bathroom
+                  </li>
+                  <li className="flex items-center text-sm text-gray-600">
+                    <span className="mr-2">•</span>
+                    Air conditioning
+                  </li>
                 </ul>
-                <Button asChild className="w-full">
-                  <Link href={`/rooms/${room.id}`}>View Details</Link>
-                </Button>
+                <BookButton />
               </div>
             </CardContent>
           </Card>
