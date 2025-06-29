@@ -21,8 +21,8 @@ function BookButton() {
     return (
       <div className="text-center mt-2">
         <span className="block mb-2 text-sm text-red-600">
-          You need to <LoginLink>sign in</LoginLink> or{" "}
-          <RegisterLink>sign up</RegisterLink> to book a room.
+          You need to <LoginLink>Sign In</LoginLink> or{" "}
+          <RegisterLink>Sign Up</RegisterLink> to book a room.
         </span>
       </div>
     );

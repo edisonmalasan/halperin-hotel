@@ -358,12 +358,12 @@ export default function DashboardNavigation() {
               <>
                 <LoginLink>
                   <span className="inline-flex items-center justify-center border relative overflow-hidden border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
-                    Login
+                    Sign In
                   </span>
                 </LoginLink>
                 <RegisterLink>
-                  <span className="inline-flex items-center justify-center relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
-                    Register
+                  <span className="inline-flex items-center justify-center border relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
+                    Sign Up
                   </span>
                 </RegisterLink>
               </>
