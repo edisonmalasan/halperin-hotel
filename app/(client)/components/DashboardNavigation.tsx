@@ -344,7 +344,7 @@ export default function DashboardNavigation() {
 
           {/* auth buttons */}
           <div className="flex gap-3 flex-shrink-0">
-            {isAuthenticated ? (
+            {isLoading ? null : isAuthenticated ? (
               <LogoutLink>
                 <Button
                   size={"sm"}
