@@ -12,7 +12,11 @@ import { occasions } from "../data/occasions";
 import { more } from "../data/more";
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { LoginLink, RegisterLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import {
+  LoginLink,
+  RegisterLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function DashboardNavigation() {
   const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
@@ -346,34 +350,21 @@ export default function DashboardNavigation() {
           <div className="flex gap-3 flex-shrink-0">
             {isLoading ? null : isAuthenticated ? (
               <LogoutLink>
-                <Button
-                  size={"sm"}
-                  variant="outline"
-                  className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease"
-                >
+                <span className="inline-flex items-center justify-center border border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
                   Sign Out
-                </Button>
+                </span>
               </LogoutLink>
             ) : (
               <>
                 <LoginLink>
-                  <Button
-                    asChild
-                    size={"sm"}
-                    variant="outline"
-                    className="border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 hover:px-5 transition-all duration-300 ease"
-                  >
+                  <span className="inline-flex items-center justify-center border relative overflow-hidden border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
                     Login
-                  </Button>
+                  </span>
                 </LoginLink>
                 <RegisterLink>
-                  <Button
-                    asChild
-                    size={"sm"}
-                    className="relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 hover:px-5 transition-all duration-300 ease"
-                  >
+                  <span className="inline-flex items-center justify-center relative overflow-hidden bg-[#8b6c26] hover:bg-[#8b6c26] text-white px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-300 ease">
                     Register
-                  </Button>
+                  </span>
                 </RegisterLink>
               </>
             )}

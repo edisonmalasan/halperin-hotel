@@ -6,11 +6,7 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
-export default function ClientLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <Providers>
       <div className={geist.className}>
