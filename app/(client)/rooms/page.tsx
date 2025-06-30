@@ -37,6 +37,57 @@ function BookButton() {
 export default function RoomsPage() {
   return (
     <div>
+      <section>
+        <div>
+          <div>
+            <picture>
+              {/*<!-- Mobile first -->*/}
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/rooms/rooms-mobile.png"
+                type="image/png"
+              />
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/rooms/rooms-mobile.png"
+              />
+
+              {/*<!-- Tablets -->*/}
+              <source
+                media="(min-width: 640px) and (max-width: 1023px)"
+                srcSet="/images/rooms/rooms-tablets.png"
+              />
+
+              {/*<!-- Desktop --> */}
+              <source
+                media="(min-width: 1024px)"
+                srcSet="/images/rooms/rooms-desktop.png"
+              />
+
+              <img
+                className="w-full h-auto object-contain"
+                src="/images/rooms/rooms-desktop.png"
+                alt="Room Hero"
+              />
+            </picture>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-y-5 p-4 sm:p-6 md:p-10">
+            <h1 className="text-[#8b6c26] text-sm sm:text-base md:text-lg font-semibold uppercase tracking-wider">
+              THE HALPERIN HOTEL
+            </h1>
+            <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
+              Living like true Hollywood royalty
+            </div>
+            <h1 className="text-base">ROOMS</h1>
+            <p className="text-center max-w-sm text-sm sm:text-base font-light">
+              Our guest rooms pay stylish homage to the stellar heritage of this
+              legendary hotel, but with a luxuriously modern edge.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <br />
       <h1 className="text-3xl font-bold mb-8">Our Rooms</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {rooms.map((room) => (
