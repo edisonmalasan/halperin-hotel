@@ -87,6 +87,11 @@ export default function RoomsPage() {
         </div>
       </section>
 
+      <section>
+        <div></div>
+        <div></div>
+      </section>
+
       <br />
       <h1 className="text-3xl font-bold mb-8">Our Rooms</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
