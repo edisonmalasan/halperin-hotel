@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import CardSlider from "../components/CardSlider";
+import { RoomCardSlider } from "@/app/(client)/rooms/data/RoomCardSlider";
 import {
   LoginLink,
   RegisterLink,
@@ -88,8 +90,21 @@ export default function RoomsPage() {
       </section>
 
       <section>
-        <div></div>
-        <div></div>
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
+          <div className="flex flex-row items-center justify-evenly gap-x-5 p-4 sm:p-6 md:p-10">
+            <div className="text-4xl max-w-xl">
+              Dazzling history, contemporary style
+            </div>
+            <p className="text-justify max-w-sm text-[15px] font-light pt-5">
+              Guest rooms in the main house embody LA’s sparkling elegance,
+              while the bungalows draw inspiration from the lush surrounding
+              landscape for an effortless and modern Californian design.
+            </p>
+          </div>
+          <div className="mt-15">
+            <CardSlider cards={RoomCardSlider} />
+          </div>
+        </div>
       </section>
 
       <br />
