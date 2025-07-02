@@ -49,7 +49,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
           >
             ROOMS
           </div>
-          <div className="text-2xl font-normal mb-2 text-neutral-800">
+          <div className="text-2xl font-normal mb-3 text-neutral-800">
             {title}
           </div>
           <div className="text-sm text-neutral-600 mb-4 text-justify">
