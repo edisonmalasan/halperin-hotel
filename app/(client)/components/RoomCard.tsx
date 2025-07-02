@@ -41,7 +41,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
         className="w-full h-72 object-cover"
         style={{ minHeight: 260, maxHeight: 400 }}
       />
-      <div className="flex-1 flex flex-row gap-x-10 p-8">
+      <div className="flex-1 flex flex-row gap-x-30 p-8">
         <div className="flex flex-col flex-1 min-w-0">
           <div
             className="text-xs font-semibold uppercase tracking-wider mb-2"
@@ -49,7 +49,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
           >
             ROOMS
           </div>
-          <div className="text-2xl font-semibold mb-2 text-neutral-800">
+          <div className="text-2xl font-normal mb-2 text-neutral-800">
             {title}
           </div>
           <div className="text-sm text-neutral-600 mb-4 text-justify">
@@ -59,7 +59,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
         <div className="flex-shrink-0 items-center justify-center pt-10">
           <ul className="flex flex-col justify-center text-sm mt-8 md:mt-0">
             {features.map((feature, i) => (
-              <li key={i} className="flex items-center gap-2">
+              <li key={i} className="flex items-center gap-2 text-xs">
                 <span className="text-[#8b6c26]">
                   <svg
                     viewBox="0 0 16 16"
