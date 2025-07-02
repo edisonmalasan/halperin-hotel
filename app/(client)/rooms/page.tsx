@@ -142,7 +142,7 @@ export default function RoomsPage() {
           </div>
 
           {/* Pagination Navigation */}
-          <div className="flex items-center justify-between mt-10">
+          <div className="flex items-center justify-between mt-20 px-25">
             {/* Page Counter */}
             <div className="text-[16px] font-medium text-black/80">
               {String(page).padStart(2, "0")}{" "}
@@ -152,45 +152,85 @@ export default function RoomsPage() {
             </div>
             {/* Arrows */}
             <div className="flex gap-4">
+              {/* Previous Button */}
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className={`w-12 h-12 rounded-full border ${
-                  page === 1
-                    ? "border-neutral-200 text-neutral-300"
-                    : "border-neutral-100 text-neutral-400 hover:border-[#8b6c26] hover:text-[#8b6c26]"
-                } flex items-center justify-center transition-colors duration-200`}
                 aria-label="Previous page"
+                className={`group w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-200 p-0 ${
+                  page === 1
+                    ? "border border-neutral-200 text-neutral-300 cursor-not-allowed opacity-50 pointer-events-none"
+                    : "border border-[#CFB67D] text-[#8b6c26] hover:bg-[#8b6c26]/10"
+                }`}
               >
-                <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-                  <path
-                    d="M12 15l-5-5 5-5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <span className="block rotate-180">
+                  <svg
+                    width="64"
+                    height="65"
+                    viewBox="0 0 64 65"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                  >
+                    <rect
+                      x="0.5"
+                      y="1.49805"
+                      width="63"
+                      height="63"
+                      rx="31.5"
+                      stroke="#CFB67D"
+                      strokeOpacity="0.5"
+                      fill="transparent"
+                      className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                    ></rect>
+                    <path
+                      className="transition-colors duration-200 group-hover:stroke-white"
+                      d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                      stroke="black"
+                      strokeLinejoin="bevel"
+                    ></path>
+                  </svg>
+                </span>
               </button>
+              {/* Next Button */}
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className={`w-12 h-12 rounded-full border ${
-                  page === totalPages
-                    ? "border-neutral-200 text-neutral-300"
-                    : "border-[#f3e9d0] text-[#8b6c26] hover:bg-[#f7f3ea]"
-                } flex items-center justify-center transition-colors duration-200`}
                 aria-label="Next page"
+                className={`group w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-200 p-0 ${
+                  page === totalPages
+                    ? "border border-neutral-200 text-neutral-300 cursor-not-allowed opacity-50 pointer-events-none"
+                    : "border border-[#CFB67D] text-[#8b6c26] hover:bg-[#8b6c26]/10"
+                }`}
               >
-                <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-                  <path
-                    d="M8 5l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <span className="block">
+                  <svg
+                    width="64"
+                    height="65"
+                    viewBox="0 0 64 65"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                  >
+                    <rect
+                      x="0.5"
+                      y="1.49805"
+                      width="63"
+                      height="63"
+                      rx="31.5"
+                      stroke="#CFB67D"
+                      strokeOpacity="0.5"
+                      fill="transparent"
+                      className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                    ></rect>
+                    <path
+                      className="transition-colors duration-200 group-hover:stroke-white"
+                      d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                      stroke="black"
+                      strokeLinejoin="bevel"
+                    ></path>
+                  </svg>
+                </span>
               </button>
             </div>
           </div>
