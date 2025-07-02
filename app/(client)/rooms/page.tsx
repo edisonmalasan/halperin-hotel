@@ -16,6 +16,7 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { rooms } from "../data/rooms";
+import RoomCard from "../components/RoomCard";
 
 function BookButton() {
   const { isAuthenticated } = useKindeBrowserClient();
@@ -96,7 +97,7 @@ export default function RoomsPage() {
               Dazzling history, contemporary style
             </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
-              Guest rooms in the main house embody LA’s sparkling elegance,
+              Guest rooms in the main house embody LA's sparkling elegance,
               while the bungalows draw inspiration from the lush surrounding
               landscape for an effortless and modern Californian design.
             </p>
@@ -114,51 +115,13 @@ export default function RoomsPage() {
               Rooms at The Halperin Hotel
             </div>
           </div>
-          <div></div>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+            {rooms.map((room, idx) => (
+              <RoomCard key={room.title + idx} {...room} />
+            ))}
+          </div>
         </div>
       </section>
-
-      <br />
-      <h1 className="text-3xl font-bold mb-8">Our Rooms</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {rooms.map((room) => (
-          <Card key={room.title} className="overflow-hidden">
-            <div className="aspect-video relative bg-gray-200">
-              {room.image ? (
-                <img
-                  src={room.image}
-                  alt={room.title}
-                  className="object-cover w-full h-full"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                  Room Image
-                </div>
-              )}
-            </div>
-            <CardHeader>
-              <CardTitle>{room.title}</CardTitle>
-              <CardDescription>{room.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <ul className="space-y-2">
-                  {room.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center text-sm text-gray-600"
-                    >
-                      <span className="mr-2">•</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <BookButton />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
     </div>
   );
 }
