@@ -48,6 +48,12 @@ export default function DashboardNavigation() {
     };
   }, [activeMenu]);
 
+  useEffect(() => {
+    // Close menu on route change
+    setIsVisible(false);
+    setTimeout(() => setActiveMenu(null), 300);
+  }, [pathname]);
+
   const handleMenuClick = (
     menu: "rooms" | "suites" | "dining" | "occasions" | "more"
   ) => {

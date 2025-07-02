@@ -107,6 +107,17 @@ export default function RoomsPage() {
         </div>
       </section>
 
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
+          <div className="flex flex-col justify-center px-30">
+            <div className="text-4xl max-w-2xl">
+              Rooms at The Halperin Hotel
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+
       <br />
       <h1 className="text-3xl font-bold mb-8">Our Rooms</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

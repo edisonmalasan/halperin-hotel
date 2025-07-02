@@ -82,7 +82,7 @@ export default function HomePage() {
           ref={videoRef}
           src="/videos/halperin-hotel.mp4"
           autoPlay
-          muted={false}
+          muted={isMuted}
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
@@ -299,7 +299,7 @@ export default function HomePage() {
               <p className="text-2xl items-start font-normal tracking-wide text-justify text-black">
                 “Behind every hallway we cleared and every threat we faced,
                 there was a team that refused to give up. Halperin Hotel stands
-                today because we gave it a second chance and we’ll keep
+                today because we gave it a second chance and we'll keep
                 defending the legacy we built.”
               </p>
               <div className="flex flex-row items-center gap-10 font-thin text-xs">
