@@ -34,7 +34,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden max-w-3xl mx-auto h-full flex flex-col">
+    <div className="bg-white  border border-gray-200 shadow-lg overflow-hidden max-w-3xl mx-auto h-full flex flex-col">
       <img
         src={image}
         alt={title}
@@ -83,22 +83,22 @@ const RoomCard: React.FC<RoomCardProps> = ({
           </ul>
         </div>
       </div>
-      <div className="flex gap-4 mt-auto px-8 pb-8">
+      <div className="flex gap-4 mt-auto px-8 pb-8 text-[13px]">
         <button
           onClick={handleBook}
-          className="bg-[#8b6c26] hover:bg-[#a88d4a] text-white font-semibold px-6 py-2 rounded-full shadow-md transition-colors duration-200"
+          className="bg-[#8b6c26] hover:bg-[#a88d4a] text-white px-5 py-2 rounded-full shadow-md hover:px-8 font-medium transition-all duration-300 ease"
         >
           BOOK NOW
         </button>
-        <Link href={href} passHref legacyBehavior>
-          <button className="border border-[#8b6c26] text-[#8b6c26] hover:bg-[#f7f3ea] font-semibold px-6 py-2 rounded-full shadow-md transition-colors duration-200">
+        <Link href={href} passHref>
+          <button className="border border-[#8b6c26] text-black/80 hover:bg-[#8b6c26] hover:text-white font-medium px-5 py-2 rounded-full shadow-md transition-colors duration-300">
             EXPLORE
           </button>
         </Link>
       </div>
       {showModal && (
         <div className="fixed left-1/2 bottom-10 transform -translate-x-1/2 z-50">
-          <div className="bg-[#8b6c26] text-white px-6 py-3 rounded-lg shadow-lg text-base font-semibold animate-fade-in-out">
+          <div className="bg-[#920e0e] text-white px-6 py-3 rounded-lg shadow-lg text-sm font-semibold animate-fade-in-out">
             You need to sign in to book a room.
           </div>
         </div>
@@ -108,10 +108,18 @@ const RoomCard: React.FC<RoomCardProps> = ({
           animation: fadeInOut 2s;
         }
         @keyframes fadeInOut {
-          0% { opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { opacity: 0; }
+          0% {
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
         }
       `}</style>
     </div>

@@ -110,12 +110,12 @@ export default function RoomsPage() {
 
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
-          <div className="flex flex-col justify-center px-30">
+          <div className="flex flex-col justify-center px-30 py-10">
             <div className="text-4xl max-w-2xl">
               Rooms at The Halperin Hotel
             </div>
           </div>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 gap-y-25 justify-center">
             {rooms.map((room, idx) => (
               <RoomCard key={room.title + idx} {...room} />
             ))}
