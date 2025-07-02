@@ -17,6 +17,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { rooms } from "../data/rooms";
 import RoomCard from "../components/RoomCard";
+import { useState } from "react";
 
 function BookButton() {
   const { isAuthenticated } = useKindeBrowserClient();
@@ -38,6 +39,14 @@ function BookButton() {
 }
 
 export default function RoomsPage() {
+  const pageSize = 6;
+  const [page, setPage] = useState(1);
+  const totalResults = rooms.length;
+  const totalPages = Math.ceil(totalResults / pageSize);
+  const startIdx = (page - 1) * pageSize;
+  const endIdx = Math.min(startIdx + pageSize, totalResults);
+  const pagedRooms = rooms.slice(startIdx, endIdx);
+
   return (
     <div>
       <section>
@@ -110,15 +119,80 @@ export default function RoomsPage() {
 
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
-          <div className="flex flex-col justify-center px-30 py-10">
+          <div className="flex flex-col justify-center px-30">
             <div className="text-4xl max-w-2xl">
               Rooms at The Halperin Hotel
             </div>
           </div>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 gap-y-25 justify-center">
-            {rooms.map((room, idx) => (
+
+          {/* Show Results Indicator */}
+          <div className="flex justify-end items-center mt-4 mb-2">
+            <span className="text-xs tracking-widest text-neutral-500 font-medium">
+              SHOWING <span className="text-black font-semibold">{endIdx}</span>{" "}
+              / <span className="text-black font-semibold">{totalResults}</span>{" "}
+              RESULTS
+            </span>
+          </div>
+
+          {/* Card Grid */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
+            {pagedRooms.map((room, idx) => (
               <RoomCard key={room.title + idx} {...room} />
             ))}
+          </div>
+
+          {/* Pagination Navigation */}
+          <div className="flex items-center justify-between mt-10">
+            {/* Page Counter */}
+            <div className="text-[16px] font-medium text-black/80">
+              {String(page).padStart(2, "0")}{" "}
+              <span className="text-neutral-400">
+                - {String(totalPages).padStart(2, "0")}
+              </span>
+            </div>
+            {/* Arrows */}
+            <div className="flex gap-4">
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className={`w-12 h-12 rounded-full border ${
+                  page === 1
+                    ? "border-neutral-200 text-neutral-300"
+                    : "border-neutral-100 text-neutral-400 hover:border-[#8b6c26] hover:text-[#8b6c26]"
+                } flex items-center justify-center transition-colors duration-200`}
+                aria-label="Previous page"
+              >
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
+                  <path
+                    d="M12 15l-5-5 5-5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className={`w-12 h-12 rounded-full border ${
+                  page === totalPages
+                    ? "border-neutral-200 text-neutral-300"
+                    : "border-[#f3e9d0] text-[#8b6c26] hover:bg-[#f7f3ea]"
+                } flex items-center justify-center transition-colors duration-200`}
+                aria-label="Next page"
+              >
+                <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
+                  <path
+                    d="M8 5l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
