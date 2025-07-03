@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import CardSlider from "../components/CardSlider";
-import { RoomCardSlider } from "@/app/(client)/rooms/data/RoomCardSlider";
+import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
 import {
   LoginLink,
   RegisterLink,
@@ -84,10 +84,10 @@ export default function SuitesPage() {
             <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
               Living like true Hollywood royalty
             </div>
-            <h1 className="text-base">ROOMS</h1>
+            <h1 className="text-base">SUITES</h1>
             <p className="text-center max-w-sm text-sm sm:text-base font-light">
-              Our guest rooms pay stylish homage to the stellar heritage of this
-              legendary hotel, but with a luxuriously modern edge.
+              Our guest suites pay stylish homage to the stellar heritage of
+              this legendary hotel, but with a luxuriously modern edge.
             </p>
           </div>
         </div>
@@ -100,13 +100,13 @@ export default function SuitesPage() {
               Dazzling history, contemporary style
             </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
-              Guest rooms in the main house embody LA's sparkling elegance,
+              Guest suites in the main house embody LA's sparkling elegance,
               while the bungalows draw inspiration from the lush surrounding
               landscape for an effortless and modern Californian design.
             </p>
           </div>
           <div className="mt-15">
-            <CardSlider cards={RoomCardSlider} />
+            <CardSlider cards={SuitesCardSlider} />
           </div>
         </div>
       </section>
@@ -115,7 +115,7 @@ export default function SuitesPage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex flex-col justify-center px-30">
             <div className="text-4xl max-w-2xl tracking-wide">
-              Rooms at The Halperin Hotel
+              Suites at The Halperin Hotel
             </div>
           </div>
 
