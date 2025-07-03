@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 
-interface RoomCardProps {
+interface BookCardProps {
   title: string;
   description: string;
   image: string;
@@ -14,7 +14,7 @@ interface RoomCardProps {
 
 const gold = "#8b6c26";
 
-const RoomCard: React.FC<RoomCardProps> = ({
+const BookCard: React.FC<BookCardProps> = ({
   title,
   description,
   image,
@@ -126,4 +126,4 @@ const RoomCard: React.FC<RoomCardProps> = ({
   );
 };
 
-export default RoomCard;
+export default BookCard;

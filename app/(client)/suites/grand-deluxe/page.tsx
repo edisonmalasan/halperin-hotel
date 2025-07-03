@@ -1,7 +1,13 @@
 import React from "react";
+import { suites } from "../../data/suites";
+import BookCard from "../../components/BookCard";
 
-const page = () => {
-  return <div></div>;
-};
-
-export default page;
+export default function GrandDeluxeSuitePage() {
+  const suite = suites.find((s) => s.href === "/suites/grand-deluxe");
+  if (!suite) return <div>Suite not found.</div>;
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <BookCard {...suite} />
+    </div>
+  );
+}

@@ -1,7 +1,13 @@
 import React from "react";
+import { rooms } from "../../data/rooms";
+import BookCard from "../../components/BookCard";
 
-const page = () => {
-  return <div></div>;
-};
-
-export default page;
+export default function DeluxeBalconyRoomPage() {
+  const room = rooms.find((r) => r.href === "/rooms/deluxe-balcony");
+  if (!room) return <div>Room not found.</div>;
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <BookCard {...room} />
+    </div>
+  );
+}

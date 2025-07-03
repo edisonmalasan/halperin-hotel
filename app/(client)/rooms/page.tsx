@@ -16,7 +16,7 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { rooms } from "../data/rooms";
-import RoomCard from "../components/RoomCard";
+import BookCard from "../components/BookCard";
 import { useState } from "react";
 
 function BookButton() {
@@ -137,7 +137,7 @@ export default function RoomsPage() {
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
             {pagedRooms.map((room, idx) => (
-              <RoomCard key={room.title + idx} {...room} />
+              <BookCard key={room.title + idx} {...room} />
             ))}
           </div>
 

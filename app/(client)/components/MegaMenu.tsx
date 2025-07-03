@@ -128,7 +128,7 @@ export default function MegaMenu({
             className={`cursor-pointer p-2 rounded group`}
             onMouseEnter={() => setSelected(item)}
           >
-            <div className="flex items-center justify-between text-sm transition-all duration-200 text-black">
+            <Link href={item.href} className="flex items-center justify-between text-sm transition-all duration-200 text-black w-full">
               <span
                 className={`transition-opacity duration-200 ${
                   selected.title === item.title
@@ -164,7 +164,7 @@ export default function MegaMenu({
                   </svg>
                 </div>
               </div>
-            </div>
+            </Link>
           </li>
         ))}
       </ul>
