@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
 
 // structure for a single content item
 interface ContentItem {
@@ -22,6 +23,23 @@ interface TabData {
 interface TabsModuleProps {
   tabs: TabData[];
 }
+
+// Helper to resolve known routes
+const resolveRoute = (href: string) => {
+  switch (href) {
+    case "/rooms":
+      return ROUTES.rooms.root;
+    case "/suites":
+      return ROUTES.suites.root;
+    case "/dining":
+      return ROUTES.dining.root;
+    case "/occasions":
+      return ROUTES.occasions.root;
+    // Add more as needed
+    default:
+      return href;
+  }
+};
 
 export default function TabsModule({ tabs }: TabsModuleProps) {
   const [activeTab, setActiveTab] = useState(0);
@@ -61,7 +79,7 @@ export default function TabsModule({ tabs }: TabsModuleProps) {
           </p>
           {item.linkHref && item.linkText && (
             <Link
-              href={item.linkHref}
+              href={resolveRoute(item.linkHref)}
               className="group inline-flex items-center gap-3 mt-4 text-sm font-semibold text-neutral-700"
             >
               {item.linkText}

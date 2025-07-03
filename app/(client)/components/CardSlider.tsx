@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
 
 interface CardFeature {
   icon?: React.ReactNode;
@@ -19,6 +21,23 @@ export interface CardSliderCard {
 interface CardSliderProps {
   cards: CardSliderCard[];
 }
+
+// Helper to resolve known routes
+const resolveRoute = (href: string) => {
+  switch (href) {
+    case "/rooms":
+      return ROUTES.rooms.root;
+    case "/suites":
+      return ROUTES.suites.root;
+    case "/dining":
+      return ROUTES.dining.root;
+    case "/occasions":
+      return ROUTES.occasions.root;
+    // Add more as needed
+    default:
+      return href;
+  }
+};
 
 export default function CardSlider({ cards }: CardSliderProps) {
   const [current, setCurrent] = useState(0);
@@ -40,26 +59,21 @@ export default function CardSlider({ cards }: CardSliderProps) {
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {cards.map((imgCard, idx) => (
-            <div
+            <Link
               key={idx}
+              href={resolveRoute(imgCard.link)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex flex-row w-full justify-between items-end mb-8 gap-12 min-w-full px-2"
             >
-              <a
-                href={imgCard.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={imgCard.linkLabel}
-                className="block group flex-shrink-0"
-              >
-                <div className="overflow-hidden w-[1013px] h-[570px]">
-                  <img
-                    src={imgCard.mainImage}
-                    alt={imgCard.title}
-                    className="object-cover w-full h-full"
-                    draggable={false}
-                  />
-                </div>
-              </a>
+              <div className="overflow-hidden w-[1013px] h-[570px]">
+                <img
+                  src={imgCard.mainImage}
+                  alt={imgCard.title}
+                  className="object-cover w-full h-full"
+                  draggable={false}
+                />
+              </div>
               <div className="flex-shrink-0 flex items-end h-[440px]">
                 <div className="overflow-hidden shadow-lg w-[315px] h-[315px] bg-gray-100 border-8 border-white flex items-center justify-center">
                   <img
@@ -70,7 +84,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
                   />
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

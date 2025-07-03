@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
 
 type MegaMenuItem = {
   title: string;
@@ -16,6 +17,60 @@ type MegaMenuProps = {
   category?: "rooms" | "suites" | "dining" | "occasions";
 };
 
+// Helper to resolve known routes
+const resolveRoute = (href: string) => {
+  switch (href) {
+    case "/rooms/superior":
+      return ROUTES.rooms.superior;
+    case "/rooms/superior-balcony":
+      return ROUTES.rooms.superiorBalcony;
+    case "/rooms/deluxe":
+      return ROUTES.rooms.deluxe;
+    case "/rooms/deluxe-balcony":
+      return ROUTES.rooms.deluxeBalcony;
+    case "/rooms/deluxe-patio":
+      return ROUTES.rooms.deluxePatio;
+    case "/rooms/bungalow":
+      return ROUTES.rooms.bungalow;
+    case "/rooms/bungalow-patio":
+      return ROUTES.rooms.bungalowPatio;
+    case "/rooms/bungalow-studio":
+      return ROUTES.rooms.bungalowStudio;
+    case "/suites/junior":
+      return ROUTES.suites.junior;
+    case "/suites/junior-patio":
+      return ROUTES.suites.juniorPatio;
+    case "/suites/junior-halperin":
+      return ROUTES.suites.juniorHalperin;
+    case "/suites/rodeo":
+      return ROUTES.suites.rodeo;
+    case "/suites/crescent":
+      return ROUTES.suites.crescent;
+    case "/suites/premier":
+      return ROUTES.suites.premier;
+    case "/suites/presidential":
+      return ROUTES.suites.presidential;
+    case "/suites/grand-deluxe":
+      return ROUTES.suites.grandDeluxe;
+    case "/dining/polo-lounge":
+      return ROUTES.dining.poloLounge;
+    case "/dining/cabana-cafe":
+      return ROUTES.dining.cabanaCafe;
+    case "/dining/fountain-coffee":
+      return ROUTES.dining.fountainCoffee;
+    case "/occasions/weddings":
+      return ROUTES.occasions.weddings;
+    case "/occasions/social-events":
+      return ROUTES.occasions.socialEvents;
+    case "/occasions/meetings":
+      return ROUTES.occasions.meetings;
+    case "/occasions/event-spaces":
+      return ROUTES.occasions.eventSpaces;
+    default:
+      return href;
+  }
+};
+
 export default function MegaMenu({
   items,
   singleColumn = false,
@@ -28,30 +83,30 @@ export default function MegaMenu({
     if (category === "rooms") {
       return {
         text: "EXPLORE ALL OUR ROOMS",
-        href: "/rooms",
+        href: ROUTES.rooms.root,
       };
     }
     if (category === "suites") {
       return {
         text: "EXPLORE ALL OUR SUITES",
-        href: "/suites",
+        href: ROUTES.suites.root,
       };
     }
     if (category === "dining") {
       return {
         text: "EXPLORE ALL DINING",
-        href: "/dining",
+        href: ROUTES.dining.root,
       };
     }
     if (category === "occasions") {
       return {
         text: "EXPLORE ALL OCCASIONS",
-        href: "/occasions",
+        href: ROUTES.occasions.root,
       };
     }
     return {
       text: "EXPLORE ALL",
-      href: "/",
+      href: ROUTES.home,
     };
   }
 
@@ -61,7 +116,10 @@ export default function MegaMenu({
         <ul>
           {items.map((item) => (
             <li key={item.href} className="p-2 hover:bg-[#8b6d2636] rounded">
-              <Link href={item.href} className="font-medium text-sm">
+              <Link
+                href={resolveRoute(item.href)}
+                className="font-medium text-sm"
+              >
                 {item.title}
               </Link>
             </li>
@@ -128,7 +186,10 @@ export default function MegaMenu({
             className={`cursor-pointer p-2 rounded group`}
             onMouseEnter={() => setSelected(item)}
           >
-            <Link href={item.href} className="flex items-center justify-between text-sm transition-all duration-200 text-black w-full">
+            <Link
+              href={resolveRoute(item.href)}
+              className="flex items-center justify-between text-sm transition-all duration-200 text-black w-full"
+            >
               <span
                 className={`transition-opacity duration-200 ${
                   selected.title === item.title

@@ -17,6 +17,7 @@ import {
   RegisterLink,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
+import { ROUTES } from "@/app/api/routes";
 
 export default function DashboardNavigation() {
   const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
@@ -344,10 +345,18 @@ export default function DashboardNavigation() {
               `}
               style={{ minWidth: 400 }}
             >
-              {activeMenu === "rooms" && <MegaMenu items={rooms} category="rooms" />}
-              {activeMenu === "suites" && <MegaMenu items={suites} category="suites" />}
-              {activeMenu === "dining" && <MegaMenu items={dining} category="dining" />}
-              {activeMenu === "occasions" && <MegaMenu items={occasions} category="occasions" />}
+              {activeMenu === "rooms" && (
+                <MegaMenu items={rooms} category="rooms" />
+              )}
+              {activeMenu === "suites" && (
+                <MegaMenu items={suites} category="suites" />
+              )}
+              {activeMenu === "dining" && (
+                <MegaMenu items={dining} category="dining" />
+              )}
+              {activeMenu === "occasions" && (
+                <MegaMenu items={occasions} category="occasions" />
+              )}
               {activeMenu === "more" && <MegaMenu items={more} singleColumn />}
             </div>
           </div>

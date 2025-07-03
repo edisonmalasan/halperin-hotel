@@ -1,6 +1,13 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
 
 export default function DashboardPage() {
   return (
@@ -16,7 +23,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <Button asChild className="w-full">
-              <Link href="/rooms">View Available Rooms</Link>
+              <Link href={ROUTES.rooms.root}>View Available Rooms</Link>
             </Button>
           </CardContent>
         </Card>
@@ -53,7 +60,9 @@ export default function DashboardPage() {
           <Card>
             <CardHeader>
               <CardTitle>Deluxe Room</CardTitle>
-              <CardDescription>Check-in: Jan 15, 2024 - Check-out: Jan 20, 2024</CardDescription>
+              <CardDescription>
+                Check-in: Jan 15, 2024 - Check-out: Jan 20, 2024
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center">
@@ -84,7 +93,7 @@ export default function DashboardPage() {
                 Valid for weekend stays until March 31, 2024
               </p>
               <Button asChild>
-                <Link href="/rooms">Book Now</Link>
+                <Link href={ROUTES.rooms.root}>Book Now</Link>
               </Button>
             </CardContent>
           </Card>
@@ -92,14 +101,16 @@ export default function DashboardPage() {
           <Card>
             <CardHeader>
               <CardTitle>Early Bird Special</CardTitle>
-              <CardDescription>Book 30 days in advance for 20% off</CardDescription>
+              <CardDescription>
+                Book 30 days in advance for 20% off
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-500 mb-4">
                 Available for all room types
               </p>
               <Button asChild>
-                <Link href="/rooms">Book Now</Link>
+                <Link href={ROUTES.rooms.root}>Book Now</Link>
               </Button>
             </CardContent>
           </Card>
@@ -107,4 +118,4 @@ export default function DashboardPage() {
       </section>
     </div>
   );
-} 
+}

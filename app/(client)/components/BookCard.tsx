@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
+import { resolve } from "path";
 
 interface BookCardProps {
   title: string;
@@ -13,6 +15,60 @@ interface BookCardProps {
 }
 
 const gold = "#8b6c26";
+
+// Helper to resolve known routes
+const resolveRoute = (href: string) => {
+  switch (href) {
+    case "/rooms/superior":
+      return ROUTES.rooms.superior;
+    case "/rooms/superior-balcony":
+      return ROUTES.rooms.superiorBalcony;
+    case "/rooms/deluxe":
+      return ROUTES.rooms.deluxe;
+    case "/rooms/deluxe-balcony":
+      return ROUTES.rooms.deluxeBalcony;
+    case "/rooms/deluxe-patio":
+      return ROUTES.rooms.deluxePatio;
+    case "/rooms/bungalow":
+      return ROUTES.rooms.bungalow;
+    case "/rooms/bungalow-patio":
+      return ROUTES.rooms.bungalowPatio;
+    case "/rooms/bungalow-studio":
+      return ROUTES.rooms.bungalowStudio;
+    case "/suites/junior":
+      return ROUTES.suites.junior;
+    case "/suites/junior-patio":
+      return ROUTES.suites.juniorPatio;
+    case "/suites/junior-halperin":
+      return ROUTES.suites.juniorHalperin;
+    case "/suites/rodeo":
+      return ROUTES.suites.rodeo;
+    case "/suites/crescent":
+      return ROUTES.suites.crescent;
+    case "/suites/premier":
+      return ROUTES.suites.premier;
+    case "/suites/presidential":
+      return ROUTES.suites.presidential;
+    case "/suites/grand-deluxe":
+      return ROUTES.suites.grandDeluxe;
+    case "/dining/polo-lounge":
+      return ROUTES.dining.poloLounge;
+    case "/dining/cabana-cafe":
+      return ROUTES.dining.cabanaCafe;
+    case "/dining/fountain-coffee":
+      return ROUTES.dining.fountainCoffee;
+    case "/occasions/weddings":
+      return ROUTES.occasions.weddings;
+    case "/occasions/social-events":
+      return ROUTES.occasions.socialEvents;
+    case "/occasions/meetings":
+      return ROUTES.occasions.meetings;
+    case "/occasions/event-spaces":
+      return ROUTES.occasions.eventSpaces;
+    default:
+      return href;
+  }
+};
 
 const BookCard: React.FC<BookCardProps> = ({
   title,
@@ -47,7 +103,7 @@ const BookCard: React.FC<BookCardProps> = ({
             className="text-xs font-semibold uppercase tracking-wider mb-2"
             style={{ color: gold }}
           >
-            ROOMS
+            {resolveRoute(href).replace(/^\//, "").toUpperCase()}
           </div>
           <div className="text-2xl font-normal mb-3 text-neutral-800">
             {title}
@@ -90,7 +146,7 @@ const BookCard: React.FC<BookCardProps> = ({
         >
           BOOK NOW
         </button>
-        <Link href={href} passHref>
+        <Link href={resolveRoute(href)} passHref>
           <button className="border border-[#8b6c26] text-black/80 hover:bg-[#8b6c26] hover:text-white font-medium px-5 py-2 rounded-full shadow-md transition-colors duration-300">
             EXPLORE
           </button>

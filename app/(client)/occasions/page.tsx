@@ -1,12 +1,20 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ROUTES } from "@/app/api/routes";
 
 const occasions = [
   {
     id: 1,
     name: "Weddings",
-    description: "Create unforgettable memories with our elegant wedding venues and services",
+    description:
+      "Create unforgettable memories with our elegant wedding venues and services",
     image: "/images/wedding.jpg",
     features: [
       "Indoor and outdoor venues",
@@ -18,7 +26,8 @@ const occasions = [
   {
     id: 2,
     name: "Corporate Events",
-    description: "Professional meeting spaces and conference facilities for your business needs",
+    description:
+      "Professional meeting spaces and conference facilities for your business needs",
     image: "/images/corporate.jpg",
     features: [
       "Conference rooms",
@@ -30,7 +39,8 @@ const occasions = [
   {
     id: 3,
     name: "Social Gatherings",
-    description: "Perfect spaces for birthdays, anniversaries, and special celebrations",
+    description:
+      "Perfect spaces for birthdays, anniversaries, and special celebrations",
     image: "/images/social.jpg",
     features: [
       "Private dining rooms",
@@ -57,7 +67,7 @@ export default function OccasionsPage() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8">Special Occasions</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {occasions.map((occasion) => (
           <Card key={occasion.id} className="overflow-hidden">
@@ -75,7 +85,10 @@ export default function OccasionsPage() {
               <div className="space-y-4">
                 <ul className="space-y-2">
                   {occasion.features.map((feature) => (
-                    <li key={feature} className="flex items-center text-sm text-gray-600">
+                    <li
+                      key={feature}
+                      className="flex items-center text-sm text-gray-600"
+                    >
                       <span className="mr-2">•</span>
                       {feature}
                     </li>
@@ -102,9 +115,12 @@ export default function OccasionsPage() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Contact Our Events Team</h3>
+                <h3 className="text-lg font-semibold">
+                  Contact Our Events Team
+                </h3>
                 <p className="text-gray-600">
-                  Our experienced event planners are here to help you create the perfect celebration.
+                  Our experienced event planners are here to help you create the
+                  perfect celebration.
                 </p>
                 <div className="space-y-2">
                   <p className="text-gray-600">
@@ -118,10 +134,13 @@ export default function OccasionsPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Request Information</h3>
                 <p className="text-gray-600">
-                  Fill out our event inquiry form and we'll get back to you within 24 hours.
+                  Fill out our event inquiry form and we'll get back to you
+                  within 24 hours.
                 </p>
                 <Button asChild>
-                  <Link href="/occasions/inquiry">Request Information</Link>
+                  <Link href={ROUTES.occasions.inquiry}>
+                    Request Information
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -130,4 +149,4 @@ export default function OccasionsPage() {
       </div>
     </div>
   );
-} 
+}
