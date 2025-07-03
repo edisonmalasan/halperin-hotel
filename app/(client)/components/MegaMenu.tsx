@@ -13,43 +13,45 @@ type MegaMenuItem = {
 type MegaMenuProps = {
   items: MegaMenuItem[];
   singleColumn?: boolean;
+  category?: "rooms" | "suites" | "dining" | "occasions";
 };
 
 export default function MegaMenu({
   items,
   singleColumn = false,
+  category = "rooms",
 }: MegaMenuProps) {
   const [selected, setSelected] = useState(items[0]);
 
   // function helper to get the explore text and link
   function getExploreAll() {
-    if (items[0]?.href?.includes("rooms")) {
+    if (category === "rooms") {
       return {
         text: "EXPLORE ALL OUR ROOMS",
-        href: items[0].href,
+        href: "/rooms",
       };
     }
-    if (items[0]?.href?.includes("suites")) {
+    if (category === "suites") {
       return {
         text: "EXPLORE ALL OUR SUITES",
-        href: items[0].href,
+        href: "/suites",
       };
     }
-    if (items[0]?.href?.includes("dining")) {
+    if (category === "dining") {
       return {
         text: "EXPLORE ALL DINING",
-        href: items[0].href,
+        href: "/dining",
       };
     }
-    if (items[0]?.href?.includes("occasions")) {
+    if (category === "occasions") {
       return {
         text: "EXPLORE ALL OCCASIONS",
-        href: items[0].href,
+        href: "/occasions",
       };
     }
     return {
       text: "EXPLORE ALL",
-      href: items[0]?.href || "#",
+      href: "/",
     };
   }
 
@@ -81,7 +83,7 @@ export default function MegaMenu({
       {/* Explore All Button */}
       <div className="col-span-2 ">
         <Link
-          href="/rooms"
+          href={getExploreAll().href}
           aria-label={getExploreAll().text}
           className="pb-4 flex gap-4 items-center uppercase text-[16px] leading-[16px] font-semibold group"
           role="button"
