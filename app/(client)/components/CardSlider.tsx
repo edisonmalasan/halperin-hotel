@@ -22,7 +22,7 @@ interface CardSliderProps {
   cards: CardSliderCard[];
 }
 
-// Helper to resolve known routes
+// helper
 const resolveRoute = (href: string) => {
   switch (href) {
     case "/rooms":
@@ -33,7 +33,6 @@ const resolveRoute = (href: string) => {
       return ROUTES.dining.root;
     case "/occasions":
       return ROUTES.occasions.root;
-    // Add more as needed
     default:
       return href;
   }
@@ -88,7 +87,7 @@ export default function CardSlider({ cards }: CardSliderProps) {
           ))}
         </div>
       </div>
-      {/* Features and Description (no sliding effect) */}
+      {/* Features and Description */}
       <div className="flex flex-row w-full gap-8 items-center mt-2 px-2">
         <div className="flex flex-col gap-3 min-w-[180px]">
           {card.features.map((feature, i) => (
