@@ -47,7 +47,7 @@ export default function RoomsPage() {
 
               <img
                 className="w-full h-auto object-contain"
-                src="/images/rooms/rooms-desktop.png"
+                src="/images/halperin-hotel-entrance.png"
                 alt="Room Hero"
               />
             </picture>

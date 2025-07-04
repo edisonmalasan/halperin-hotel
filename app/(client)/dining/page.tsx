@@ -25,30 +25,30 @@ export default function DiningPage() {
               {/*<!-- Mobile first -->*/}
               <source
                 media="(max-width: 639px)"
-                srcSet="/images/rooms/rooms-mobile.png"
+                srcSet="/images/dining/pool-tablets.png"
                 type="image/png"
               />
               <source
                 media="(max-width: 639px)"
-                srcSet="/images/rooms/rooms-mobile.png"
+                srcSet="/images/dining/pool-tablets.png"
               />
 
               {/*<!-- Tablets -->*/}
               <source
                 media="(min-width: 640px) and (max-width: 1023px)"
-                srcSet="/images/rooms/rooms-tablets.png"
+                srcSet="/images/dining/pool-tablets.png"
               />
 
               {/*<!-- Desktop --> */}
               <source
                 media="(min-width: 1024px)"
-                srcSet="/images/rooms/rooms-desktop.png"
+                srcSet="/images/dining/pool-desktop.png"
               />
 
               <img
                 className="w-full h-auto object-contain"
-                src="/images/rooms/rooms-desktop.png"
-                alt="Room Hero"
+                src="/images/dining/pool-desktop.png"
+                alt="Pool Hero"
               />
             </picture>
           </div>

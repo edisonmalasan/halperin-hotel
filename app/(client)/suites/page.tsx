@@ -48,12 +48,12 @@ export default function SuitesPage() {
               {/*<!-- Desktop --> */}
               <source
                 media="(min-width: 1024px)"
-                srcSet="/images/rooms/rooms-desktop.png"
+                srcSet="/images/halperin-hotel-entrance.png"
               />
 
               <img
                 className="w-full h-auto object-contain"
-                src="/images/rooms/rooms-desktop.png"
+                src="/images/halperin-hotel-entrance.png"
                 alt="Room Hero"
               />
             </picture>
