@@ -1,26 +1,20 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import CardSlider from "../components/CardSlider";
-import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
-import { suites } from "../data/suites";
+import { DiningCardSlider } from "@/app/(client)/dining/data/DiningCardSlider";
+import { dining } from "../data/dining";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
 
-export default function SuitesPage() {
+export default function DiningPage() {
   const pageSize = 6;
   const [page, setPage] = useState(1);
-  const totalResults = suites.length;
+  const totalResults = dining.length;
   const totalPages = Math.ceil(totalResults / pageSize);
   const startIdx = (page - 1) * pageSize;
   const endIdx = Math.min(startIdx + pageSize, totalResults);
-  const pagedSuites = suites.slice(startIdx, endIdx);
+  const pagedSuites = dining.slice(startIdx, endIdx);
 
   return (
     <div>
@@ -87,7 +81,7 @@ export default function SuitesPage() {
             </p>
           </div>
           <div className="mt-15">
-            <CardSlider cards={SuitesCardSlider} />
+            <CardSlider cards={DiningCardSlider} />
           </div>
         </div>
       </section>
@@ -96,7 +90,7 @@ export default function SuitesPage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex flex-col justify-center px-30">
             <div className="text-4xl max-w-2xl tracking-wide">
-              Suites at The Halperin Hotel
+              Dining at The Halperin Hotel
             </div>
           </div>
 

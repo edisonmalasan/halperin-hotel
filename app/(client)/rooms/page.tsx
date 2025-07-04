@@ -1,42 +1,11 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import React from "react";
 import CardSlider from "../components/CardSlider";
 import { RoomCardSlider } from "@/app/(client)/rooms/data/RoomCardSlider";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
 import { rooms } from "../data/rooms";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
-
-function BookButton() {
-  const { isAuthenticated } = useKindeBrowserClient();
-  if (!isAuthenticated) {
-    return (
-      <div className="text-center mt-2">
-        <span className="block mb-2 text-sm text-red-600">
-          You need to <LoginLink>Sign In</LoginLink> or{" "}
-          <RegisterLink>Sign Up</RegisterLink> to book a room.
-        </span>
-      </div>
-    );
-  }
-  return (
-    <Button className="w-full mt-2" disabled>
-      Book Now
-    </Button>
-  );
-}
 
 export default function RoomsPage() {
   const pageSize = 6;
