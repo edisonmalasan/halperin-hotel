@@ -42,7 +42,7 @@ export default function RoomsPage() {
               {/*<!-- Desktop --> */}
               <source
                 media="(min-width: 1024px)"
-                srcSet="/images/rooms/rooms-desktop.png"
+                srcSet="/images/halperin-hotel-entrance.png"
               />
 
               <img

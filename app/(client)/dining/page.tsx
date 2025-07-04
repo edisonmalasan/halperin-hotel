@@ -57,12 +57,12 @@ export default function DiningPage() {
               THE HALPERIN HOTEL
             </h1>
             <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
-              Living like true Hollywood royalty
+              From power lunches to poolside lounging
             </div>
-            <h1 className="text-base">SUITES</h1>
+            <h1 className="text-base">Restaurants and bars</h1>
             <p className="text-center max-w-sm text-sm sm:text-base font-light">
-              Our guest suites pay stylish homage to the stellar heritage of
-              this legendary hotel, but with a luxuriously modern edge.
+              For every occasion and every mood, The Halperin Hotel has the
+              restaurant for you.
             </p>
           </div>
         </div>
@@ -72,12 +72,12 @@ export default function DiningPage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex flex-row items-center justify-evenly gap-x-5 p-4 sm:p-6 md:p-10">
             <div className="text-4xl max-w-xl">
-              Dazzling history, contemporary style
+              Flavors that inspire, settings that shine
             </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
-              Guest suites in the main house embody LA's sparkling elegance,
-              while the bungalows draw inspiration from the lush surrounding
-              landscape for an effortless and modern Californian design.
+              Casual, fresh dining in a picture-perfect setting. Enjoy a relaxed
+              meal in the LA sunshine while your view of the pool sparkles with
+              sheer pleasure.
             </p>
           </div>
           <div className="mt-15">
