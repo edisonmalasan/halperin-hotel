@@ -20,7 +20,7 @@ export const RoomCardSlider: CardSliderCard[] = [
       { text: "Entertaining area" },
       { text: "Fireplace" },
     ],
-    link: "#",
+    link: "/rooms/bungalow",
     linkLabel: "Explore Bungalow",
   },
   {
@@ -35,7 +35,7 @@ export const RoomCardSlider: CardSliderCard[] = [
       { text: "GARDEN OR CITY VIEWS" },
       { text: "LOTS OF NATURAL LIGHT" },
     ],
-    link: "#",
+    link: "/rooms/deluxe-balcony",
     linkLabel: "Explore Deluxe Room with Balcony",
   },
   {
@@ -50,7 +50,7 @@ export const RoomCardSlider: CardSliderCard[] = [
       { text: "GARDEN VIEWS" },
       { text: "LOTS OF NATURAL LIGHT" },
     ],
-    link: "#",
+    link: "/rooms/superior",
     linkLabel: "Explore Superior Room",
   },
   {
@@ -64,7 +64,7 @@ export const RoomCardSlider: CardSliderCard[] = [
       { text: "Entertaining area" },
       { text: "Fireplace" },
     ],
-    link: "#",
+    link: "/rooms/deluxe-patio",
     linkLabel: "Explore Deluxe Room with Patio",
   },
 ];
