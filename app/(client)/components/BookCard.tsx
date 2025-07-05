@@ -112,7 +112,7 @@ const BookCard: React.FC<BookCardProps> = ({
             {description}
           </div>
         </div>
-        <div className="flex-shrink-0 items-center justify-center pt-10">
+        <div className="flex-shrink-0 items-center justify-center pt-15">
           <ul className="flex flex-col justify-center text-sm mt-8 md:mt-0">
             {features.map((feature, i) => (
               <li key={i} className="flex items-center gap-2 text-xs">

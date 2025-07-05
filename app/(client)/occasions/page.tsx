@@ -72,8 +72,8 @@ export default function OccasionsPage() {
       <section>
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex flex-row items-center justify-evenly gap-x-5 p-4 sm:p-6 md:p-10">
-            <div className="text-4xl max-w-xl">
-              Dazzling history, contemporary style
+            <div className="text-4xl max-w-xl tracking-wide">
+              Timeless elegance, modern sophistication
             </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
               It starts at the red carpet. The famous exterior. The sense of
