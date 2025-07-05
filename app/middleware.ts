@@ -30,16 +30,16 @@ export default withAuth(
             }
         }
 
-        // (client) is public, so no protection here!
+        // public client
     },
     {
-        publicPaths: ["/", "/(client)"], // Homepage and all (client) pages are public
+        publicPaths: ["/", "/(client)"], // homepage and client components are public 
     }
 );
 
 export const config = {
     matcher: [
-        // Run on everything but Next internals and static files
+        //run on evrything but next internals and static files
         '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     ],
 };
