@@ -1,152 +1,210 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ROUTES } from "@/app/api/routes";
+"use client";
 
-const occasions = [
-  {
-    id: 1,
-    name: "Weddings",
-    description:
-      "Create unforgettable memories with our elegant wedding venues and services",
-    image: "/images/wedding.jpg",
-    features: [
-      "Indoor and outdoor venues",
-      "Wedding planning services",
-      "Catering options",
-      "Accommodation for guests",
-    ],
-  },
-  {
-    id: 2,
-    name: "Corporate Events",
-    description:
-      "Professional meeting spaces and conference facilities for your business needs",
-    image: "/images/corporate.jpg",
-    features: [
-      "Conference rooms",
-      "Business center",
-      "Catering services",
-      "Audio-visual equipment",
-    ],
-  },
-  {
-    id: 3,
-    name: "Social Gatherings",
-    description:
-      "Perfect spaces for birthdays, anniversaries, and special celebrations",
-    image: "/images/social.jpg",
-    features: [
-      "Private dining rooms",
-      "Customized menus",
-      "Event decoration",
-      "Professional staff",
-    ],
-  },
-  {
-    id: 4,
-    name: "Holiday Celebrations",
-    description: "Special events and packages for holiday seasons",
-    image: "/images/holiday.jpg",
-    features: [
-      "Themed decorations",
-      "Special menus",
-      "Entertainment options",
-      "Family packages",
-    ],
-  },
-];
+import React from "react";
+import CardSlider from "../components/CardSlider";
+import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
+import { suites } from "../data/suites";
+import BookCard from "../components/BookCard";
+import { useState } from "react";
 
 export default function OccasionsPage() {
+  const pageSize = 6;
+  const [page, setPage] = useState(1);
+  const totalResults = suites.length;
+  const totalPages = Math.ceil(totalResults / pageSize);
+  const startIdx = (page - 1) * pageSize;
+  const endIdx = Math.min(startIdx + pageSize, totalResults);
+  const pagedSuites = suites.slice(startIdx, endIdx);
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-8">Special Occasions</h1>
+      <section>
+        <div>
+          <div>
+            <picture>
+              {/*<!-- Mobile first -->*/}
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/rooms/rooms-mobile.png"
+                type="image/png"
+              />
+              <source
+                media="(max-width: 639px)"
+                srcSet="/images/rooms/rooms-mobile.png"
+              />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {occasions.map((occasion) => (
-          <Card key={occasion.id} className="overflow-hidden">
-            <div className="aspect-video relative bg-gray-200">
-              {/* Add actual images later */}
-              <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                {occasion.name} Image
-              </div>
-            </div>
-            <CardHeader>
-              <CardTitle>{occasion.name}</CardTitle>
-              <CardDescription>{occasion.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <ul className="space-y-2">
-                  {occasion.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center text-sm text-gray-600"
-                    >
-                      <span className="mr-2">•</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild className="w-full">
-                  <Link href={`/occasions/${occasion.id}`}>Learn More</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              {/*<!-- Tablets -->*/}
+              <source
+                media="(min-width: 640px) and (max-width: 1023px)"
+                srcSet="/images/rooms/rooms-tablets.png"
+              />
 
-      {/* Contact Section */}
-      <div className="mt-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Plan Your Special Event</CardTitle>
-            <CardDescription>
-              Let us help you create an unforgettable experience
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">
-                  Contact Our Events Team
-                </h3>
-                <p className="text-gray-600">
-                  Our experienced event planners are here to help you create the
-                  perfect celebration.
-                </p>
-                <div className="space-y-2">
-                  <p className="text-gray-600">
-                    <strong>Phone:</strong> +1 234 567 890
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Email:</strong> events@halperinhotel.com
-                  </p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Request Information</h3>
-                <p className="text-gray-600">
-                  Fill out our event inquiry form and we'll get back to you
-                  within 24 hours.
-                </p>
-                <Button asChild>
-                  <Link href={ROUTES.occasions.inquiry}>
-                    Request Information
-                  </Link>
-                </Button>
-              </div>
+              {/*<!-- Desktop --> */}
+              <source
+                media="(min-width: 1024px)"
+                srcSet="/images/halperin-hotel-entrance.png"
+              />
+
+              <img
+                className="w-full h-auto object-contain"
+                src="/images/halperin-hotel-entrance.png"
+                alt="Room Hero"
+              />
+            </picture>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-y-5 p-4 sm:p-6 md:p-10">
+            <h1 className="text-[#8b6c26] text-sm sm:text-base md:text-lg font-semibold uppercase tracking-wider">
+              THE HALPERIN HOTEL
+            </h1>
+            <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
+              Living like true Hollywood royalty
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <h1 className="text-base">SUITES</h1>
+            <p className="text-center max-w-sm text-sm sm:text-base font-light">
+              Our guest suites pay stylish homage to the stellar heritage of
+              this legendary hotel, but with a luxuriously modern edge.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
+          <div className="flex flex-row items-center justify-evenly gap-x-5 p-4 sm:p-6 md:p-10">
+            <div className="text-4xl max-w-xl">
+              Dazzling history, contemporary style
+            </div>
+            <p className="text-justify max-w-sm text-[15px] font-light pt-5">
+              Guest suites in the main house embody LA's sparkling elegance,
+              while the bungalows draw inspiration from the lush surrounding
+              landscape for an effortless and modern Californian design.
+            </p>
+          </div>
+          <div className="mt-15">
+            <CardSlider cards={SuitesCardSlider} />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-30">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
+          <div className="flex flex-col justify-center px-30">
+            <div className="text-4xl max-w-2xl tracking-wide">
+              Suites at The Halperin Hotel
+            </div>
+          </div>
+
+          {/* Show Results Indicator */}
+          <div className="flex justify-end items-center mt-4 mb-2">
+            <span className="text-xs tracking-widest text-neutral-500 font-medium">
+              SHOWING <span className="text-black font-semibold">{endIdx}</span>{" "}
+              / <span className="text-black font-semibold">{totalResults}</span>{" "}
+              RESULTS
+            </span>
+          </div>
+
+          {/* Card Grid */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
+            {pagedSuites.map((suites, idx) => (
+              <BookCard key={suites.title + idx} {...suites} />
+            ))}
+          </div>
+
+          {/* Pagination Navigation */}
+          <div className="flex items-center justify-between mt-20 px-25">
+            {/* Page Counter */}
+            <div className="text-[16px] font-medium text-black/80">
+              {String(page).padStart(2, "0")}{" "}
+              <span className="text-neutral-400">
+                - {String(totalPages).padStart(2, "0")}
+              </span>
+            </div>
+            {/* Arrows */}
+            <div className="flex gap-4">
+              {/* Previous Button */}
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                aria-label="Previous page"
+                className={`group w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-200 p-0 ${
+                  page === 1
+                    ? "border border-neutral-200 text-neutral-300 cursor-not-allowed opacity-50 pointer-events-none"
+                    : "border border-[#CFB67D] text-[#8b6c26] hover:bg-[#8b6c26]/10"
+                }`}
+              >
+                <span className="block rotate-180">
+                  <svg
+                    width="64"
+                    height="65"
+                    viewBox="0 0 64 65"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                  >
+                    <rect
+                      x="0.5"
+                      y="1.49805"
+                      width="63"
+                      height="63"
+                      rx="31.5"
+                      stroke="#CFB67D"
+                      strokeOpacity="0.5"
+                      fill="transparent"
+                      className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                    ></rect>
+                    <path
+                      className="transition-colors duration-200 group-hover:stroke-white"
+                      d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                      stroke="black"
+                      strokeLinejoin="bevel"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+              {/* Next Button */}
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                aria-label="Next page"
+                className={`group w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-200 p-0 ${
+                  page === totalPages
+                    ? "border border-neutral-200 text-neutral-300 cursor-not-allowed opacity-50 pointer-events-none"
+                    : "border border-[#CFB67D] text-[#8b6c26] hover:bg-[#8b6c26]/10"
+                }`}
+              >
+                <span className="block">
+                  <svg
+                    width="64"
+                    height="65"
+                    viewBox="0 0 64 65"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="arrowHover rtl:rotate-180 text-[#8b6c26]"
+                  >
+                    <rect
+                      x="0.5"
+                      y="1.49805"
+                      width="63"
+                      height="63"
+                      rx="31.5"
+                      stroke="#CFB67D"
+                      strokeOpacity="0.5"
+                      fill="transparent"
+                      className="transition-colors duration-200 group-hover:fill-[#8b6c26]"
+                    ></rect>
+                    <path
+                      className="transition-colors duration-200 group-hover:stroke-white"
+                      d="M34.5 38.998C34.5 32.998 40 32.998 40 32.998M40 32.998C40 32.998 34.5 32.998 34.5 26.998M40 32.998H24"
+                      stroke="black"
+                      strokeLinejoin="bevel"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

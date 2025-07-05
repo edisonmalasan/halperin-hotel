@@ -1,14 +1,8 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import CardSlider from "../components/CardSlider";
 import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
-import {
-  LoginLink,
-  RegisterLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
 import { suites } from "../data/suites";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
