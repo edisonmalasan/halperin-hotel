@@ -2,19 +2,19 @@
 
 import React from "react";
 import CardSlider from "../components/CardSlider";
-import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
-import { suites } from "../data/suites";
+import { OccasionsCardSlider } from "@/app/(client)/occasions/data/OccasionsCardSlider";
+import { occasions } from "../data/occasions";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
 
 export default function OccasionsPage() {
   const pageSize = 6;
   const [page, setPage] = useState(1);
-  const totalResults = suites.length;
+  const totalResults = occasions.length;
   const totalPages = Math.ceil(totalResults / pageSize);
   const startIdx = (page - 1) * pageSize;
   const endIdx = Math.min(startIdx + pageSize, totalResults);
-  const pagedSuites = suites.slice(startIdx, endIdx);
+  const pagedOccasions = occasions.slice(startIdx, endIdx);
 
   return (
     <div>
@@ -57,12 +57,13 @@ export default function OccasionsPage() {
               THE HALPERIN HOTEL
             </h1>
             <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
-              Living like true Hollywood royalty
+              Where Hollywood celebrates its finest moments
             </div>
-            <h1 className="text-base">SUITES</h1>
+            <h1 className="text-base">Occasions</h1>
             <p className="text-center max-w-sm text-sm sm:text-base font-light">
-              Our guest suites pay stylish homage to the stellar heritage of
-              this legendary hotel, but with a luxuriously modern edge.
+              Our incredible setting and wonderful team combine to create
+              absolutely unforgettable events. This is the true definition of
+              spectacular.
             </p>
           </div>
         </div>
@@ -75,13 +76,14 @@ export default function OccasionsPage() {
               Dazzling history, contemporary style
             </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
-              Guest suites in the main house embody LA's sparkling elegance,
-              while the bungalows draw inspiration from the lush surrounding
-              landscape for an effortless and modern Californian design.
+              It starts at the red carpet. The famous exterior. The sense of
+              history, celebrity and excitement. Your guests feel like movie
+              stars as they glide into the lobby to be greeted warmly and led to
+              your unforgettable event at The Halperin Hotel.
             </p>
           </div>
           <div className="mt-15">
-            <CardSlider cards={SuitesCardSlider} />
+            <CardSlider cards={OccasionsCardSlider} />
           </div>
         </div>
       </section>
@@ -90,7 +92,7 @@ export default function OccasionsPage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
           <div className="flex flex-col justify-center px-30">
             <div className="text-4xl max-w-2xl tracking-wide">
-              Suites at The Halperin Hotel
+              Occasions at The Halperin Hotel
             </div>
           </div>
 
@@ -105,8 +107,8 @@ export default function OccasionsPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedSuites.map((suites, idx) => (
-              <BookCard key={suites.title + idx} {...suites} />
+            {pagedOccasions.map((occasions, idx) => (
+              <BookCard key={occasions.title + idx} {...occasions} />
             ))}
           </div>
 
