@@ -99,7 +99,7 @@ export const DirectionAwareHover = ({
               src={imageUrl}
             />
             {title && (
-              <div className="absolute bottom-4 left-4 z-30 text-2xl font-semibold mb-2 drop-shadow-lg pointer-events-none text-white transition-opacity duration-300 group-hover/card:opacity-0 opacity-100">
+              <div className="absolute bottom-4 left-4 z-30 text-3xl font-semibold mb-2 drop-shadow-lg pointer-events-none text-white transition-opacity duration-300 group-hover/card:opacity-0 opacity-100">
                 {title}
               </div>
             )}

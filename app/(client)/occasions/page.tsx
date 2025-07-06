@@ -80,16 +80,19 @@ export default function OccasionsPage() {
                 key={item.title}
                 imageUrl={item.imageUrl}
                 title={item.title}
+                className="h-[600px] w-[440px]"
               >
-                <div className="text-base font-light mb-4 drop-shadow-lg">
-                  {item.description}
+                <div className="flex flex-col pb-8 gap-4">
+                  <div className="text-sm text-justify font-light mb-4 drop-shadow-lg max-w-xs">
+                    {item.description}
+                  </div>
+                  <Link
+                    href={item.link}
+                    className="mt-2 px-5 py-2 bg-white text-[#8b6c26] rounded-full font-semibold text-sm shadow-md transition-all duration-200 hover:bg-[#8b6c26] hover:text-white w-fit"
+                  >
+                    EXPLORE {item.title.toUpperCase()}
+                  </Link>
                 </div>
-                <Link
-                  href={item.link}
-                  className="mt-2 px-5 py-2 bg-white text-[#8b6c26] rounded-full font-semibold text-sm shadow-md transition-all duration-200 hover:bg-[#8b6c26] hover:text-white w-fit"
-                >
-                  EXPLORE {item.title.toUpperCase()}
-                </Link>
               </DirectionAwareHover>
             ))}
           </div>
