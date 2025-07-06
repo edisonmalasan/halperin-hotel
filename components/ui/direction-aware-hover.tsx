@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils";
 
 export const DirectionAwareHover = ({
   imageUrl,
+  title,
   children,
   childrenClassName,
   imageClassName,
   className,
 }: {
   imageUrl: string;
+  title?: React.ReactNode;
   children: React.ReactNode | string;
   childrenClassName?: string;
   imageClassName?: string;
@@ -66,7 +68,7 @@ export const DirectionAwareHover = ({
       onMouseEnter={handleMouseEnter}
       ref={ref}
       className={cn(
-        "md:h-96 w-60 h-60 md:w-96 bg-transparent rounded-lg overflow-hidden group/card relative",
+        "w-[440px] h-[600px] md:h-[600px] md:w-[440px] bg-transparent rounded-lg overflow-hidden group/card relative",
         className
       )}
     >
@@ -92,10 +94,15 @@ export const DirectionAwareHover = ({
                 "h-full w-full object-cover scale-[1.15]",
                 imageClassName
               )}
-              width="1000"
-              height="1000"
+              width="440"
+              height="600"
               src={imageUrl}
             />
+            {title && (
+              <div className="absolute bottom-4 left-4 z-30 text-2xl font-semibold mb-2 drop-shadow-lg pointer-events-none text-white transition-opacity duration-300 group-hover/card:opacity-0 opacity-100">
+                {title}
+              </div>
+            )}
           </motion.div>
           <motion.div
             variants={textVariants}
@@ -104,10 +111,15 @@ export const DirectionAwareHover = ({
               ease: "easeOut",
             }}
             className={cn(
-              "text-white absolute bottom-4 left-4 z-40",
+              "text-white absolute bottom-4 left-4 z-40 w-[90%]",
               childrenClassName
             )}
           >
+            {title && (
+              <div className="text-2xl font-semibold mb-2 drop-shadow-lg pointer-events-none text-white">
+                {title}
+              </div>
+            )}
             {children}
           </motion.div>
         </motion.div>

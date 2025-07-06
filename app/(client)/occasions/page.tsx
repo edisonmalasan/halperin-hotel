@@ -6,6 +6,9 @@ import { OccasionsCardSlider } from "@/app/(client)/occasions/data/OccasionsCard
 import { occasions } from "../data/occasions";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
+import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
+import { OccasionsImageHover } from "../data/OccasionsImageHover";
+import Link from "next/link";
 
 export default function OccasionsPage() {
   const pageSize = 6;
@@ -18,7 +21,7 @@ export default function OccasionsPage() {
 
   return (
     <div>
-      <section>
+      <section className="pb-10">
         <div>
           <div>
             <picture>
@@ -69,9 +72,27 @@ export default function OccasionsPage() {
         </div>
       </section>
 
-      <section>
+      <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8">
-          <div>{/* Direction Aware hover */}</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {OccasionsImageHover.map((item) => (
+              <DirectionAwareHover
+                key={item.title}
+                imageUrl={item.imageUrl}
+                title={item.title}
+              >
+                <div className="text-base font-light mb-4 drop-shadow-lg">
+                  {item.description}
+                </div>
+                <Link
+                  href={item.link}
+                  className="mt-2 px-5 py-2 bg-white text-[#8b6c26] rounded-full font-semibold text-sm shadow-md transition-all duration-200 hover:bg-[#8b6c26] hover:text-white w-fit"
+                >
+                  EXPLORE {item.title.toUpperCase()}
+                </Link>
+              </DirectionAwareHover>
+            ))}
+          </div>
         </div>
       </section>
 
