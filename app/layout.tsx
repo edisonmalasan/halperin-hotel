@@ -42,7 +42,7 @@ export default function RootLayout({
                   <div>
                     <h3 className="font-bold mb-4">ADDRESS</h3>
                     <ul className="space-y-2 text-gray-600">
-                      <li>The Halperin Hills Hotel,</li>
+                      <li>The Halperin Hotel,</li>
                       <li>9641 Sunset Boulevard,</li>
                       <li>Beverly Hills, CA 90210</li>
                     </ul>
