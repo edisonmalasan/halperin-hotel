@@ -4,7 +4,7 @@ import React from "react";
 import CardSlider from "@/app/(client)/components/CardSlider";
 import { RoomCardSlider } from "@/app/(client)/rooms/data/RoomCardSlider";
 import TabsModule from "../../components/TabsModule";
-import { tabsData } from "../../data/tabsData";
+import { tabsData } from "../data/superiorTabsData";
 
 export default function SuperiorRoomPage() {
   return (
@@ -33,12 +33,12 @@ export default function SuperiorRoomPage() {
               {/*<!-- Desktop --> */}
               <source
                 media="(min-width: 1024px)"
-                srcSet="/images/Rooms/superior/superior-room-page.png"
+                srcSet="/images/rooms/superior/superior-room-page.png"
               />
 
               <img
                 className="w-full h-auto object-contain"
-                src="/images/Rooms/superior/superior-room-page.png"
+                src="/images/rooms/superior/superior-room-page.png"
                 alt="Room Hero"
               />
             </picture>
@@ -161,6 +161,10 @@ export default function SuperiorRoomPage() {
         <div className="container mx-auto">
           <TabsModule tabs={tabsData} />
         </div>
+      </section>
+
+      <section>
+        <div></div>
       </section>
     </div>
   );
