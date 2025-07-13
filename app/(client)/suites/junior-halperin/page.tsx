@@ -8,8 +8,6 @@ import { diningSlides } from "../../data/diningCarousel";
 import { suites } from "../../data/suites";
 
 export default function JuniorHalperinSuitePage() {
-  const suite = suites.find((s) => s.href === "/suites/junior-halperin");
-  if (!suite) return <div>Suite not found.</div>;
   return (
     <div>
       {/* SECTION 1 */}
@@ -37,13 +35,13 @@ export default function JuniorHalperinSuitePage() {
               {/*<!-- Desktop --> */}
               <source
                 media="(min-width: 1024px)"
-                srcSet="/images/suites/grand-deluxe/grand-deluxe-page.png"
+                srcSet="/images/suites/junior-halperin/junior-halperin-page.png"
               />
 
               <img
                 className="w-full h-auto object-contain"
-                src="/images/suites/grand-deluxe/grand-deluxe-page.png"
-                alt="Grand Deluxe Suite at The Halperin Hotel"
+                src="/images/suites/junior-halperin/junior-halperin-page.png"
+                alt="Junior Halperin Suite at The Halperin Hotel"
               />
             </picture>
           </div>
@@ -180,8 +178,8 @@ export default function JuniorHalperinSuitePage() {
         <div className="flex flex-row justify-between mb-10 text-center md:text-left">
           <h2 className="text-3xl font-light mb-4">At a glance</h2>
           <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            A much-loved suite in the nation’s most famous zip code. Spacious,
-            elegant and utterly charming.
+            A separate living room and warm decor adds the sense of home to this
+            beautiful suite.
           </p>
         </div>
         {/* Bottom */}
