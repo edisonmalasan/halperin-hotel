@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import TabsModule from "../../components/TabsModule";
+import { tabsData } from "../data/juniorTabsData";
+import ImageCarousel from "../../components/ImageCarousel";
+import { diningSlides } from "../../data/diningCarousel";
 import { suites } from "../../data/suites";
-import BookCard from "../../components/BookCard";
 
 export default function JuniorHalperinSuitePage() {
   const suite = suites.find((s) => s.href === "/suites/junior-halperin");

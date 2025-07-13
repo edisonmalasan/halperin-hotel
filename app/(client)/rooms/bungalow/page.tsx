@@ -262,8 +262,7 @@ export default function BungalowPage() {
             className="absolute inset-0 w-full h-full object-cover object-center z-0"
             draggable="false"
           />
-          {/* Overlay for darkening if needed */}
-          <div className="absolute inset-0" />
+
           {/* Main heading and subheading */}
           <div className="relative z-20 w-full flex flex-col items-center justify-center text-center px-4 h-full">
             <h2 className="text-white text-4xl md:text-6xl font-extralight leading-tight mt-12 md:mt-0">
