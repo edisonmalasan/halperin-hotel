@@ -7,6 +7,7 @@ import TabsModule from "../../components/TabsModule";
 import { tabsData } from "../data/fountainTabsData";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
+
 export default function FountainCoffeePage() {
   return (
     <div>

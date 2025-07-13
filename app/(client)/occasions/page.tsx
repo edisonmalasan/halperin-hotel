@@ -2,7 +2,7 @@
 
 import React from "react";
 import CardSlider from "../components/CardSlider";
-import { OccasionsCardSlider } from "@/app/(client)/occasions/data/OccasionsCardSlider";
+import { OccasionsCardSlider } from "@/app/(client)/occasions/data/WeddingCardSlider";
 import { occasions } from "../data/occasions";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
@@ -54,7 +54,7 @@ export default function OccasionsPage() {
                 alt="Room Hero"
               />
             </picture>
-              </div>
+          </div>
           <div className="flex flex-col items-center justify-center gap-y-5 p-4 sm:p-6 md:p-10">
             <h1 className="text-[#8b6c26] text-sm sm:text-base md:text-lg font-semibold uppercase tracking-wider">
               THE HALPERIN HOTEL
@@ -68,8 +68,8 @@ export default function OccasionsPage() {
               absolutely unforgettable events. This is the true definition of
               spectacular.
             </p>
-              </div>
-      </div>
+          </div>
+        </div>
       </section>
 
       <section className="py-20">
@@ -104,7 +104,7 @@ export default function OccasionsPage() {
           <div className="flex flex-row items-center justify-evenly gap-x-5 p-4 sm:p-6 md:p-10">
             <div className="text-4xl max-w-xl tracking-wide">
               Timeless elegance, modern sophistication
-              </div>
+            </div>
             <p className="text-justify max-w-sm text-[15px] font-light pt-5">
               It starts at the red carpet. The famous exterior. The sense of
               history, celebrity and excitement. Your guests feel like movie
@@ -150,7 +150,7 @@ export default function OccasionsPage() {
               <span className="text-neutral-400">
                 - {String(totalPages).padStart(2, "0")}
               </span>
-              </div>
+            </div>
             {/* Arrows */}
             <div className="flex gap-4">
               {/* Previous Button */}
@@ -235,8 +235,8 @@ export default function OccasionsPage() {
               </button>
             </div>
           </div>
-      </div>
+        </div>
       </section>
     </div>
   );
-} 
+}

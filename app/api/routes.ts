@@ -35,7 +35,5 @@ export const ROUTES = {
         weddings: "/occasions/weddings",
         socialEvents: "/occasions/social-events",
         meetings: "/occasions/meetings",
-        eventSpaces: "/occasions/event-spaces",
-        inquiry: "/occasions/inquiry",
     },
 }; 

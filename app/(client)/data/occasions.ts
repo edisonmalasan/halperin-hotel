@@ -35,16 +35,4 @@ export const occasions = [
       "LUXURY SERVICE",
     ],
   },
-  {
-    title: "Event Spaces",
-    href: "/occasions/event-spaces",
-    description:
-      "It starts at the red carpet. The famous exterior. The sense of history, celebrity and excitement. Your guests feel like movie stars as they glide into the lobby to be greeted warmly and led to your unforgettable event at The Halperin Hotel.",
-    image: "/images/occasions/event-spaces/event-spaces-mm.png",
-    features: [
-      "BALLROOM & GARDENS",
-      "FLEXIBLE LAYOUTS",
-      "EVENT CONCIERGE",
-    ],
-  },
 ];
