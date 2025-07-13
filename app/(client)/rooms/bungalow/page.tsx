@@ -2,7 +2,7 @@
 
 import React from "react";
 import TabsModule from "../../components/TabsModule";
-import { tabsData } from "../data/superiorBalconyTabsData";
+import { tabsData } from "../data/bungalowTabsData";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
 
@@ -40,7 +40,7 @@ export default function BungalowPage() {
               <img
                 className="w-full h-auto object-contain"
                 src="/images/rooms/bungalow/bungalow-page.png"
-                alt="Superior Room with Balcony"
+                alt="Bungalow Room"
               />
             </picture>
           </div>
@@ -157,8 +157,9 @@ export default function BungalowPage() {
         <div className="flex flex-row justify-between mb-10 text-center md:text-left">
           <h2 className="text-3xl font-light mb-4">At a glance</h2>
           <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            The warm, welcoming combination of elegant design and soft colour
-            make these bright rooms perfect for the business traveller.
+            The privately located, iconic bungalow rooms. Bathed in soft colours
+            and the glow of history and hidden amongst the timeless, tranquil
+            gardens.
           </p>
         </div>
         {/* Bottom */}
@@ -183,7 +184,7 @@ export default function BungalowPage() {
                 />
               </svg>
               <span>
-                37m²/400ft<sup>2</sup>
+                44m²/475ft²<sup>2</sup>
               </span>
             </div>
             <div className="flex-1 flex items-center gap-2 py-2">
@@ -203,7 +204,7 @@ export default function BungalowPage() {
                   d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
                 />
               </svg>
-              <span>Private balcony</span>
+              <span>Lots of natural light</span>
             </div>
           </div>
           {/* dividr */}
@@ -227,7 +228,7 @@ export default function BungalowPage() {
                   d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
                 />
               </svg>
-              <span>City views</span>
+              <span>Garden view</span>
             </div>
             <div className="flex-1 flex items-center gap-2 py-2">
               <svg
