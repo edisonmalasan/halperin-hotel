@@ -166,7 +166,7 @@ export default function BungalowPatioRoomPage() {
         {/* Bottom */}
         <div className="mx-auto w-full">
           {(() => {
-            // find the room data for Bungalow Room with Patio
+            // find the specific data based on route
             const room = rooms.find((r) => r.href === "/rooms/bungalow-patio");
             const features = room?.features || [];
             // split
