@@ -4,10 +4,10 @@ export const tabsData = [
         content: [
             {
                 label: "THE ROOM",
-                heading: "A private sanctuary",
+                heading: "Sleep soundly",
                 description:
-                    "Your gloriously huge and comfortable bed is made for blissful slumbers. Exquisite Egyptian cotton invites you in for a wonderful night’s sleep.",
-                image: "/images/rooms/bungalow/bungalow-tab-1.png",
+                    "Your gloriously huge bed invites blissful slumbers. The bespoke cotton linens are embroidered with The Beverly Hills Hotel logo and topped with a soft duvet for a perfect night’s sleep.",
+                image: "/images/rooms/bungalow-patio/bungalow-patio-tab-1.png",  
             },
         ],
     },
@@ -16,10 +16,10 @@ export const tabsData = [
         content: [
             {
                 label: "THE VIEW",
-                heading: "A corner of paradise",
+                heading: "Paradise found",
                 description:
-                    "Your room is surrounded by 12 acres of tropical gardens and exotic flowers. Beyond this, the iconic LA palm trees stand tall against the blue sky. You’re in the centre of the city, and the air crackles with possibility.",
-                image: "/images/rooms/bungalow/bungalow-tab-2.png",
+                    "Step out onto your private patio to take in the sights and sounds of the 12-acre tropical gardens that surround you. You’re in the centre of this famous city, and the air crackles with possibility.",
+                image: "/images/rooms/bungalow-patio/bungalow-patio-tab-2.png",
                 // linkText: "EXPLORE THE POOL",
                 // linkHref: "#",
             },
@@ -30,9 +30,9 @@ export const tabsData = [
         content: [
             {
                 label: "THE BATHROOM",
-                heading: "Bathrooms of lavish luxury",
+                heading: "Made for beautiful bathing",
                 description:
-                    "Our iconic bathrooms are elegant affairs with enough room to practise your Oscar speech in front of the mirror. Delight comes in the form of huge towels and a beautiful combination bathtub and shower. The warm, signature marble shines to perfection.",
+                    "A bathroom worthy of its iconic location, where huge towels, a wonderfully deep bathtub and separate shower await. The cool, dark marble shines to perfection.",
                 image: "/images/rooms/bungalow/bungalow-tab-3.png",
                 // linkText: "EXPLORE OCCASIONS",
                 // linkHref: "#",

@@ -5,6 +5,7 @@ import TabsModule from "../../components/TabsModule";
 import { tabsData } from "../data/bungalowPatioTabsData";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
+import { rooms } from "../../data/rooms";
 
 export default function BungalowPatioRoomPage() {
   return (
@@ -40,7 +41,7 @@ export default function BungalowPatioRoomPage() {
               <img
                 className="w-full h-auto object-contain"
                 src="images/rooms/bungalow-patio/bungalow-patio-page.png"
-                alt="Bungalow with Patio Room"
+                alt="Bungalow Room with Patio"
               />
             </picture>
           </div>
@@ -49,13 +50,14 @@ export default function BungalowPatioRoomPage() {
               THE HALPERIN HOTEL
             </h1>
             <div className="text-2xl sm:text-3xl md:text-5xl font-extralight text-center">
-              Bungalow life at its finest
+              Bungalow life with something extra
             </div>
-            <h1 className="text-base">BUNGALOW ROOM</h1>
+            <h1 className="text-base">BUNGALOW ROOM WITH PATIO</h1>
             <p className="text-center max-w-sm text-sm sm:text-base font-light">
-              The iconic bungalow rooms. Bathed in soft colours and the glow of
-              history and hidden amongst the timeless, tranquil gardens. Immerse
-              yourself in vintage glamour and modern luxury.
+              Our iconic bungalow room with a private patio, surrounded by the
+              timeless, tranquil gardens. Bathed in soft colours and the glow of
+              history, this is a place to immerse yourself in vintage glamour
+              and modern luxury.
             </p>
           </div>
         </div>
@@ -69,9 +71,9 @@ export default function BungalowPatioRoomPage() {
             <div className="flex flex-col justify-center gap-y-10 overflow-hidden max-w-4xl">
               <div className="text-[#8b6c26] text-sm">YOUR ROOM</div>
               <p className="text-3xl/10 indent-10 tracking-wide text-justify">
-                Hide away in our 12 acres of lush tropical gardens amongst the
-                forests of fragrant hibiscus, colorful bougainvillea and
-                majestic palms.
+                Enjoy the warmth of dappled sunlight or a cool shady oasis on
+                your private patio, and still be within easy access of every
+                hotel service.
               </p>
             </div>
             <div className="flex flex-col justify-center pt-8 space-y-3 font-light text-xs">
@@ -93,7 +95,7 @@ export default function BungalowPatioRoomPage() {
                     strokeWidth="0.5"
                   ></path>
                 </svg>
-                <p>QUIET SPACE</p>
+                <p>SEEING THE SUNRISE</p>
               </div>
               <div className="flex flex-row items-center gap-x-2">
                 {" "}
@@ -135,7 +137,7 @@ export default function BungalowPatioRoomPage() {
                     strokeWidth="0.5"
                   ></path>
                 </svg>
-                <p>ULTIMATE SECLUSION</p>
+                <p>QUIET SPACE</p>
               </div>
             </div>
           </div>
@@ -157,99 +159,80 @@ export default function BungalowPatioRoomPage() {
         <div className="flex flex-row justify-between mb-10 text-center md:text-left">
           <h2 className="text-3xl font-light mb-4">At a glance</h2>
           <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            The privately located, iconic bungalow rooms. Bathed in soft colours
-            and the glow of history and hidden amongst the timeless, tranquil
-            gardens.
+            The privately located, iconic bungalow rooms with patios. This is a
+            place to immerse yourself in vintage glamour and modern luxury.
           </p>
         </div>
         {/* Bottom */}
         <div className="mx-auto w-full">
-          {/* 1st row*/}
-          <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>
-                44m²/475ft²<sup>2</sup>
-              </span>
-            </div>
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Lots of natural light</span>
-            </div>
-          </div>
-          {/* dividr */}
-          <div className="border-t border-gray-200 my-2 w-full" />
-          {/* 2nd row */}
-          <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Garden view</span>
-            </div>
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Working area</span>
-            </div>
-          </div>
+          {(() => {
+            // find the room data for Bungalow Room with Patio
+            const room = rooms.find((r) => r.href === "/rooms/bungalow-patio");
+            const features = room?.features || [];
+            // split
+            const firstRow = features.slice(0, 2);
+            const secondRow = features.slice(2, 4);
+            return (
+              <>
+                {/* 1st row*/}
+                <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
+                  {firstRow.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 flex items-center gap-2 py-2"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        viewBox="0 0 16 16"
+                        className="shrink-0"
+                      >
+                        <path
+                          fill="#8B6C26"
+                          stroke="#8B6C26"
+                          strokeWidth="0.5"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
+                        />
+                      </svg>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* dividr */}
+                <div className="border-t border-gray-200 my-2 w-full" />
+                {/* 2nd row */}
+                <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
+                  {secondRow.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 flex items-center gap-2 py-2"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        viewBox="0 0 16 16"
+                        className="shrink-0"
+                      >
+                        <path
+                          fill="#8B6C26"
+                          stroke="#8B6C26"
+                          strokeWidth="0.5"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
+                        />
+                      </svg>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
       {/* END OF SECTION 4 */}

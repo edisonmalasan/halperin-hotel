@@ -5,6 +5,7 @@ import TabsModule from "../../components/TabsModule";
 import { tabsData } from "../data/superiorTabsData";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
+import { rooms } from "../../data/rooms";
 
 export default function SuperiorRoomPage() {
   return (
@@ -163,92 +164,74 @@ export default function SuperiorRoomPage() {
         </div>
         {/* Bottom */}
         <div className="mx-auto w-full">
-          {/* 1st row*/}
-          <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>
-                37m²/400ft<sup>2</sup>
-              </span>
-            </div>
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Peaceful location</span>
-            </div>
-          </div>
-          {/* dividr */}
-          <div className="border-t border-gray-200 my-2 w-full" />
-          {/* 2nd row */}
-          <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Garden views</span>
-            </div>
-            <div className="flex-1 flex items-center gap-2 py-2">
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                viewBox="0 0 16 16"
-                className="shrink-0"
-              >
-                <path
-                  fill="#8B6C26"
-                  stroke="#8B6C26"
-                  strokeWidth="0.5"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
-                />
-              </svg>
-              <span>Lots of natural light</span>
-            </div>
-          </div>
+          {(() => {
+            // find the room data for Bungalow Room with Patio
+            const room = rooms.find((r) => r.href === "/rooms/superior");
+            const features = room?.features || [];
+            // split
+            const firstRow = features.slice(0, 2);
+            const secondRow = features.slice(2, 4);
+            return (
+              <>
+                {/* 1st row*/}
+                <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
+                  {firstRow.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 flex items-center gap-2 py-2"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        viewBox="0 0 16 16"
+                        className="shrink-0"
+                      >
+                        <path
+                          fill="#8B6C26"
+                          stroke="#8B6C26"
+                          strokeWidth="0.5"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
+                        />
+                      </svg>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* dividr */}
+                <div className="border-t border-gray-200 my-2 w-full" />
+                {/* 2nd row */}
+                <div className="flex flex-col md:flex-row w-full px-5 text-sm font-light">
+                  {secondRow.map((feature, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 flex items-center gap-2 py-2"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        fill="none"
+                        viewBox="0 0 16 16"
+                        className="shrink-0"
+                      >
+                        <path
+                          fill="#8B6C26"
+                          stroke="#8B6C26"
+                          strokeWidth="0.5"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M7.604 3.45h.819c.361 2.147 2.282 3.928 4.377 4.385v.808c-2.074.43-4.031 2.288-4.376 4.407h-.822c-.372-2.133-2.301-3.965-4.402-4.407v-.805c2.124-.507 3.993-2.203 4.405-4.387zM7.913 3.825c-.469 2.06-2.341 3.77-4.337 4.307v.209c1.987.494 3.899 2.331 4.339 4.334h.195c.432-2.036 2.341-3.836 4.316-4.334V8.134c-1.984-.501-3.883-2.297-4.316-4.309h-.197z"
+                        />
+                      </svg>
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
         </div>
       </section>
       {/* END OF SECTION 4 */}
