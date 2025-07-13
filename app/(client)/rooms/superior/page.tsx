@@ -1,11 +1,8 @@
 "use client";
 
 import React from "react";
-import CardSlider from "@/app/(client)/components/CardSlider";
-import { RoomCardSlider } from "@/app/(client)/rooms/data/RoomCardSlider";
 import TabsModule from "../../components/TabsModule";
 import { tabsData } from "../data/superiorTabsData";
-import { rooms } from "../../data/rooms";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
 
