@@ -42,7 +42,7 @@ export default function PoloLoungePage() {
               <img
                 className="w-full h-auto object-contain"
                 src="/images/suites/rodeo/rodeo-page.png"
-                alt="Presidential Suite"
+                alt="Polo Lounge"
               />
             </picture>
           </div>
@@ -113,7 +113,7 @@ export default function PoloLoungePage() {
       {/* END OF SECTION 2.1 */}
 
       {/* SECTION 3 */}
-      <section className="py-2 0 bg-white">
+      <section className="bg-white">
         <div className="container mx-auto">
           <TabsModule tabs={tabsData} />
         </div>
@@ -121,20 +121,23 @@ export default function PoloLoungePage() {
       {/* END OF SECTION 3 */}
 
       {/* SECTION 4 */}
-      <section className="w-full max-w-7xl mx-auto px-6">
-        {/* Top */}
-        <div className="flex flex-row justify-between text-center md:text-left">
-          <h2 className="text-3xl font-light mb-4">Dining in style</h2>
-          <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            For every occasion and every mood, The Beverly Hills Hotel has the
-            restaurant for you.
-          </p>
+      <section className="bg-white">
+        <div className="container mx-auto py-10">
+          <div className="flex flex-row justify-center gap-x-35 overflow-hidden">
+            <div className="text-[35px] items-start font-normal tracking-wide text-black ">
+              Dining in style
+            </div>
+            <p className="max-w-sm text-[14px] pt-5 tracking-wide text-justify">
+              For every occasion and every mood, The Beverly Hills Hotel has the
+              restaurant for you.
+            </p>
+          </div>
         </div>
       </section>
       {/* END OF SECTION 4 */}
 
       {/* SECTION 5 */}
-      <section className="py-32 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto">
           <ImageCarousel slides={diningSlides} />
         </div>
