@@ -24,7 +24,7 @@ interface TabsModuleProps {
   tabs: TabData[];
 }
 
-// Helper to resolve known routes
+// helper to resolve known routes
 const resolveRoute = (href: string) => {
   switch (href) {
     case "/rooms":

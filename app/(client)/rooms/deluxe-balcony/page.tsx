@@ -158,7 +158,9 @@ export default function DeluxeBalconyRoomPage() {
         <div className="flex flex-row justify-between mb-10 text-center md:text-left">
           <h2 className="text-3xl font-light mb-4">At a glance</h2>
           <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            Everything you need for a wonderful stay at the heart of the action.
+            A peaceful space with everything you need, including a balcony.
+            Ideal for guests wanting to be close to the hotel’s lobby and
+            legendary Polo Lounge. 49m²/525ft²
           </p>
         </div>
         {/* Bottom */}
