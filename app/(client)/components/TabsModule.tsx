@@ -35,7 +35,6 @@ const resolveRoute = (href: string) => {
       return ROUTES.dining.root;
     case "/occasions":
       return ROUTES.occasions.root;
-    // Add more as needed
     default:
       return href;
   }

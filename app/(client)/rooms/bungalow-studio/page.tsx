@@ -161,8 +161,9 @@ export default function BungalowStudioRoomPage() {
         <div className="flex flex-row justify-between mb-10 text-center md:text-left">
           <h2 className="text-3xl font-light mb-4">At a glance</h2>
           <p className="text-neutral-600 text-base max-w-2xl mx-auto md:mx-0">
-            The privately located, iconic bungalow rooms with patios. This is a
-            place to immerse yourself in vintage glamour and modern luxury.
+            These privately located, iconic bungalow studios with a balcony are
+            the perfect stylish retreat from which to enjoy the comforts of home
+            – and a few new comforts that only The Beverly Hills can offer.
           </p>
         </div>
         {/* Bottom */}
