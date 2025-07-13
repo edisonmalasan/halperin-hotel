@@ -3,7 +3,6 @@
 import React from "react";
 import CardSlider from "../../components/CardSlider";
 import { OccasionsCardSlider } from "../data/WeddingCardSlider";
-import TabsModule from "../../components/TabsModule";
 import ImageCarousel from "../../components/ImageCarousel";
 import { diningSlides } from "../../data/diningCarousel";
 
