@@ -16,117 +16,124 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
-function Logo() {
-  return (
-    <a
-      href="#"
-      className="relative z-20 flex items-center space-x-2 py-1 text-base font-bold text-white"
-    >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-white dark:bg-black" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-bold whitespace-pre text-white dark:text-white"
-      >
-        Halperin PMS
-      </motion.span>
-    </a>
-  );
-}
-function LogoIcon() {
-  return (
-    <a
-      href="#"
-      className="relative z-20 flex items-center space-x-2 py-1 text-base font-bold text-white"
-    >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-white dark:bg-black" />
-    </a>
-  );
-}
+import { useRouter } from "next/navigation";
 
 const adminLinks = [
   {
     label: "Dashboard",
-    key: "dashboard",
-    icon: <IconHome className="h-5 w-5 shrink-0 text-white dark:text-white" />,
+    href: "/admin/dashboard",
+    icon: (
+      <IconHome className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
+    ),
   },
   {
     label: "Reservations",
-    key: "reservations",
+    href: "/admin/reservations",
     icon: (
-      <IconCalendarCheck className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconCalendarCheck className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
   {
     label: "Rooms",
-    key: "rooms",
-    icon: <IconBed className="h-5 w-5 shrink-0  text-white dark:text-white" />,
+    href: "/admin/rooms",
+    icon: (
+      <IconBed className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
+    ),
   },
   {
     label: "Housekeeping",
-    key: "housekeeping",
+    href: "#",
     icon: (
-      <IconBrush className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconBrush className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
   {
     label: "Guests",
-    key: "guests",
+    href: "#",
     icon: (
-      <IconUsers className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconUsers className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
   {
     label: "Billing",
-    key: "billing",
+    href: "#",
     icon: (
-      <IconReceipt className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconReceipt className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
   {
     label: "Analytics",
-    key: "analytics",
+    href: "#",
     icon: (
-      <IconChartBar className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconChartBar className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
   {
     label: "Settings",
-    key: "settings",
+    href: "#",
     icon: (
-      <IconSettings className="h-5 w-5 shrink-0  text-white dark:text-white" />
+      <IconSettings className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
   },
 ];
 
-const contentMap = {
-  dashboard: <div className="p-6 text-white">Admin Dashboard Content</div>,
-  reservations: (
-    <div className="p-6 text-white">Reservation Management Content</div>
-  ),
-  rooms: <div className="p-6 text-white">Room Management Content</div>,
-  housekeeping: <div className="p-6 text-white">Housekeeping Content</div>,
-  guests: <div className="p-6 text-white">Guests Content</div>,
-  billing: <div className="p-6 text-white">Billing Content</div>,
-  analytics: <div className="p-6 text-white">Analytics Content</div>,
-  settings: <div className="p-6 text-white">Settings Content</div>,
+const Logo = ({ open }: { open: boolean }) => {
+  return (
+    <a
+      href="#"
+      className="relative z-20 flex items-center space-x-5 py-1 text-lg font-normal text-white dark:text-white mb-6"
+    >
+      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-white dark:bg-white" />
+      <motion.span
+        initial={false}
+        animate={{
+          opacity: open ? 1 : 0,
+          x: open ? 0 : -20,
+        }}
+        transition={{ duration: 0.3, type: "tween" }}
+        className="font-medium whitespace-pre text-white dark:text-white"
+        style={{ display: open ? "inline-block" : "none" }}
+      >
+        Halperin Hotel
+      </motion.span>
+    </a>
+  );
 };
 
-export default function AdminLayout() {
-  const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("dashboard");
+  const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
+  const router = useRouter();
 
-  // Determine avatar icon based on user's provider
+  const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+  const isAdmin = user?.email && adminEmails.includes(user.email);
+
+  React.useEffect(() => {
+    if (!isLoading) {
+      if (!isAuthenticated || !isAdmin) {
+        router.replace("/admin/access-denied");
+      }
+    }
+  }, [isAuthenticated, isAdmin, isLoading, router]);
+
+  if (isLoading) return null;
+  if (!isAuthenticated || !isAdmin) return null;
+
   let avatarIcon = null;
   if (user?.picture) {
     avatarIcon = (
       <img
         src={user.picture}
-        className="h-7 w-7 shrink-0 rounded-full border border-[#8b6c26] object-cover"
-        width={28}
-        height={28}
+        className="h-9 w-9 shrink-0 rounded-full border border-[#8b6c26] object-cover"
+        width={38}
+        height={38}
         alt="Avatar"
       />
     );
@@ -134,9 +141,9 @@ export default function AdminLayout() {
     avatarIcon = (
       <img
         src="/images/google-icon.png"
-        className="h-7 w-7 shrink-0 rounded-full"
-        width={28}
-        height={28}
+        className="h-9 w-9 shrink-0 rounded-full"
+        width={38}
+        height={38}
         alt="Google"
       />
     );
@@ -144,90 +151,101 @@ export default function AdminLayout() {
     avatarIcon = (
       <img
         src="/images/facebook-icon.png"
-        className="h-7 w-7 shrink-0 rounded-full"
-        width={28}
-        height={28}
+        className="h-9 w-9 shrink-0 rounded-full"
+        width={38}
+        height={38}
         alt="Facebook"
       />
     );
   } else {
     avatarIcon = (
-      <span className="h-7 w-7 flex items-center justify-center rounded-full bg-gray-200 border border-[#8b6c26]">
-        <IconUsers className="w-5 h-5 text-[#8b6c26]" />
+      <span className="h-12 w-12 flex items-center justify-center rounded-full bg-gray-200 border border-[#8b6c26]">
+        <IconUsers className="w-7 h-7 text-[#8b6c26]" />
       </span>
     );
   }
 
-  const handleSignOut = () => {
-    localStorage.clear();
-    sessionStorage.clear();
-  };
-
   return (
     <div
       className={cn(
-        "flex w-full h-screen flex-1 flex-row overflow-hidden bg-[#262626] dark:bg-[#262626]"
+        "flex w-full h-screen flex-1 flex-col overflow-hidden md:flex-row",
+        "bg-gray-100 dark:bg-neutral-800"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10 bg-[#262626] text-white">
+        <SidebarBody className="justify-between gap-10">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-8 flex flex-col gap-2">
+            {/* Logo at the top */}
+            <div className="pt-4 px-2">
+              <Logo open={open} />
+            </div>
+            {/* Remove logo, show nav only */}
+            <div className="mt-2 flex flex-col gap-2">
               {adminLinks.map((link, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setSelected(link.key)}
-                  className={cn(
-                    selected === link.key
-                      ? "bg-neutral-800 text-white rounded"
-                      : "rounded",
-                    "transition-colors duration-150"
-                  )}
-                  style={{ cursor: "pointer" }}
-                >
-                  <SidebarLink
-                    link={{
-                      ...link,
-                      href: "#",
-                    }}
-                    className={open ? "" : "justify-center"}
-                  />
-                </div>
+                <SidebarLink key={idx} link={link} />
               ))}
             </div>
           </div>
-          <div className="pb-15 items-center">
-            {isLoading ? null : isAuthenticated ? (
-              <SidebarLink
-                link={{
-                  label: open ? user?.given_name || "User" : "",
-                  href: "#",
-                  icon: avatarIcon,
+          <div className="flex flex-col gap-4 pb-15 w-full">
+            {/* User avatar and name in a row */}
+            <div
+              className={`flex items-center w-full transition-all duration-300 ${
+                open ? "justify-start pl-2" : "justify-center"
+              }`}
+            >
+              {avatarIcon}
+              <motion.div
+                initial={false}
+                animate={{
+                  width: open ? 120 : 0,
+                  opacity: open ? 1 : 0,
                 }}
-                className={open ? "" : "justify-center"}
-              />
-            ) : null}
-            <LogoutLink>
-              <button
-                onClick={handleSignOut}
-                className={cn(
-                  "flex items-center gap-2 px-3 py-1.5 mt-2 rounded border border-white text-white hover:bg-neutral-800 font-medium text-sm transition-all w-full",
-                  open ? "justify-start" : "justify-center"
-                )}
+                transition={{ duration: 0.3, type: "tween" }}
+                className="overflow-hidden min-w-0 flex flex-row items-center"
+                style={{ height: 24 }}
               >
-                <IconLogout className="w-5 h-5" />
-                {open && "Sign Out"}
-              </button>
+                <span className="whitespace-nowrap text-base transition-opacity duration-300 block ml-3">
+                  {user?.given_name || user?.email}
+                </span>
+              </motion.div>
+            </div>
+            {/* Logout icon and text in a row, both clickable */}
+            <LogoutLink>
+              <div className="flex items-center w-full cursor-pointer">
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                  }}
+                  className="flex items-center justify-center px-3 py-1.5 rounded border border-white text-white hover:bg-neutral-800 font-medium text-sm transition-all"
+                  style={{ minWidth: 44, minHeight: 44 }}
+                  tabIndex={-1}
+                >
+                  <IconLogout className="w-5 h-5" />
+                </button>
+                <motion.button
+                  type="button"
+                  onClick={() => {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                  }}
+                  initial={false}
+                  animate={{
+                    width: open ? 80 : 0,
+                    opacity: open ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3, type: "tween" }}
+                  className="overflow-hidden min-w-0 flex flex-row items-center whitespace-nowrap text-base transition-opacity duration-300 block ml-3 bg-transparent border-none text-white cursor-pointer"
+                  style={{ height: 24 }}
+                >
+                  Sign Out
+                </motion.button>
+              </div>
             </LogoutLink>
           </div>
         </SidebarBody>
       </Sidebar>
-      <div className="flex flex-1">
-        <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-800 bg-neutral-900 p-2 md:p-10 m-4">
-          {contentMap[selected as keyof typeof contentMap]}
-        </div>
-      </div>
+      <main className="flex-1 p-8">{children}</main>
     </div>
   );
 }
