@@ -23,7 +23,7 @@ export default withAuth(
         }
 
         // protect admin routes only allow admin user
-        if (req.nextUrl.pathname.startsWith("/(admin)")) {
+        if (req.nextUrl.pathname.startsWith("/admin")) {
             const user = req.kindeAuth?.user;
             if (!user || user.email !== "edisonmalasan14@gmail.com") {
                 return Response.redirect(new URL("/admin/access-denied", req.url));
@@ -33,7 +33,7 @@ export default withAuth(
         // public client
     },
     {
-        publicPaths: ["/", "/(client)", "/admin/access-denied"], // homepage, client, and access denied are public
+        publicPaths: ["/", "/client", "/admin/access-denied"], // homepage, client, and access denied are public
     }
 );
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Toaster } from "@/components/ui/sonner";
 import { Noto_Sans } from "next/font/google";
-import DashboardNavigation from "./(client)/components/DashboardNavigation";
+import DashboardNavigation from "./client/components/DashboardNavigation";
 import Link from "next/link";
 import "./globals.css";
 import Script from "next/script";

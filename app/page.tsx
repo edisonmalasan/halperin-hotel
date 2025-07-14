@@ -7,15 +7,15 @@ import {
 import Link from "next/link";
 import { Play, Pause, VolumeX, Volume2 } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
-import { draggableItems } from "./(client)/data/draggableItems";
-import Container from "./(client)/components/DraggableContainer";
+import { draggableItems } from "./client/data/draggableItems";
+import Container from "./client/components/DraggableContainer";
 import { FlipWords } from "@/components/ui/flip-words";
-import CardSlider from "./(client)/components/CardSlider";
-import { sliderCards } from "./(client)/data/homecardslider";
-import ImageCarousel from "./(client)/components/ImageCarousel";
-import { diningSlides } from "./(client)/data/diningCarousel";
-import TabsModule from "./(client)/components/TabsModule";
-import { tabsData } from "./(client)/data/tabsData";
+import CardSlider from "./client/components/CardSlider";
+import { sliderCards } from "./client/data/homecardslider";
+import ImageCarousel from "./client/components/ImageCarousel";
+import { diningSlides } from "./client/data/diningCarousel";
+import TabsModule from "./client/components/TabsModule";
+import { tabsData } from "./client/data/tabsData";
 
 export default function HomePage() {
   /* SECTION 1 VARS */
