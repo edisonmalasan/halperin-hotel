@@ -19,52 +19,50 @@ const gold = "#8b6c26";
 // Helper to resolve known routes
 const resolveRoute = (href: string) => {
   switch (href) {
-    case "/rooms/superior":
+    case "/client/rooms/superior":
       return ROUTES.rooms.superior;
-    case "/rooms/superior-balcony":
+    case "/client/rooms/superior-balcony":
       return ROUTES.rooms.superiorBalcony;
-    case "/rooms/deluxe":
+    case "/client/rooms/deluxe":
       return ROUTES.rooms.deluxe;
-    case "/rooms/deluxe-balcony":
+    case "/client/rooms/deluxe-balcony":
       return ROUTES.rooms.deluxeBalcony;
-    case "/rooms/deluxe-patio":
+    case "/client/rooms/deluxe-patio":
       return ROUTES.rooms.deluxePatio;
-    case "/rooms/bungalow":
+    case "/client/rooms/bungalow":
       return ROUTES.rooms.bungalow;
-    case "/rooms/bungalow-patio":
+    case "/client/rooms/bungalow-patio":
       return ROUTES.rooms.bungalowPatio;
-    case "/rooms/bungalow-studio":
+    case "/client/rooms/bungalow-studio":
       return ROUTES.rooms.bungalowStudio;
-    case "/suites/junior":
+    case "/client/suites/junior":
       return ROUTES.suites.junior;
-    case "/suites/junior-patio":
+    case "/client/suites/junior-patio":
       return ROUTES.suites.juniorPatio;
-    case "/suites/junior-halperin":
+    case "/client/suites/junior-halperin":
       return ROUTES.suites.juniorHalperin;
-    case "/suites/rodeo":
+    case "/client/suites/rodeo":
       return ROUTES.suites.rodeo;
-    case "/suites/crescent":
+    case "/client/suites/crescent":
       return ROUTES.suites.crescent;
-    case "/suites/premier":
+    case "/client/suites/premier":
       return ROUTES.suites.premier;
-    case "/suites/presidential":
+    case "/client/suites/presidential":
       return ROUTES.suites.presidential;
-    case "/suites/grand-deluxe":
+    case "/client/suites/grand-deluxe":
       return ROUTES.suites.grandDeluxe;
-    case "/dining/polo-lounge":
+    case "/client/dining/polo-lounge":
       return ROUTES.dining.poloLounge;
-    case "/dining/cabana-cafe":
+    case "/client/dining/cabana-cafe":
       return ROUTES.dining.cabanaCafe;
-    case "/dining/fountain-coffee":
+    case "/client/dining/fountain-coffee":
       return ROUTES.dining.fountainCoffee;
-    case "/occasions/weddings":
+    case "/client/occasions/weddings":
       return ROUTES.occasions.weddings;
-    case "/occasions/social-events":
+    case "/client/occasions/social-events":
       return ROUTES.occasions.socialEvents;
-    case "/occasions/meetings":
+    case "/client/occasions/meetings":
       return ROUTES.occasions.meetings;
-    case "/occasions/event-spaces":
-      return ROUTES.occasions.eventSpaces;
     default:
       return href;
   }

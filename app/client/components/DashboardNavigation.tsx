@@ -75,6 +75,11 @@ export default function DashboardNavigation() {
     }
   };
 
+  const handleSignOut = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+  };
+
   return (
     <>
       {/* backdrop overlay */}
@@ -369,8 +374,18 @@ export default function DashboardNavigation() {
                 {user?.picture ? (
                   <img
                     src={user.picture}
-                    alt={user.given_name || user.family_name || user.email || "User"}
-                    title={user.given_name || user.family_name || user.email || "User"}
+                    alt={
+                      user.given_name ||
+                      user.family_name ||
+                      user.email ||
+                      "User"
+                    }
+                    title={
+                      user.given_name ||
+                      user.family_name ||
+                      user.email ||
+                      "User"
+                    }
                     className="w-9 h-9 rounded-full object-cover border border-[#8b6c26] shadow-sm mr-1"
                   />
                 ) : (
@@ -395,11 +410,14 @@ export default function DashboardNavigation() {
                     </svg>
                   </span>
                 )}
-              <LogoutLink>
-                  <span className="inline-flex items-center justify-center border border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-400 ease">
-                  Sign Out
-                </span>
-              </LogoutLink>
+                <LogoutLink>
+                  <span
+                    onClick={handleSignOut}
+                    className="inline-flex items-center justify-center border border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-400 ease"
+                  >
+                    Sign Out
+                  </span>
+                </LogoutLink>
               </>
             ) : (
               <>
