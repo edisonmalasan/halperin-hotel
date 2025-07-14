@@ -2,7 +2,7 @@
 
 import React from "react";
 import CardSlider from "../../components/CardSlider";
-import { DiningCardSlider } from "@/app/(client)/dining/data/DiningCardSlider";
+import { DiningCardSlider } from "@/app/client/dining/data/DiningCardSlider";
 import TabsModule from "../../components/TabsModule";
 import { tabsData } from "../data/fountainTabsData";
 import ImageCarousel from "../../components/ImageCarousel";

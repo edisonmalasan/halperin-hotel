@@ -2,7 +2,7 @@
 
 import React from "react";
 import CardSlider from "../components/CardSlider";
-import { DiningCardSlider } from "@/app/(client)/dining/data/DiningCardSlider";
+import { DiningCardSlider } from "@/app/client/dining/data/DiningCardSlider";
 import { dining } from "../data/dining";
 import BookCard from "../components/BookCard";
 import { useState } from "react";

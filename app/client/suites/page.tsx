@@ -2,7 +2,7 @@
 
 import React from "react";
 import CardSlider from "../components/CardSlider";
-import { SuitesCardSlider } from "@/app/(client)/suites/data/SuitesCardSlider";
+import { SuitesCardSlider } from "@/app/client/suites/data/SuitesCardSlider";
 import { suites } from "../data/suites";
 import BookCard from "../components/BookCard";
 import { useState } from "react";

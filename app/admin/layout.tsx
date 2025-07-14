@@ -188,12 +188,13 @@ export default function AdminLayout({
           </div>
           <div className="flex flex-col gap-4 pb-15 w-full">
             {/* User avatar and name in a row */}
-            <div
-              className={`flex items-center w-full transition-all duration-300 ${
-                open ? "justify-start pl-2" : "justify-center"
-              }`}
-            >
-              {avatarIcon}
+            <div className="flex items-center w-full">
+              <div
+                className="flex items-center justify-center"
+                style={{ minWidth: 44, minHeight: 44 }}
+              >
+                {avatarIcon}
+              </div>
               <motion.div
                 initial={false}
                 animate={{

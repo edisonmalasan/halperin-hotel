@@ -1,8 +1,18 @@
+"use client";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+
 export default function AdminDashboardPage() {
+  const { user, isLoading } = useKindeBrowserClient();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!user) return <div>Not logged in</div>;
+
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Welcome, Admin!</h1>
+        <h1 className="text-3xl font-bold mb-2">
+          Welcome, {user.given_name || user.email || "Admin"}!
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
           Here is an overview of your hotel management system.
         </p>
