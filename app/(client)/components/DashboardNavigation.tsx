@@ -362,13 +362,45 @@ export default function DashboardNavigation() {
           </div>
 
           {/* auth buttons */}
-          <div className="flex gap-3 flex-shrink-0">
+          <div className="flex gap-3 flex-shrink-0 items-center">
             {isLoading ? null : isAuthenticated ? (
+              <>
+                {/* User avatar/icon */}
+                {user?.picture ? (
+                  <img
+                    src={user.picture}
+                    alt={user.given_name || user.family_name || user.email || "User"}
+                    title={user.given_name || user.family_name || user.email || "User"}
+                    className="w-9 h-9 rounded-full object-cover border border-[#8b6c26] shadow-sm mr-1"
+                  />
+                ) : (
+                  <span
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 border border-[#8b6c26] mr-1"
+                    title={user?.email || "User"}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="#8b6c26"
+                      className="w-6 h-6"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 19.5a7.5 7.5 0 1115 0v.75A2.25 2.25 0 0117.25 22.5h-10.5A2.25 2.25 0 014.5 20.25v-.75z"
+                      />
+                    </svg>
+                  </span>
+                )}
               <LogoutLink>
-                <span className="inline-flex items-center justify-center border border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-400 ease">
+                  <span className="inline-flex items-center justify-center border border-[#8b6c26] text-black hover:bg-[#8b6d2636] px-3 py-1.5 rounded text-sm hover:px-5 font-medium transition-all duration-400 ease">
                   Sign Out
                 </span>
               </LogoutLink>
+              </>
             ) : (
               <>
                 <LoginLink>
