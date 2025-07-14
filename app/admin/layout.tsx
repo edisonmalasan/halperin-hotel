@@ -17,39 +17,39 @@ import { cn } from "@/lib/utils";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-// content components for each section
-function Dashboard() {
-  return <div className="p-6">Admin Dashboard Content</div>;
+function Logo() {
+  return (
+    <a
+      href="#"
+      className="relative z-20 flex items-center space-x-2 py-1 text-base font-bold text-white"
+    >
+      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-white dark:bg-black" />
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="font-bold whitespace-pre text-white dark:text-white"
+      >
+        Halperin PMS
+      </motion.span>
+    </a>
+  );
 }
-function Reservations() {
-  return <div className="p-6">Reservation Management Content</div>;
-}
-function Rooms() {
-  return <div className="p-6">Room Management Content</div>;
-}
-function Housekeeping() {
-  return <div className="p-6">Housekeeping Content</div>;
-}
-function Guests() {
-  return <div className="p-6">Guests Content</div>;
-}
-function Billing() {
-  return <div className="p-6">Billing Content</div>;
-}
-function Analytics() {
-  return <div className="p-6">Analytics Content</div>;
-}
-function Settings() {
-  return <div className="p-6">Settings Content</div>;
+function LogoIcon() {
+  return (
+    <a
+      href="#"
+      className="relative z-20 flex items-center space-x-2 py-1 text-base font-bold text-white"
+    >
+      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-white dark:bg-black" />
+    </a>
+  );
 }
 
 const adminLinks = [
   {
     label: "Dashboard",
     key: "dashboard",
-    icon: (
-      <IconHome className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-    ),
+    icon: <IconHome className="h-5 w-5 shrink-0 text-white dark:text-white" />,
   },
   {
     label: "Reservations",
@@ -103,33 +103,15 @@ const adminLinks = [
 ];
 
 const contentMap = {
-  dashboard: <Dashboard />,
-  reservations: <Reservations />,
-  rooms: <Rooms />,
-  housekeeping: <Housekeeping />,
-  guests: <Guests />,
-  billing: <Billing />,
-  analytics: <Analytics />,
-  settings: <Settings />,
+  dashboard: <div className="p-6">Admin Dashboard Content</div>,
+  reservations: <div className="p-6">Reservation Management Content</div>,
+  rooms: <div className="p-6">Room Management Content</div>,
+  housekeeping: <div className="p-6">Housekeeping Content</div>,
+  guests: <div className="p-6">Guests Content</div>,
+  billing: <div className="p-6">Billing Content</div>,
+  analytics: <div className="p-6">Analytics Content</div>,
+  settings: <div className="p-6">Settings Content</div>,
 };
-
-function Logo() {
-  return (
-    <a
-      href="#"
-      className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
-    >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-black dark:bg-white" />
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="font-medium whitespace-pre text-black dark:text-white"
-      >
-        Halperin PMS
-      </motion.span>
-    </a>
-  );
-}
 
 export default function AdminLayout() {
   const { isAuthenticated, user, isLoading } = useKindeBrowserClient();
@@ -184,24 +166,24 @@ export default function AdminLayout() {
   return (
     <div
       className={cn(
-        "mx-auto flex w-full max-w-7xl flex-1 flex-col overflow-hidden rounded-md border border-neutral-200 bg-gray-100 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
-        "h-screen"
+        "flex w-full h-screen flex-1 flex-row overflow-hidden bg-black dark:bg-black"
       )}
     >
-      <Sidebar open={open} setOpen={setOpen} animate={false}>
-        <SidebarBody className="justify-between gap-10">
+      <Sidebar open={open} setOpen={setOpen}>
+        <SidebarBody className="justify-between gap-10 bg-black text-white">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
-            <Logo />
+            {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
               {adminLinks.map((link, idx) => (
                 <div
                   key={idx}
                   onClick={() => setSelected(link.key)}
-                  className={
+                  className={cn(
                     selected === link.key
-                      ? "bg-neutral-200 dark:bg-neutral-700 rounded"
-                      : "rounded"
-                  }
+                      ? "bg-neutral-800 text-white rounded"
+                      : "rounded",
+                    "transition-colors duration-150"
+                  )}
                   style={{ cursor: "pointer" }}
                 >
                   <SidebarLink
@@ -209,6 +191,7 @@ export default function AdminLayout() {
                       ...link,
                       href: "#",
                     }}
+                    className={open ? "" : "justify-center"}
                   />
                 </div>
               ))}
@@ -218,27 +201,32 @@ export default function AdminLayout() {
             {isLoading ? null : isAuthenticated ? (
               <SidebarLink
                 link={{
-                  label: user?.email || "User",
+                  label: open ? user?.given_name || "User" : "",
                   href: "#",
                   icon: avatarIcon,
                 }}
+                className={open ? "" : "justify-center"}
               />
             ) : null}
             <LogoutLink>
               <button
                 onClick={handleSignOut}
-                className="flex items-center gap-2 px-3 py-1.5 mt-2 rounded border border-[#8b6c26] text-[#8b6c26] hover:bg-[#8b6d2636] font-medium text-sm transition-all w-full justify-start"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-1.5 mt-2 rounded border border-white text-white hover:bg-neutral-800 font-medium text-sm transition-all w-full",
+                  open ? "justify-start" : "justify-center"
+                )}
               >
-                <IconLogout className="w-5 h-5" /> Sign Out
+                <IconLogout className="w-5 h-5" />
+                {open && "Sign Out"}
               </button>
             </LogoutLink>
           </div>
         </SidebarBody>
       </Sidebar>
-      <div className="flex-1 flex flex-col overflow-x-hidden">
-        <main className="flex-1 p-4 md:p-10">
+      <div className="flex flex-1">
+        <div className="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-800 bg-neutral-900 p-2 md:p-10 m-4">
           {contentMap[selected as keyof typeof contentMap]}
-        </main>
+        </div>
       </div>
     </div>
   );
