@@ -55,62 +55,62 @@ const adminLinks = [
     label: "Reservations",
     key: "reservations",
     icon: (
-      <IconCalendarCheck className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconCalendarCheck className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
   {
     label: "Rooms",
     key: "rooms",
-    icon: (
-      <IconBed className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
-    ),
+    icon: <IconBed className="h-5 w-5 shrink-0  text-white dark:text-white" />,
   },
   {
     label: "Housekeeping",
     key: "housekeeping",
     icon: (
-      <IconBrush className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconBrush className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
   {
     label: "Guests",
     key: "guests",
     icon: (
-      <IconUsers className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconUsers className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
   {
     label: "Billing",
     key: "billing",
     icon: (
-      <IconReceipt className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconReceipt className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
   {
     label: "Analytics",
     key: "analytics",
     icon: (
-      <IconChartBar className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconChartBar className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
   {
     label: "Settings",
     key: "settings",
     icon: (
-      <IconSettings className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
+      <IconSettings className="h-5 w-5 shrink-0  text-white dark:text-white" />
     ),
   },
 ];
 
 const contentMap = {
-  dashboard: <div className="p-6">Admin Dashboard Content</div>,
-  reservations: <div className="p-6">Reservation Management Content</div>,
-  rooms: <div className="p-6">Room Management Content</div>,
-  housekeeping: <div className="p-6">Housekeeping Content</div>,
-  guests: <div className="p-6">Guests Content</div>,
-  billing: <div className="p-6">Billing Content</div>,
-  analytics: <div className="p-6">Analytics Content</div>,
-  settings: <div className="p-6">Settings Content</div>,
+  dashboard: <div className="p-6 text-white">Admin Dashboard Content</div>,
+  reservations: (
+    <div className="p-6 text-white">Reservation Management Content</div>
+  ),
+  rooms: <div className="p-6 text-white">Room Management Content</div>,
+  housekeeping: <div className="p-6 text-white">Housekeeping Content</div>,
+  guests: <div className="p-6 text-white">Guests Content</div>,
+  billing: <div className="p-6 text-white">Billing Content</div>,
+  analytics: <div className="p-6 text-white">Analytics Content</div>,
+  settings: <div className="p-6 text-white">Settings Content</div>,
 };
 
 export default function AdminLayout() {
@@ -197,7 +197,7 @@ export default function AdminLayout() {
               ))}
             </div>
           </div>
-          <div>
+          <div className="pb-15">
             {isLoading ? null : isAuthenticated ? (
               <SidebarLink
                 link={{
