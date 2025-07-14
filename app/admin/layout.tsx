@@ -166,11 +166,11 @@ export default function AdminLayout() {
   return (
     <div
       className={cn(
-        "flex w-full h-screen flex-1 flex-row overflow-hidden bg-black dark:bg-black"
+        "flex w-full h-screen flex-1 flex-row overflow-hidden bg-[#262626] dark:bg-[#262626]"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10 bg-black text-white">
+        <SidebarBody className="justify-between gap-10 bg-[#262626] text-white">
           <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
@@ -197,7 +197,7 @@ export default function AdminLayout() {
               ))}
             </div>
           </div>
-          <div className="pb-15">
+          <div className="pb-15 items-center">
             {isLoading ? null : isAuthenticated ? (
               <SidebarLink
                 link={{
