@@ -236,7 +236,7 @@ export default function AdminLayout({
                     opacity: open ? 1 : 0,
                   }}
                   transition={{ duration: 0.3, type: "tween" }}
-                  className="overflow-hidden min-w-0 flex flex-row items-center whitespace-nowrap text-base transition-opacity duration-300 block ml-3 bg-transparent border-none text-white cursor-pointer"
+                  className="overflow-hidden min-w-0 flex flex-row items-center whitespace-nowrap text-base transition-opacity duration-300 ml-3 bg-transparent border-none text-white cursor-pointer"
                   style={{ height: 24 }}
                 >
                   Sign Out
