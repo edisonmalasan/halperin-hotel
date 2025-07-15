@@ -16,8 +16,15 @@ import {
   IconCalendarCheck,
   IconLogin,
   IconLogout,
+  IconBed,
+  IconBuildingSkyscraper,
+  IconTable,
+  IconConfetti,
 } from "@tabler/icons-react";
-import Image from "next/image";
+import { rooms } from "@/app/client/data/rooms";
+import { suites } from "@/app/client/data/suites";
+import { dining } from "@/app/client/data/dining";
+import { occasions } from "@/app/client/data/occasions";
 
 ChartJS.register(
   ArcElement,
@@ -29,42 +36,109 @@ ChartJS.register(
   LineElement
 );
 
+// Data counts
+const totalTypeOfRooms = rooms.length;
+const totalTypeOfSuites = suites.length;
+const totalTypeOfDining = dining.length;
+const totalTypeOfEvents = occasions.length;
+
+// Fictional but realistic numbers
+const newBooking = 872;
+const scheduledRoom = 285;
+const checkIn = 53;
+const checkOut = 78;
+const bookedRoomToday = 1062;
+const availableRooms = 6; // fictional
+const availableSuites = 2; // fictional
+const occupiedRooms = totalTypeOfRooms - availableRooms;
+const occupiedSuites = totalTypeOfSuites - availableSuites;
+const revenue = 18400; // fictional
+const occupancyRate = Math.round(
+  ((occupiedRooms + occupiedSuites) / (totalTypeOfRooms + totalTypeOfSuites)) *
+    100
+);
+
+// Dining table data (fictional)
+const avgTablesPerVenue = 30;
+const totalDiningTables = totalTypeOfDining * avgTablesPerVenue;
+const bookedDiningTables = totalTypeOfDining * 5; // fictional: 5 tables booked per venue
+const availableDiningTables = totalDiningTables - bookedDiningTables;
+
+const diningDonutData = {
+  labels: ["Available", "Booked"],
+  datasets: [
+    {
+      data: [availableDiningTables, bookedDiningTables],
+      backgroundColor: ["#00b894", "#232334"],
+      borderWidth: 0,
+    },
+  ],
+};
+
 const statCards = [
   {
     label: "New Booking",
-    value: 872,
+    value: newBooking,
     icon: <IconBookmark size={36} className="text-white/80" />,
     bg: "bg-[#3ecfff]",
     text: "text-white",
   },
   {
-    label: "Schedule Room",
-    value: 285,
+    label: "Scheduled Room",
+    value: scheduledRoom,
     icon: <IconCalendarCheck size={36} className="text-white/80" />,
     bg: "bg-[#4be6a9]",
     text: "text-white",
   },
   {
     label: "Check In",
-    value: 53,
+    value: checkIn,
     icon: <IconLogin size={36} className="text-white/80" />,
     bg: "bg-[#ffe082]",
-    text: "text-gray-900",
+    text: "text-white",
   },
   {
     label: "Check Out",
-    value: 78,
+    value: checkOut,
     icon: <IconLogout size={36} className="text-white/80 rotate-180" />,
     bg: "bg-[#ffb085]",
-    text: "text-gray-900",
+    text: "text-white",
+  },
+  {
+    label: "Type of Rooms",
+    value: totalTypeOfRooms,
+    icon: <IconBed size={36} className="text-white/80" />,
+    bg: "bg-[#7c83fd]",
+    text: "text-white",
+  },
+  {
+    label: "Type of Suites",
+    value: totalTypeOfSuites,
+    icon: <IconBuildingSkyscraper size={36} className="text-white/80" />,
+    bg: "bg-[#f7b801]",
+    text: "text-white",
+  },
+  {
+    label: "Type of Dining",
+    value: totalTypeOfDining,
+    icon: <IconTable size={36} className="text-white/80" />,
+    bg: "bg-[#00b894]",
+    text: "text-white",
+  },
+  {
+    label: "Type of Events",
+    value: totalTypeOfEvents,
+    icon: <IconConfetti size={36} className="text-white/80" />,
+    bg: "bg-[#fd79a8]",
+    text: "text-white",
   },
 ];
 
 const donutData = {
-  labels: ["Available", "Occupied"],
+  labels: ["Occupied", "Available"],
   datasets: [
     {
-      data: [785, 215],
+      data: [occupiedRooms + occupiedSuites, availableRooms + availableSuites],
       backgroundColor: ["#3ecfff", "#232334"],
       borderWidth: 0,
     },
@@ -139,6 +213,18 @@ const progressData = [
   { label: "Done", value: 65, color: "bg-cyan-400" },
   { label: "Finish", value: 763, color: "bg-purple-400" },
 ];
+
+const miniDiningInfo = dining.map((d) => ({
+  title: d.title,
+  description: d.description,
+  image: d.image,
+}));
+
+const miniEventInfo = occasions.map((e) => ({
+  title: e.title,
+  description: e.description,
+  image: e.image,
+}));
 
 const reviews = [
   {
@@ -252,25 +338,45 @@ export default function AdminDashboardPage() {
               <Doughnut data={donutData} options={donutOptions} />
             </div>
             <div className="text-3xl font-bold">785</div>
-            <div className="text-gray-400">Available Room Today</div>
+            <div className="text-gray-400">Total Available Room & Suites</div>
           </div>
-          {/* Booked Room Today */}
-          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg">
-            <div className="font-semibold mb-4">Booked Room Today</div>
-            <div className="space-y-3">
-              {progressData.map((item) => (
-                <div key={item.label} className="flex items-center gap-2">
-                  <span className={`w-3 h-3 rounded-full ${item.color}`}></span>
-                  <span className="w-24 text-sm">{item.label}</span>
-                  <div className="flex-1 h-2 bg-gray-700 rounded-full mx-2">
-                    <div
-                      className={`h-2 rounded-full ${item.color}`}
-                      style={{ width: `${(item.value / 1062) * 100}%` }}
-                    ></div>
-                  </div>
-                  <span className="w-10 text-right">{item.value}</span>
+          <div className="rounded-2xl bg-[#232334] p-6 flex flex-col items-center shadow-lg">
+            <div className="w-32 h-32 mb-2">
+              <Doughnut data={diningDonutData} options={donutOptions} />
+            </div>
+            <div className="text-3xl font-bold">{availableDiningTables}</div>
+            <div className="text-gray-400">
+              Total Available Table For Dining
+            </div>
+          </div>
+        </div>
+        {/* Center Column: Reservation Statistic and Reviews */}
+        <div className="rounded-2xl bg-transparent p-0 shadow-none flex flex-col gap-6 self-start w-full">
+          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col self-start w-full">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <div className="text-xl font-semibold">Booking Statistic</div>
+                <div className="text-gray-400 text-sm">
+                  Lorem ipsum dolor sit amet
                 </div>
-              ))}
+              </div>
+              <div className="flex gap-6">
+                <div className="text-lg font-bold">
+                  549{" "}
+                  <span className="text-xs font-normal text-gray-400">
+                    Check In
+                  </span>
+                </div>
+                <div className="text-lg font-bold">
+                  327{" "}
+                  <span className="text-xs font-normal text-gray-400">
+                    Check Out
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="max-w-full">
+              <Line data={lineData} options={lineOptions} />
             </div>
           </div>
           {/* Donut Chart for Check In/Out */}
@@ -325,72 +431,6 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </div>
-        {/* Center Column: Reservation Statistic and Reviews */}
-        <div className="rounded-2xl bg-transparent p-0 shadow-none flex flex-col gap-6 self-start w-full">
-          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col self-start w-full">
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <div className="text-xl font-semibold">
-                  Reservation Statistic
-                </div>
-                <div className="text-gray-400 text-sm">
-                  Lorem ipsum dolor sit amet
-                </div>
-              </div>
-              <div className="flex gap-6">
-                <div className="text-lg font-bold">
-                  549{" "}
-                  <span className="text-xs font-normal text-gray-400">
-                    Check In
-                  </span>
-                </div>
-                <div className="text-lg font-bold">
-                  327{" "}
-                  <span className="text-xs font-normal text-gray-400">
-                    Check Out
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-full">
-              <Line data={lineData} options={lineOptions} />
-            </div>
-          </div>
-          {/* Latest Customer Review */}
-          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg">
-            <div className="font-semibold mb-4">Latest Customer Review</div>
-            <div className="flex flex-col gap-4">
-              {reviews.map((r, i) => (
-                <div
-                  key={i}
-                  className="flex gap-4 items-start border-b border-[#232334] pb-4 last:border-b-0"
-                >
-                  <img
-                    src={r.avatar.replace("/public", "")}
-                    alt={r.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div className="flex-1">
-                    <div className="font-medium text-white">{r.name}</div>
-                    <div className="text-xs text-gray-400 mb-1">
-                      Posted on {r.date}
-                    </div>
-                    <div className="text-sm text-gray-200 mb-1">{r.text}</div>
-                    <StarRating rating={r.rating} />
-                  </div>
-                  <div className="flex flex-col gap-2 items-center justify-center">
-                    <button className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-white">
-                      &#10003;
-                    </button>
-                    <button className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white">
-                      &#10005;
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
         {/* Right Column: Calendar & Donut Charts */}
         <div className="flex flex-col gap-6">
           {/* Calendar */}
@@ -423,7 +463,26 @@ export default function AdminDashboardPage() {
               ))}
             </div>
           </div>
-          {/* Newest Booking Card */}
+          {/* Booked Room Today */}
+          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg">
+            <div className="font-semibold mb-4">Booked Room Today</div>
+            <div className="space-y-3">
+              {progressData.map((item) => (
+                <div key={item.label} className="flex items-center gap-2">
+                  <span className={`w-3 h-3 rounded-full ${item.color}`}></span>
+                  <span className="w-24 text-sm">{item.label}</span>
+                  <div className="flex-1 h-2 bg-gray-700 rounded-full mx-2">
+                    <div
+                      className={`h-2 rounded-full ${item.color}`}
+                      style={{ width: `${(item.value / 1062) * 100}%` }}
+                    ></div>
+                  </div>
+                  <span className="w-10 text-right">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Newest Booking Card
           <div className="rounded-2xl bg-[#232334] p-6 shadow-lg">
             <div className="font-semibold mb-2">Newest Booking</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -450,7 +509,7 @@ export default function AdminDashboardPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
