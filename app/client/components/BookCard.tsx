@@ -1,10 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import { ROUTES } from "@/app/api/routes";
-import { resolve } from "path";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  useModal,
+} from "@/components/ui/animated-modal";
 
 interface BookCardProps {
   title: string;
@@ -21,6 +27,14 @@ const gold = "#8b6c26";
 
 // helper
 const resolveRoute = (href: string) => {
+  if (
+    href.startsWith("/rooms/") ||
+    href.startsWith("/suites/") ||
+    href.startsWith("/dining/") ||
+    href.startsWith("/occasions/")
+  ) {
+    return "/client" + href; //ensure client prefix
+  }
   switch (href) {
     case "/client/rooms/superior":
       return ROUTES.rooms.superior;
@@ -111,10 +125,11 @@ const BookCard: React.FC<BookCardProps> = ({
   prefix,
   slug,
 }) => {
-  const { isAuthenticated } = useKindeBrowserClient();
-  const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated, user } = useKindeBrowserClient();
   const [availability, setAvailability] = useState<number | null>(null);
   const [availabilityType, setAvailabilityType] = useState<string>("");
+  const [shouldOpenModal, setShouldOpenModal] = useState(false);
+  const [bookingDate, setBookingDate] = useState<string>("");
 
   // helper category
   const getCategory = () => {
@@ -127,8 +142,9 @@ const BookCard: React.FC<BookCardProps> = ({
 
   const handleBook = async () => {
     if (!isAuthenticated) {
-      setShowModal(true);
-      setTimeout(() => setShowModal(false), 2000);
+      setShouldOpenModal(true);
+      setAvailability(null);
+      setAvailabilityType("");
       return;
     }
     // fetch availability
@@ -151,15 +167,11 @@ const BookCard: React.FC<BookCardProps> = ({
     });
     const data = await res.json();
     setAvailability(data.available);
-    setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-      setAvailability(null);
-    }, 3000);
+    setShouldOpenModal(true);
   };
 
   return (
-    <div className="bg-white  border border-gray-200 shadow-lg overflow-hidden max-w-3xl mx-auto h-full flex flex-col">
+    <div className="bg-white border border-gray-200 shadow-lg overflow-hidden max-w-3xl mx-auto h-full flex flex-col">
       <img
         src={image}
         alt={title}
@@ -221,44 +233,167 @@ const BookCard: React.FC<BookCardProps> = ({
           </button>
         </Link>
       </div>
-      {/* show if ilan avail na room using the handleBook which ifefetch nya ilan avail na room*/}
-      {showModal && (
-        <div className="fixed left-1/2 bottom-10 transform -translate-x-1/2 z-50">
-          <div
-            className={`bg-[#8b6c26] text-white px-6 py-3 rounded-lg shadow-lg text-sm font-semibold animate-fade-in-out`}
-          >
-            {availability !== null
-              ? `There are ${availability} available ${
-                  availabilityType === "dining"
-                    ? "tables"
-                    : availabilityType === "event"
-                    ? "events"
-                    : "rooms"
-                } for ${title}`
-              : "You need to sign in to book."}
-          </div>
-        </div>
-      )}
-      <style jsx>{`
-        .animate-fade-in-out {
-          animation: fadeInOut 2s;
-        }
-        @keyframes fadeInOut {
-          0% {
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-      `}</style>
+      {/* render modal always*/}
+      <Modal>
+        <BookingModal
+          title={title}
+          isAuthenticated={isAuthenticated}
+          user={user}
+          availability={availability}
+          availabilityType={availabilityType}
+          bookingDate={bookingDate}
+          setBookingDate={setBookingDate}
+          shouldOpenModal={shouldOpenModal}
+          setShouldOpenModal={setShouldOpenModal}
+          typeName={typeName}
+          description={description}
+          slug={slug}
+          getCategory={getCategory}
+        />
+      </Modal>
     </div>
+  );
+};
+
+// booking modal child component
+const BookingModal = ({
+  title,
+  isAuthenticated,
+  user,
+  availability,
+  availabilityType,
+  bookingDate,
+  setBookingDate,
+  shouldOpenModal,
+  setShouldOpenModal,
+  typeName,
+  description,
+  slug,
+  getCategory,
+}: any) => {
+  const { setOpen } = useModal();
+  const [bookingStatus, setBookingStatus] = useState<
+    null | "success" | "error" | "loading" | "not-auth"
+  >(null);
+  const [modalMessage, setModalMessage] = useState<string>("");
+
+  useEffect(() => {
+    if (shouldOpenModal) {
+      setOpen(true);
+      setShouldOpenModal(false);
+    }
+  }, [shouldOpenModal, setOpen, setShouldOpenModal]);
+
+  const handleConfirm = async () => {
+    if (!bookingDate) {
+      setModalMessage("Please select a booking date.");
+      return;
+    }
+    setBookingStatus("loading");
+    setModalMessage("");
+    try {
+      const category = getCategory();
+      let body: any = {
+        type: typeName,
+        description,
+        category,
+        date: bookingDate,
+        user: {
+          email: user?.email,
+          name: user?.given_name || user?.family_name || user?.email,
+          kindeId: user?.id,
+        },
+      };
+      if (category === "room" && slug) {
+        body = { ...body, roomTypeSlug: slug };
+      } else if (category === "suite" && slug) {
+        body = { ...body, suiteTypeSlug: slug };
+      } else if (category === "dining" && slug) {
+        body = { ...body, diningVenueSlug: slug };
+      } else if (category === "event" && slug) {
+        body = { ...body, eventTypeSlug: slug };
+      }
+      const res = await fetch("/api/book", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setBookingStatus("success");
+        setModalMessage("Booking confirmed!");
+      } else {
+        setBookingStatus("error");
+        setModalMessage(data.error || "Booking failed.");
+      }
+    } catch (e) {
+      setBookingStatus("error");
+      setModalMessage("Booking failed. Please try again.");
+    }
+  };
+
+  return (
+    <ModalBody>
+      <ModalContent>
+        {bookingStatus === "not-auth" || !isAuthenticated ? (
+          <div className="text-center text-lg font-semibold">
+            You need to sign in to book.
+          </div>
+        ) : (
+          <>
+            <div className="text-xl font-bold mb-2">Book {title}</div>
+            {availability !== null && (
+              <div className="mb-2">
+                There are {availability} available{" "}
+                {availabilityType === "dining"
+                  ? "tables"
+                  : availabilityType === "event"
+                  ? "events"
+                  : "rooms"}{" "}
+                for {title}
+              </div>
+            )}
+            <div className="mb-4">
+              <label className="block mb-1 font-medium">Select Date:</label>
+              <input
+                type="date"
+                className="border rounded px-2 py-1 text-black"
+                value={bookingDate}
+                onChange={(e) => setBookingDate(e.target.value)}
+              />
+            </div>
+            {modalMessage && (
+              <div
+                className={`mb-2 ${
+                  bookingStatus === "error" ? "text-red-500" : "text-green-500"
+                }`}
+              >
+                {modalMessage}
+              </div>
+            )}
+          </>
+        )}
+      </ModalContent>
+      <ModalFooter>
+        {bookingStatus === null && isAuthenticated && (
+          <button
+            className="bg-[#8b6c26] hover:bg-[#a88d4a] text-white px-5 py-2 rounded-full font-medium transition-all duration-300 ease"
+            onClick={handleConfirm}
+            disabled={bookingStatus === "loading"}
+          >
+            {bookingStatus === "loading" ? "Booking..." : "Confirm"}
+          </button>
+        )}
+        {bookingStatus === "success" && (
+          <span className="text-green-600 font-semibold">
+            Booking successful!
+          </span>
+        )}
+        {bookingStatus === "error" && (
+          <span className="text-red-600 font-semibold">Booking failed.</span>
+        )}
+      </ModalFooter>
+    </ModalBody>
   );
 };
 
