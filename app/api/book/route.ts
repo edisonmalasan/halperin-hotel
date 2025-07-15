@@ -30,38 +30,154 @@ export async function POST(req: NextRequest) {
     let updateStatus = 'occupied';
     let entity = null;
 
-    if (category === 'room' && roomTypeSlug) {
-      // find available room
-      const roomType = await prisma.roomType.findUnique({ where: { slug: roomTypeSlug } });
-      if (!roomType) return NextResponse.json({ error: 'Room type not found.' }, { status: 404 });
-      entity = await prisma.room.findFirst({ where: { typeId: roomType.id, status: 'available' } });
-      if (!entity) return NextResponse.json({ error: 'No available rooms.' }, { status: 409 });
-      bookingData.roomId = entity.id;
-      await prisma.room.update({ where: { id: entity.id }, data: { status: updateStatus } });
-    } else if (category === 'suite' && suiteTypeSlug) {
-      const suiteType = await prisma.suiteType.findUnique({ where: { slug: suiteTypeSlug } });
-      if (!suiteType) return NextResponse.json({ error: 'Suite type not found.' }, { status: 404 });
-      entity = await prisma.suite.findFirst({ where: { typeId: suiteType.id, status: 'available' } });
-      if (!entity) return NextResponse.json({ error: 'No available suites.' }, { status: 409 });
-      bookingData.suiteId = entity.id;
-      await prisma.suite.update({ where: { id: entity.id }, data: { status: updateStatus } });
-    } else if (category === 'dining' && diningVenueSlug) {
-      const venue = await prisma.diningVenue.findUnique({ where: { slug: diningVenueSlug } });
-      if (!venue) return NextResponse.json({ error: 'Dining venue not found.' }, { status: 404 });
-      entity = await prisma.diningTable.findFirst({ where: { venueId: venue.id, status: 'available' } });
-      if (!entity) return NextResponse.json({ error: 'No available tables.' }, { status: 409 });
-      bookingData.diningTableId = entity.id;
-      await prisma.diningTable.update({ where: { id: entity.id }, data: { status: 'booked' } });
-    } else if (category === 'event' && eventTypeSlug) {
-      const eventType = await prisma.eventType.findUnique({ where: { slug: eventTypeSlug } });
-      if (!eventType) return NextResponse.json({ error: 'Event type not found.' }, { status: 404 });
-      entity = await prisma.event.findFirst({ where: { typeId: eventType.id, status: 'available' } });
-      if (!entity) return NextResponse.json({ error: 'No available events.' }, { status: 409 });
-      bookingData.eventId = entity.id;
-      await prisma.event.update({ where: { id: entity.id }, data: { status: 'booked' } });
-    } else {
-      return NextResponse.json({ error: 'Invalid booking category or missing slug.' }, { status: 400 });
-    }
+  // Room Booking
+if (category === 'room' && roomTypeSlug) {
+  const roomType = await prisma.roomType.findUnique({
+    where: { slug: roomTypeSlug },
+  });
+
+  if (!roomType) {
+    return NextResponse.json(
+      { error: 'Room type not found.' },
+      { status: 404 }
+    );
+  }
+
+  entity = await prisma.room.findFirst({
+    where: {
+      typeId: roomType.id,
+      status: 'available',
+    },
+  });
+
+  if (!entity) {
+    return NextResponse.json(
+      { error: 'No available rooms.' },
+      { status: 409 }
+    );
+  }
+
+  bookingData.roomId = entity.id;
+
+  await prisma.room.update({
+    where: { id: entity.id },
+    data: { status: updateStatus },
+  });
+}
+
+// Suite Booking
+else if (category === 'suite' && suiteTypeSlug) {
+  const suiteType = await prisma.suiteType.findUnique({
+    where: { slug: suiteTypeSlug },
+  });
+
+  if (!suiteType) {
+    return NextResponse.json(
+      { error: 'Suite type not found.' },
+      { status: 404 }
+    );
+  }
+
+  entity = await prisma.suite.findFirst({
+    where: {
+      typeId: suiteType.id,
+      status: 'available',
+    },
+  });
+
+  if (!entity) {
+    return NextResponse.json(
+      { error: 'No available suites.' },
+      { status: 409 }
+    );
+  }
+
+  bookingData.suiteId = entity.id;
+
+  await prisma.suite.update({
+    where: { id: entity.id },
+    data: { status: updateStatus },
+  });
+}
+
+// Dining Table Booking
+else if (category === 'dining' && diningVenueSlug) {
+  const venue = await prisma.diningVenue.findUnique({
+    where: { slug: diningVenueSlug },
+  });
+
+  if (!venue) {
+    return NextResponse.json(
+      { error: 'Dining venue not found.' },
+      { status: 404 }
+    );
+  }
+
+  entity = await prisma.diningTable.findFirst({
+    where: {
+      venueId: venue.id,
+      status: 'available',
+    },
+  });
+
+  if (!entity) {
+    return NextResponse.json(
+      { error: 'No available tables.' },
+      { status: 409 }
+    );
+  }
+
+  bookingData.diningTableId = entity.id;
+
+  await prisma.diningTable.update({
+    where: { id: entity.id },
+    data: { status: 'booked' },
+  });
+}
+
+// Event Booking
+else if (category === 'event' && eventTypeSlug) {
+  const eventType = await prisma.eventType.findUnique({
+    where: { slug: eventTypeSlug },
+  });
+
+  if (!eventType) {
+    return NextResponse.json(
+      { error: 'Event type not found.' },
+      { status: 404 }
+    );
+  }
+
+  entity = await prisma.event.findFirst({
+    where: {
+      typeId: eventType.id,
+      status: 'available',
+    },
+  });
+
+  if (!entity) {
+    return NextResponse.json(
+      { error: 'No available events.' },
+      { status: 409 }
+    );
+  }
+
+  bookingData.eventId = entity.id;
+
+  await prisma.event.update({
+    where: { id: entity.id },
+    data: { status: 'booked' },
+  });
+}
+
+// Invalid Category or Missing Slug
+else {
+  return NextResponse.json(
+    { error: 'Invalid booking category or missing slug.' },
+    { status: 400 }
+  );
+}
+
 
     // create booking
     const booking = await prisma.booking.create({ data: bookingData });
