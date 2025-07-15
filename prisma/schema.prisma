@@ -1,7 +1,18 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
 
 model User {
   id        Int       @id @default(autoincrement())
@@ -14,17 +25,17 @@ model User {
 
 model RoomType {
   id          Int     @id @default(autoincrement())
-  name        String // e.g. "Bungalow", "Deluxe"
+  name        String
   description String?
   rooms       Room[]
 }
 
 model Room {
   id       Int       @id @default(autoincrement())
-  number   String // e.g. "101", "Deluxe-1"
+  number   String
   type     RoomType  @relation(fields: [typeId], references: [id])
   typeId   Int
-  status   String // "available", "occupied", "cleaning", etc.
+  status   String
   bookings Booking[]
 }
 
@@ -44,7 +55,7 @@ model Suite {
   bookings Booking[]
 }
 
-model DiningType {
+model DiningVenue {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
