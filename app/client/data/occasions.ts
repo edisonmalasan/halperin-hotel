@@ -10,6 +10,7 @@ export const occasions = [
       "CUSTOM MENUS",
       "WEDDING SPECIALIST",
     ],
+    slug: "wedding",
   },
   {
     title: "Social Events",
@@ -22,6 +23,7 @@ export const occasions = [
       "RED CARPET ARRIVALS",
       "PERSONALIZED SETUP",
     ],
+    slug: "social-event",
   },
   {
     title: "Meetings",
@@ -34,5 +36,6 @@ export const occasions = [
       "CUSTOM PACKAGES",
       "LUXURY SERVICE",
     ],
+    slug: "meeting",
   },
 ];

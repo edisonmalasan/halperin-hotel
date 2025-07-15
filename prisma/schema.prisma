@@ -27,6 +27,7 @@ model RoomType {
   id          Int     @id @default(autoincrement())
   name        String
   description String?
+  slug        String  @unique
   rooms       Room[]
 }
 
@@ -43,6 +44,7 @@ model SuiteType {
   id          Int     @id @default(autoincrement())
   name        String
   description String?
+  slug        String  @unique
   suites      Suite[]
 }
 
@@ -59,6 +61,7 @@ model DiningVenue {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
+  slug        String  @unique
   tables      DiningTable[]
 }
 
@@ -75,6 +78,7 @@ model EventType {
   id          Int     @id @default(autoincrement())
   name        String
   description String?
+  slug        String  @unique
   events      Event[]
 }
 

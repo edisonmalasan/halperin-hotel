@@ -10,6 +10,7 @@ export const dining = [
       "SUNDAY BRUNCH",
       "MCCARTHY SALAD",
     ],
+    slug: "polo-lounge",
   },
   {
     title: "The Cabana Cafe",
@@ -22,6 +23,7 @@ export const dining = [
       "LEISURELY AMBIENCE",
       "LA SUNSHINE",
     ],
+    slug: "cabana-cafe",
   },
   {
     title: "The Fountain Coffee Room",
@@ -34,5 +36,6 @@ export const dining = [
       "HOUSEMADE ICE CREAM",
       "FRESHLY PRESSED JUICES",
     ],
+    slug: "fountain-coffee-room",
   },
 ];

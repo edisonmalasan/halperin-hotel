@@ -1,181 +1,140 @@
 import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient();
 
 async function main() {
-  // Room Types and Rooms
-  await prisma.roomType.create({
-    data: {
-      name: 'Deluxe',
-      description: 'Deluxe Room',
-      rooms: {
-        create: [
-          { number: 'Deluxe-1', status: 'available' },
-          { number: 'Deluxe-2', status: 'available' },
-          { number: 'Deluxe-3', status: 'occupied' },
-          { number: 'Deluxe-4', status: 'available' },
-          { number: 'Deluxe-5', status: 'cleaning' },
-        ]
-      }
-    }
-  });
+  // room types and rooms
+  const roomChildren = [
+    { name: 'Superior', description: 'Superior Room', prefix: 'Superior' },
+    { name: 'Superior', description: 'Superior Room with Balcony', prefix: 'Superior-Balcony' },
+    { name: 'Deluxe', description: 'Deluxe Room', prefix: 'Deluxe' },
+    { name: 'Deluxe', description: 'Deluxe Room with Balcony', prefix: 'Deluxe-Balcony' },
+    { name: 'Deluxe', description: 'Deluxe Room with Patio', prefix: 'Deluxe-Patio' },
+    { name: 'Bungalow', description: 'Bungalow Room', prefix: 'Bungalow' },
+    { name: 'Bungalow', description: 'Bungalow Room with Patio', prefix: 'Bungalow-Patio' },
+    { name: 'Bungalow', description: 'Bungalow Studio with Balcony', prefix: 'Bungalow-Studio-Balcony' },
+  ];
 
-  await prisma.roomType.create({
-    data: {
-      name: 'Bungalow',
-      description: 'Bungalow Room',
-      rooms: {
-        create: [
-          { number: 'Bungalow-1', status: 'available' },
-          { number: 'Bungalow-2', status: 'occupied' },
-          { number: 'Bungalow-3', status: 'available' },
-        ]
-      }
-    }
-  });
+  const roomTypeRecords = [];
+  for (const child of roomChildren) {
+    const type = await prisma.roomType.create({
+      data: {
+        name: child.name,
+        description: child.description,
+        slug: child.prefix,
+      },
+    });
+    roomTypeRecords.push({ ...child, id: type.id, slug: child.prefix });
+  }
 
-  await prisma.roomType.create({
-    data: {
-      name: 'Superior',
-      description: 'Superior Room',
-      rooms: {
-        create: [
-          { number: 'Superior-1', status: 'available' },
-          { number: 'Superior-2', status: 'occupied' },
-        ]
-      }
-    }
-  });
+  for (const type of roomTypeRecords) {
+    await prisma.room.createMany({
+      data: Array.from({ length: 10 }).map((_, i) => ({
+        number: `${type.prefix}-${i + 1}`,
+        status: i % 3 === 0 ? 'occupied' : 'available',
+        typeId: type.id,
+      })),
+    });
+  }
 
-  // Suite Types and Suites
-  await prisma.suiteType.create({
-    data: {
-      name: 'Junior Suite',
-      description: 'Junior Suite',
-      suites: {
-        create: [
-          { number: 'Junior-1', status: 'available' },
-          { number: 'Junior-2', status: 'occupied' },
-          { number: 'Junior-3', status: 'available' },
-        ]
-      }
-    }
-  });
+  //  suite types and suites
+  const suiteChildren = [
+    { name: 'Junior Suite', description: 'Junior Suite', prefix: 'Junior' },
+    { name: 'Junior Suite', description: 'Junior Suite with Patio', prefix: 'Junior-Patio' },
+    { name: 'Junior Halperin Suite', description: 'Junior Halperin Suite', prefix: 'Junior-Halperin' },
+    { name: 'Rodeo Suite', description: 'Rodeo Suite', prefix: 'Rodeo' },
+    { name: 'Crescent Suite', description: 'Crescent Suite', prefix: 'Crescent' },
+    { name: 'Premier Suite', description: 'Premier Suite', prefix: 'Premier' },
+    { name: 'Presidential Suite', description: 'Presidential Suite', prefix: 'Presidential' },
+    { name: 'Grand Deluxe Suite', description: 'Grand Deluxe Suite', prefix: 'Grand-Deluxe' },
+  ];
 
-  await prisma.suiteType.create({
-    data: {
-      name: 'Presidential Suite',
-      description: 'Presidential Suite',
-      suites: {
-        create: [
-          { number: 'Presidential-1', status: 'available' },
-          { number: 'Presidential-2', status: 'occupied' },
-        ]
-      }
-    }
-  });
+  const suiteTypeRecords = [];
+  for (const child of suiteChildren) {
+    const type = await prisma.suiteType.create({
+      data: {
+        name: child.name,
+        description: child.description,
+        slug: child.prefix,
+      },
+    });
+    suiteTypeRecords.push({ ...child, id: type.id, slug: child.prefix });
+  }
 
-  await prisma.suiteType.create({
-    data: {
-      name: 'Crescent Suite',
-      description: 'Crescent Suite',
-      suites: {
-        create: [
-          { number: 'Crescent-1', status: 'available' },
-        ]
-      }
-    }
-  });
+  for (const type of suiteTypeRecords) {
+    await prisma.suite.createMany({
+      data: Array.from({ length: 10 }).map((_, i) => ({
+        number: `${type.prefix}-${i + 1}`,
+        status: i % 4 === 0 ? 'occupied' : 'available',
+        typeId: type.id,
+      })),
+    });
+  }
 
-  // Dining Venues and Tables
-  await prisma.diningVenue.create({
-    data: {
-      name: 'Polo Lounge',
-      description: 'The most interesting room in Beverly Hills.',
-      tables: {
-        create: [
-          { number: 'Table 1', status: 'available' },
-          { number: 'Table 2', status: 'booked' },
-          { number: 'Table 3', status: 'available' },
-          { number: 'Table 4', status: 'available' },
-          { number: 'Table 5', status: 'booked' },
-        ]
-      }
-    }
-  });
+  // dining venues and tables
+  const diningVenues = [
+    { name: 'Polo Lounge', description: 'Polo Lounge', slug: 'polo-lounge' },
+    { name: 'The Cabana Cafe', description: 'The Cabana Cafe', slug: 'cabana-cafe' },
+    { name: 'The Fountain Coffee Room', description: 'The Fountain Coffee Room', slug: 'fountain-coffee-room' },
+  ];
 
-  await prisma.diningVenue.create({
-    data: {
-      name: 'Cabana Cafe',
-      description: 'Casual, fresh dining in a picture-perfect setting.',
-      tables: {
-        create: [
-          { number: 'Table 1', status: 'available' },
-          { number: 'Table 2', status: 'available' },
-          { number: 'Table 3', status: 'booked' },
-        ]
-      }
-    }
-  });
+  const diningVenueRecords = [];
+  for (const venue of diningVenues) {
+    const v = await prisma.diningVenue.create({
+      data: {
+        name: venue.name,
+        description: venue.description,
+        slug: venue.slug,
+      },
+    });
+    diningVenueRecords.push({ ...venue, id: v.id });
+  }
 
-  await prisma.diningVenue.create({
-    data: {
-      name: 'Fountain Coffee Room',
-      description: 'Iconic diner serving Hollywood stars since 1949.',
-      tables: {
-        create: [
-          { number: 'Table 1', status: 'available' },
-          { number: 'Table 2', status: 'available' },
-        ]
-      }
-    }
-  });
+  for (const venue of diningVenueRecords) {
+    await prisma.diningTable.createMany({
+      data: Array.from({ length: 10 }).map((_, i) => ({
+        number: `Table ${i + 1}`,
+        status: i % 5 === 0 ? 'booked' : 'available',
+        venueId: venue.id,
+      })),
+    });
+  }
 
-  // Event Types and Events
-  await prisma.eventType.create({
-    data: {
-      name: 'Wedding',
-      description: 'Weddings at the Pink Palace.',
-      events: {
-        create: [
-          { date: new Date('2024-07-15T12:00:00Z'), status: 'available' },
-          { date: new Date('2024-07-16T12:00:00Z'), status: 'booked' },
-          { date: new Date('2024-07-17T12:00:00Z'), status: 'available' },
-        ]
-      }
-    }
-  });
+  // event types and events
+  const eventTypes = [
+    { name: 'Wedding', description: 'Weddings', prefix: 'wedding' },
+    { name: 'Social Event', description: 'Social Events', prefix: 'social-event' },
+    { name: 'Meeting', description: 'Meetings', prefix: 'meeting' },
+  ];
 
-  await prisma.eventType.create({
-    data: {
-      name: 'Meeting',
-      description: 'Business meetings and conferences.',
-      events: {
-        create: [
-          { date: new Date('2024-07-20T09:00:00Z'), status: 'available' },
-          { date: new Date('2024-07-21T09:00:00Z'), status: 'booked' },
-        ]
-      }
-    }
-  });
+  const eventTypeRecords = [];
+  for (const eventType of eventTypes) {
+    const e = await prisma.eventType.create({
+      data: {
+        name: eventType.name,
+        description: eventType.description,
+        slug: eventType.prefix, 
+      },
+    });
+    eventTypeRecords.push({ ...eventType, id: e.id, slug: eventType.prefix });
+  }
 
-  await prisma.eventType.create({
-    data: {
-      name: 'Social Event',
-      description: 'Private parties and social gatherings.',
-      events: {
-        create: [
-          { date: new Date('2024-08-01T18:00:00Z'), status: 'available' },
-        ]
-      }
-    }
-  });
+  for (const eventType of eventTypeRecords) {
+    await prisma.event.createMany({
+      data: Array.from({ length: 10 }).map((_, i) => ({
+        date: new Date(2024, 6, 10 + i, 12, 0, 0),
+        status: i % 2 === 0 ? 'available' : 'booked',
+        typeId: eventType.id,
+      })),
+    });
+  }
 
-  console.log('Seed complete!');
+  console.log('SUCCESSFUL...Seed complete!');
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error('❌ Seed failed:', e);
     process.exit(1);
   })
   .finally(async () => {

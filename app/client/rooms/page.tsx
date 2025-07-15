@@ -6,6 +6,7 @@ import { RoomCardSlider } from "@/app/client/rooms/data/RoomCardSlider";
 import { rooms } from "../data/rooms";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
+import { titleToTypeName } from "@/app/client/components/BookCard";
 
 export default function RoomsPage() {
   const pageSize = 6;
@@ -16,6 +17,11 @@ export default function RoomsPage() {
   const endIdx = Math.min(startIdx + pageSize, totalResults);
   const pagedRooms = rooms.slice(startIdx, endIdx);
 
+  const pagedRoomsWithType = pagedRooms.map((room) => ({
+    ...room,
+    typeName:
+      titleToTypeName[room.title as keyof typeof titleToTypeName] || room.title,
+  }));
   return (
     <div>
       <section>
@@ -105,7 +111,7 @@ export default function RoomsPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedRooms.map((room, idx) => (
+            {pagedRoomsWithType.map((room, idx) => (
               <BookCard key={room.title + idx} {...room} />
             ))}
           </div>

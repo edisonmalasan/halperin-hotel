@@ -12,11 +12,14 @@ interface BookCardProps {
   image: string;
   features: string[];
   href: string;
+  typeName: string;
+  prefix?: string;
+  slug?: string;
 }
 
 const gold = "#8b6c26";
 
-// Helper to resolve known routes
+// helper
 const resolveRoute = (href: string) => {
   switch (href) {
     case "/client/rooms/superior":
@@ -68,23 +71,91 @@ const resolveRoute = (href: string) => {
   }
 };
 
+// mapping for type name
+export const titleToTypeName = {
+  // Rooms
+  "Superior Room": "Superior",
+  "Superior Room with Balcony": "Superior",
+  "Deluxe Room": "Deluxe",
+  "Deluxe Room with Balcony": "Deluxe",
+  "Deluxe Room with Patio": "Deluxe",
+  "Bungalow Room": "Bungalow",
+  "Bungalow Room with Patio": "Bungalow",
+  "Bungalow Studio with Balcony": "Bungalow",
+  // Suites
+  "Junior Suite": "Junior Suite",
+  "Junior Suite with Patio": "Junior Suite",
+  "Junior Halperin Suite": "Junior Halperin Suite",
+  "Rodeo Suite": "Rodeo Suite",
+  "Crescent Suite": "Crescent Suite",
+  "Premier Suite": "Premier Suite",
+  "Presidential Suite": "Presidential Suite",
+  "Grand Deluxe Suite": "Grand Deluxe Suite",
+  // Dining
+  "Polo Lounge": "Polo Lounge",
+  "The Cabana Cafe": "The Cabana Cafe",
+  "The Fountain Coffee Room": "The Fountain Coffee Room",
+  // Events
+  Weddings: "Wedding",
+  "Social Events": "Social Event",
+  Meetings: "Meeting",
+};
+
 const BookCard: React.FC<BookCardProps> = ({
   title,
   description,
   image,
   features,
   href,
+  typeName,
+  prefix,
+  slug,
 }) => {
   const { isAuthenticated } = useKindeBrowserClient();
   const [showModal, setShowModal] = useState(false);
+  const [availability, setAvailability] = useState<number | null>(null);
+  const [availabilityType, setAvailabilityType] = useState<string>("");
 
-  const handleBook = () => {
+  // helper category
+  const getCategory = () => {
+    if (href.includes("/rooms/")) return "room";
+    if (href.includes("/suites/")) return "suite";
+    if (href.includes("/dining/")) return "dining";
+    if (href.includes("/occasions/")) return "event";
+    return "room";
+  };
+
+  const handleBook = async () => {
     if (!isAuthenticated) {
       setShowModal(true);
       setTimeout(() => setShowModal(false), 2000);
       return;
     }
-    // Booking logic here
+    // fetch availability
+    const category = getCategory();
+    setAvailabilityType(category);
+    let body: any = { type: typeName, description, category };
+    if (category === "room" && slug) {
+      body = { roomTypeSlug: slug, category };
+    } else if (category === "suite" && slug) {
+      body = { suiteTypeSlug: slug, category };
+    } else if (category === "dining" && slug) {
+      body = { diningVenueSlug: slug, category };
+    } else if (category === "event" && slug) {
+      body = { eventTypeSlug: slug, category };
+    }
+    const res = await fetch("/api/availability", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    setAvailability(data.available);
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+      setAvailability(null);
+    }, 3000);
   };
 
   return (
@@ -150,10 +221,21 @@ const BookCard: React.FC<BookCardProps> = ({
           </button>
         </Link>
       </div>
+      {/* show if ilan avail na room using the handleBook which ifefetch nya ilan avail na room*/}
       {showModal && (
         <div className="fixed left-1/2 bottom-10 transform -translate-x-1/2 z-50">
-          <div className="bg-[#920e0e] text-white px-6 py-3 rounded-lg shadow-lg text-sm font-semibold animate-fade-in-out">
-            You need to sign in to book a room.
+          <div
+            className={`bg-[#8b6c26] text-white px-6 py-3 rounded-lg shadow-lg text-sm font-semibold animate-fade-in-out`}
+          >
+            {availability !== null
+              ? `There are ${availability} available ${
+                  availabilityType === "dining"
+                    ? "tables"
+                    : availabilityType === "event"
+                    ? "events"
+                    : "rooms"
+                } for ${title}`
+              : "You need to sign in to book."}
           </div>
         </div>
       )}

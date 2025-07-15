@@ -11,6 +11,7 @@ export const suites = [
       "GARDEN VIEW",
       "WORKING AREA",
     ],
+    slug: "Junior",
   },
   {
     title: "Junior Suite with Patio",
@@ -24,6 +25,7 @@ export const suites = [
       "CITY VIEWS",
       "CONNECTING ROOM OPTION",
     ],
+    slug: "Junior-Patio",
   },
   {
     title: "Junior Halperin Suite",
@@ -37,6 +39,7 @@ export const suites = [
       "GARDEN VIEW",
       "WORKING AREA",
     ],
+    slug: "Junior-Halperin",
   },
   {
     title: "Rodeo Suite",
@@ -50,6 +53,7 @@ export const suites = [
       "WORKING FIREPLACE",
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
+    slug: "Rodeo",
   },
   {
     title: "Crescent Suite",
@@ -63,6 +67,7 @@ export const suites = [
       "CITY VIEWS OVER BEVERLY HILLS",
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
+    slug: "Crescent",
   },
   {
     title: "Premier Suite",
@@ -76,6 +81,7 @@ export const suites = [
       "PRIVATE KITCHEN",
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
+    slug: "Premier",
   },
   {
     title: "Presidential Suite",
@@ -89,6 +95,7 @@ export const suites = [
       "WORKING FIREPLACE",
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
+    slug: "Presidential",
   },
   {
     title: "Grand Deluxe Suite",
@@ -102,5 +109,6 @@ export const suites = [
       "GARDEN VIEWS",
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
+    slug: "Grand-Deluxe",
   },
 ];
