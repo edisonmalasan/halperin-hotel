@@ -37,15 +37,19 @@ export default function AdminDashboardPage() {
       .then(setStats);
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!user) return <div>Not logged in</div>;
-  if (
-    !stats ||
-    !stats.monthlyRevenueArr ||
-    !stats.monthlyBookingsArr ||
-    !stats.monthLabels
-  )
-    return <div>Loading stats...</div>;
+  if (isLoading || !user || !stats || !stats.monthlyRevenueArr || !stats.monthlyBookingsArr || !stats.monthLabels) {
+    return (
+      <div className="flex items-center justify-center h-screen w-full bg-[#181828]">
+        <div className="flex flex-col items-center">
+          <svg className="animate-spin h-16 w-16 text-white mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          </svg>
+          <div className="text-3xl font-bold text-white">Loading stats...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen w-full overflow-y-scroll bg-[#181828] text-white px-2 md:px-6 py-6 space-y-8">
