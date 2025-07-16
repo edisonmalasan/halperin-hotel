@@ -26,7 +26,7 @@ export async function GET() {
   const totalBookings = await prisma.booking.count();
   const totalGuests = await prisma.user.count();
 
-  // --- Analytics: Check-ins and Check-outs for the last 12 days ---
+  // check ins and check outs for the last 12 days 
   const today = new Date();
   const analyticsLabels: string[] = [];
   const checkInData: number[] = [];
@@ -39,7 +39,7 @@ export async function GET() {
     const dayEnd = new Date(day);
     dayEnd.setHours(23, 59, 59, 999);
     analyticsLabels.push(day.getDate().toString().padStart(2, '0'));
-    // demo: count bookings with status checked-in or checked-out on this day
+    // count bookings with status checked-in or checked-out on this day
     const checkIns = await prisma.booking.count({
       where: {
         status: 'checked-in',
@@ -80,7 +80,7 @@ export async function GET() {
     status: b.status,
   }));
 
-  // --- Monthly Revenue: Sum of booking prices for current month ---
+  // revenue
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
   const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
@@ -95,30 +95,31 @@ export async function GET() {
   });
   const monthlyRevenue = monthlyRevenueResult._sum.price || 0;
 
-  // --- Monthly Revenue and Bookings for the last 12 months ---
+  // get the first day of 11 months ago
+  const firstMonth = new Date(now.getFullYear(), now.getMonth() - 11, 1);
+  const monthlyStats = await prisma.$queryRawUnsafe<any[]>(`
+    SELECT
+      EXTRACT(YEAR FROM "date") AS year,
+      EXTRACT(MONTH FROM "date") AS month,
+      SUM("price") AS revenue,
+      COUNT(*) AS bookings
+    FROM "Booking"
+    WHERE "date" >= $1 AND "status" IN ('booked', 'checked-out')
+    GROUP BY year, month
+    ORDER BY year, month;
+  `, firstMonth);
+
+  // for the last 12 months
   const monthlyRevenueArr: number[] = [];
   const monthlyBookingsArr: number[] = [];
   const monthLabels: string[] = [];
   for (let i = 11; i >= 0; i--) {
     const month = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    const monthStart = new Date(month.getFullYear(), month.getMonth(), 1, 0, 0, 0, 0);
-    const monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59, 999);
-    monthLabels.push(month.toLocaleString('default', { month: 'short', year: '2-digit' }));
-    const revenueResult = await prisma.booking.aggregate({
-      _sum: { price: true },
-      where: {
-        date: { gte: monthStart, lte: monthEnd },
-        status: { in: ['booked', 'checked-out'] },
-      },
-    });
-    const bookingsCount = await prisma.booking.count({
-      where: {
-        date: { gte: monthStart, lte: monthEnd },
-        status: { in: ['booked', 'checked-out'] },
-      },
-    });
-    monthlyRevenueArr.push(revenueResult._sum.price || 0);
-    monthlyBookingsArr.push(bookingsCount);
+    const label = month.toLocaleString('default', { month: 'short', year: '2-digit' });
+    monthLabels.push(label);
+    const stat = monthlyStats.find((s: any) => Number(s.year) === month.getFullYear() && Number(s.month) === month.getMonth() + 1);
+    monthlyRevenueArr.push(stat ? Number(stat.revenue) : 0);
+    monthlyBookingsArr.push(stat ? Number(stat.bookings) : 0);
   }
 
   return NextResponse.json({
