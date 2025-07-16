@@ -44,7 +44,15 @@ export default function AdminDashboardPage() {
           <RecentBookingsTable recentBookings={stats.recentBookings} />
         </div>
         {/* calendar*/}
-        <DashboardCalendar />
+        <div className="flex flex-col gap-4">
+          <DashboardCalendar />
+          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col items-center mt-4">
+            <div className="text-lg font-semibold mb-1">Total Revenue (This Month)</div>
+            <div className="text-3xl font-bold text-[#3ecfff]">
+              {require('@/lib/utils').formatPeso(stats.monthlyRevenue)}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { rooms } from "../data/rooms";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
 import { titleToTypeName } from "@/app/client/components/BookCard";
+import { usdToPhp } from '@/lib/utils';
 
 export default function RoomsPage() {
   const pageSize = 6;
@@ -112,7 +113,7 @@ export default function RoomsPage() {
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
             {pagedRoomsWithType.map((room, idx) => (
-              <BookCard key={room.title + idx} {...room} />
+              <BookCard key={room.title + idx} {...room} price={usdToPhp(250 + idx * 50)} />
             ))}
           </div>
 

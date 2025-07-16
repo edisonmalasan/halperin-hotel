@@ -39,8 +39,9 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available rooms.' }, { status: 409 });
       bookingData.roomId = entity.id;
+      bookingData.price = entity.price; // set price from room
       await prisma.room.update({ where: { id: entity.id }, data: { status: updateStatus } });
-      
+
     } else if (category === 'suite' && suiteTypeSlug) {
       const suiteType = await prisma.suiteType.findUnique({ where: { slug: suiteTypeSlug } });
 
@@ -49,7 +50,9 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available suites.' }, { status: 409 });
       bookingData.suiteId = entity.id;
-      await prisma.suite.update({ where: { id: entity.id }, data: { status: updateStatus } 
+      bookingData.price = entity.price; // set price from suite
+      await prisma.suite.update({
+        where: { id: entity.id }, data: { status: updateStatus }
       });
 
     } else if (category === 'dining' && diningVenueSlug) {
@@ -60,7 +63,7 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available tables.' }, { status: 409 });
       bookingData.diningTableId = entity.id;
-
+      bookingData.price = entity.price; // set price from dining table
       await prisma.diningTable.update({ where: { id: entity.id }, data: { status: 'booked' } });
 
     } else if (category === 'event' && eventTypeSlug) {
@@ -71,9 +74,9 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available events.' }, { status: 409 });
       bookingData.eventId = entity.id;
-
+      bookingData.price = entity.price; // set price from event
       await prisma.event.update({ where: { id: entity.id }, data: { status: 'booked' } });
-      
+
     } else {
       return NextResponse.json({ error: 'Invalid booking category or missing slug.' }, { status: 400 });
     }
@@ -84,9 +87,5 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Booking error:', error);
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
-  } finally {
-    if (process.env.NODE_ENV !== 'production') {
-      await prisma.$disconnect();
-    }
   }
 }

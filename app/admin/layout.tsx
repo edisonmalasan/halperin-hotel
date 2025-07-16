@@ -27,8 +27,8 @@ const adminLinks = [
     ),
   },
   {
-    label: "Reservations",
-    href: "/admin/reservations",
+    label: "Bookings",
+    href: "/admin/bookings",
     icon: (
       <IconCalendarCheck className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),

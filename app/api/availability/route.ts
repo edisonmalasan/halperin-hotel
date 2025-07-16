@@ -64,10 +64,5 @@ export async function POST(req: NextRequest) {
       JSON.stringify({ error: 'Internal Server Error' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
-  } finally {
-    // disconnect prisma after each req
-    if (process.env.NODE_ENV !== 'production') {
-      await prisma.$disconnect();
-    }
-  }
+  } 
 }

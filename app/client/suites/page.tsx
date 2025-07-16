@@ -6,6 +6,7 @@ import { SuitesCardSlider } from "@/app/client/suites/data/SuitesCardSlider";
 import { suites } from "../data/suites";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
+import { usdToPhp } from '@/lib/utils';
 
 export default function SuitesPage() {
   const pageSize = 6;
@@ -105,8 +106,8 @@ export default function SuitesPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedSuites.map((suites, idx) => (
-              <BookCard key={suites.title + idx} {...suites} />
+            {pagedSuites.map((suite, idx) => (
+              <BookCard key={suite.title + idx} {...suite} price={usdToPhp(400 + idx * 150)} typeName={suite.title} />
             ))}
           </div>
 

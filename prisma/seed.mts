@@ -3,6 +3,17 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  // Delete all data in correct order to avoid FK errors
+  await prisma.booking.deleteMany();
+  await prisma.room.deleteMany();
+  await prisma.suite.deleteMany();
+  await prisma.diningTable.deleteMany();
+  await prisma.event.deleteMany();
+  await prisma.roomType.deleteMany();
+  await prisma.suiteType.deleteMany();
+  await prisma.diningVenue.deleteMany();
+  await prisma.eventType.deleteMany();
+
   // room types and rooms
   const roomChildren = [
     { name: 'Superior', description: 'Superior Room', prefix: 'Superior' },
@@ -27,15 +38,18 @@ async function main() {
     roomTypeRecords.push({ ...child, id: type.id, slug: child.prefix });
   }
 
+  let allRooms: any[] = [];
   for (const type of roomTypeRecords) {
-    await prisma.room.createMany({
-      data: Array.from({ length: 10 }).map((_, i) => ({
+    allRooms = allRooms.concat(
+      Array.from({ length: 10 }).map((_, i) => ({
         number: `${type.prefix}-${i + 1}`,
-        status: i % 3 === 0 ? 'occupied' : 'available',
+        status: 'available',
         typeId: type.id,
-      })),
-    });
+        price: 200 + (i % 3) * 50, // 200, 250, 300
+      }))
+    );
   }
+  await prisma.room.createMany({ data: allRooms, skipDuplicates: true });
 
   //  suite types and suites
   const suiteChildren = [
@@ -61,15 +75,18 @@ async function main() {
     suiteTypeRecords.push({ ...child, id: type.id, slug: child.prefix });
   }
 
+  let allSuites: any[] = [];
   for (const type of suiteTypeRecords) {
-    await prisma.suite.createMany({
-      data: Array.from({ length: 10 }).map((_, i) => ({
+    allSuites = allSuites.concat(
+      Array.from({ length: 10 }).map((_, i) => ({
         number: `${type.prefix}-${i + 1}`,
-        status: i % 4 === 0 ? 'occupied' : 'available',
+        status: 'available',
         typeId: type.id,
-      })),
-    });
+        price: 400 + (i % 4) * 150, // 400, 550, 700, 850
+      }))
+    );
   }
+  await prisma.suite.createMany({ data: allSuites, skipDuplicates: true });
 
   // dining venues and tables
   const diningVenues = [
@@ -90,15 +107,18 @@ async function main() {
     diningVenueRecords.push({ ...venue, id: v.id });
   }
 
+  let allDiningTables: any[] = [];
   for (const venue of diningVenueRecords) {
-    await prisma.diningTable.createMany({
-      data: Array.from({ length: 10 }).map((_, i) => ({
+    allDiningTables = allDiningTables.concat(
+      Array.from({ length: 10 }).map((_, i) => ({
         number: `Table ${i + 1}`,
-        status: i % 5 === 0 ? 'booked' : 'available',
+        status: 'available',
         venueId: venue.id,
-      })),
-    });
+        price: 50 + (i % 3) * 25, // 50, 75, 100
+      }))
+    );
   }
+  await prisma.diningTable.createMany({ data: allDiningTables, skipDuplicates: true });
 
   // event types and events
   const eventTypes = [
@@ -113,28 +133,31 @@ async function main() {
       data: {
         name: eventType.name,
         description: eventType.description,
-        slug: eventType.prefix, 
+        slug: eventType.prefix,
       },
     });
     eventTypeRecords.push({ ...eventType, id: e.id, slug: eventType.prefix });
   }
 
+  let allEvents: any[] = [];
   for (const eventType of eventTypeRecords) {
-    await prisma.event.createMany({
-      data: Array.from({ length: 10 }).map((_, i) => ({
+    allEvents = allEvents.concat(
+      Array.from({ length: 10 }).map((_, i) => ({
         date: new Date(2024, 6, 10 + i, 12, 0, 0),
-        status: i % 2 === 0 ? 'available' : 'booked',
+        status: 'available',
         typeId: eventType.id,
-      })),
-    });
+        price: 2000 + (i % 4) * 1000, // 2000, 3000, 4000, 5000
+      }))
+    );
   }
+  await prisma.event.createMany({ data: allEvents, skipDuplicates: true });
 
   console.log('SUCCESSFUL...Seed complete!');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Seed failed:', e);
+    console.error('SEED FAILED:', e);
     process.exit(1);
   })
   .finally(async () => {

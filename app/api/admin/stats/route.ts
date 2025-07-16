@@ -80,6 +80,21 @@ export async function GET() {
     status: b.status,
   }));
 
+  // --- Monthly Revenue: Sum of booking prices for current month ---
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+  const monthlyRevenueResult = await prisma.booking.aggregate({
+    _sum: {
+      price: true,
+    },
+    where: {
+      date: { gte: monthStart, lte: monthEnd },
+      status: { in: ['booked', 'checked-out'] },
+    },
+  });
+  const monthlyRevenue = monthlyRevenueResult._sum.price || 0;
+
   return NextResponse.json({
     totalRooms,
     availableRooms,
@@ -101,5 +116,6 @@ export async function GET() {
       checkOut: checkOutData,
     },
     recentBookings: recentBookingData,
+    monthlyRevenue, // <-- add this
   });
 }

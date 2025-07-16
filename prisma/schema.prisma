@@ -33,11 +33,12 @@ model RoomType {
 
 model Room {
   id       Int       @id @default(autoincrement())
-  number   String
+  number   String    @unique
   type     RoomType  @relation(fields: [typeId], references: [id])
   typeId   Int
   status   String
   bookings Booking[]
+  price    Float     @default(0)
 }
 
 model SuiteType {
@@ -50,28 +51,30 @@ model SuiteType {
 
 model Suite {
   id       Int       @id @default(autoincrement())
-  number   String
+  number   String    @unique
   type     SuiteType @relation(fields: [typeId], references: [id])
   typeId   Int
   status   String
   bookings Booking[]
+  price    Float     @default(0)
 }
 
 model DiningVenue {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
-  slug        String  @unique
+  slug        String        @unique
   tables      DiningTable[]
 }
 
 model DiningTable {
   id       Int         @id @default(autoincrement())
-  number   String
+  number   String      @unique
   venue    DiningVenue @relation(fields: [venueId], references: [id])
   venueId  Int
   status   String
   bookings Booking[]
+  price    Float       @default(0)
 }
 
 model EventType {
@@ -86,9 +89,10 @@ model Event {
   id       Int       @id @default(autoincrement())
   type     EventType @relation(fields: [typeId], references: [id])
   typeId   Int
-  date     DateTime
+  date     DateTime  @unique
   status   String
   bookings Booking[]
+  price    Float     @default(0)
 }
 
 model Booking {
@@ -107,4 +111,5 @@ model Booking {
   status        String
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+  price         Float        @default(0)
 }

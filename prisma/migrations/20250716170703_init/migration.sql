@@ -25,6 +25,7 @@ CREATE TABLE "Room" (
     "number" TEXT NOT NULL,
     "typeId" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Room_pkey" PRIMARY KEY ("id")
 );
@@ -45,6 +46,7 @@ CREATE TABLE "Suite" (
     "number" TEXT NOT NULL,
     "typeId" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Suite_pkey" PRIMARY KEY ("id")
 );
@@ -65,6 +67,7 @@ CREATE TABLE "DiningTable" (
     "number" TEXT NOT NULL,
     "venueId" INTEGER NOT NULL,
     "status" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "DiningTable_pkey" PRIMARY KEY ("id")
 );
@@ -85,6 +88,7 @@ CREATE TABLE "Event" (
     "typeId" INTEGER NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
@@ -101,6 +105,7 @@ CREATE TABLE "Booking" (
     "status" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Booking_pkey" PRIMARY KEY ("id")
 );
@@ -115,13 +120,25 @@ CREATE UNIQUE INDEX "User_kindeId_key" ON "User"("kindeId");
 CREATE UNIQUE INDEX "RoomType_slug_key" ON "RoomType"("slug");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Room_number_key" ON "Room"("number");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "SuiteType_slug_key" ON "SuiteType"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Suite_number_key" ON "Suite"("number");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DiningVenue_slug_key" ON "DiningVenue"("slug");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "DiningTable_number_key" ON "DiningTable"("number");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "EventType_slug_key" ON "EventType"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Event_date_key" ON "Event"("date");
 
 -- AddForeignKey
 ALTER TABLE "Room" ADD CONSTRAINT "Room_typeId_fkey" FOREIGN KEY ("typeId") REFERENCES "RoomType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,4 +1,7 @@
 import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+
+Chart.register(ArcElement, Tooltip, Legend);
 
 export default function DonutCharts({ stats }: { stats: any }) {
   const donutData = {
@@ -46,11 +49,9 @@ export default function DonutCharts({ stats }: { stats: any }) {
         <div className="w-32 h-32 mb-2">
           <Doughnut data={diningDonutData} options={donutOptions} />
         </div>
-        <div className="text-3xl font-bold">
-          {stats.availableDiningTables}
-        </div>
+        <div className="text-3xl font-bold">{stats.availableDiningTables}</div>
         <div className="text-gray-400">Total Available Table For Dining</div>
       </div>
     </div>
   );
-} 
+}

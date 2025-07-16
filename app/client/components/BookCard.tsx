@@ -11,6 +11,7 @@ import {
   ModalFooter,
   useModal,
 } from "@/components/ui/animated-modal";
+import { formatPeso } from "@/lib/utils";
 
 interface BookCardProps {
   title: string;
@@ -21,6 +22,7 @@ interface BookCardProps {
   typeName: string;
   prefix?: string;
   slug?: string;
+  price?: number;
 }
 
 const gold = "#8b6c26";
@@ -33,7 +35,7 @@ const resolveRoute = (href: string) => {
     href.startsWith("/dining/") ||
     href.startsWith("/occasions/")
   ) {
-    return "/client" + href; //ensure client prefix
+    return "/client" + href;
   }
   switch (href) {
     case "/client/rooms/superior":
@@ -124,6 +126,7 @@ const BookCard: React.FC<BookCardProps> = ({
   typeName,
   prefix,
   slug,
+  price, // <-- add price prop if not present
 }) => {
   const { isAuthenticated, user } = useKindeBrowserClient();
   const [availability, setAvailability] = useState<number | null>(null);
@@ -189,6 +192,12 @@ const BookCard: React.FC<BookCardProps> = ({
           <div className="text-2xl font-normal mb-3 text-neutral-800">
             {title}
           </div>
+          {/* Show price if available */}
+          {typeof price === "number" && (
+            <div className="text-lg font-semibold text-[#8b6c26] mb-2">
+              {formatPeso(price)}
+            </div>
+          )}
           <div className="text-sm text-neutral-600 mb-4 text-justify">
             {description}
           </div>
@@ -249,6 +258,7 @@ const BookCard: React.FC<BookCardProps> = ({
           description={description}
           slug={slug}
           getCategory={getCategory}
+          price={price} // <-- add price prop if not present
         />
       </Modal>
     </div>
@@ -270,6 +280,7 @@ const BookingModal = ({
   description,
   slug,
   getCategory,
+  price, // <-- add price prop if not present
 }: any) => {
   const { setOpen } = useModal();
   const [bookingStatus, setBookingStatus] = useState<
@@ -342,6 +353,12 @@ const BookingModal = ({
         ) : (
           <>
             <div className="text-xl font-bold mb-2">Book {title}</div>
+            {/* Show price if available */}
+            {typeof price === "number" && (
+              <div className="mb-2 text-lg font-semibold text-[#8b6c26]">
+                Price: {formatPeso(price)}
+              </div>
+            )}
             {availability !== null && (
               <div className="mb-2">
                 There are {availability} available{" "}
