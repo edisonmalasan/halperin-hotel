@@ -9,7 +9,7 @@ import { useState } from "react";
 import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 import { OccasionsImageHover } from "../data/OccasionsImageHover";
 import Link from "next/link";
-import { usdToPhp } from '@/lib/utils';
+import { usdToPhp } from "@/lib/utils";
 
 export default function OccasionsPage() {
   const pageSize = 6;
@@ -19,6 +19,12 @@ export default function OccasionsPage() {
   const startIdx = (page - 1) * pageSize;
   const endIdx = Math.min(startIdx + pageSize, totalResults);
   const pagedOccasions = occasions.slice(startIdx, endIdx);
+
+  const pagedOccasionsWithType: any[] = pagedOccasions.map((occasion) => ({
+    ...occasion,
+    typeName: occasion.title,
+    price: usdToPhp(occasion.price), // convert to php currency
+  }));
 
   return (
     <div>
@@ -138,8 +144,8 @@ export default function OccasionsPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedOccasions.map((occasion, idx) => (
-              <BookCard key={occasion.title + idx} {...occasion} price={usdToPhp(2000 + idx * 1000)} typeName={occasion.title} />
+            {pagedOccasionsWithType.map((occasion, idx) => (
+              <BookCard key={occasion.title + idx} {...occasion} />
             ))}
           </div>
 

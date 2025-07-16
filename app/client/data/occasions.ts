@@ -11,6 +11,7 @@ export const occasions = [
       "WEDDING SPECIALIST",
     ],
     slug: "wedding",
+    price: 2000, // USD (PHP = 112,000)
   },
   {
     title: "Social Events",
@@ -24,6 +25,7 @@ export const occasions = [
       "PERSONALIZED SETUP",
     ],
     slug: "social-event",
+    price: 1500, // USD (PHP = 84,000)
   },
   {
     title: "Meetings",
@@ -37,5 +39,6 @@ export const occasions = [
       "LUXURY SERVICE",
     ],
     slug: "meeting",
+    price: 1000, // USD (PHP = 56,000)
   },
 ];

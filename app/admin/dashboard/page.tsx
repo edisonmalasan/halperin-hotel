@@ -6,6 +6,10 @@ import DonutCharts from "./components/DonutCharts";
 import AnalyticsChart from "./components/AnalyticsChart";
 import RecentBookingsTable from "./components/RecentBookingsTable";
 import DashboardCalendar from "./components/DashboardCalendar";
+import { usdToPhp, formatPeso } from '@/lib/utils';
+import { Line } from 'react-chartjs-2';
+import { Chart, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend } from 'chart.js';
+Chart.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 
 export default function AdminDashboardPage() {
   const { user, isLoading } = useKindeBrowserClient();
@@ -19,7 +23,7 @@ export default function AdminDashboardPage() {
 
   if (isLoading) return <div>Loading...</div>;
   if (!user) return <div>Not logged in</div>;
-  if (!stats) return <div>Loading stats...</div>;
+  if (!stats || !stats.monthlyRevenueArr || !stats.monthlyBookingsArr || !stats.monthLabels) return <div>Loading stats...</div>;
 
   return (
     <div className="h-screen w-full overflow-y-scroll bg-[#181828] text-white px-2 md:px-6 py-6 space-y-8">
@@ -30,28 +34,92 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* donut charts left column */}
         <DonutCharts stats={stats} />
-        {/* analytical and recent bookings */}
-        <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col self-start w-full min-h-[300px]">
-          <div className="flex items-center justify-between mb-2">
-            <div>
-              <div className="text-xl font-semibold">Booking Statistic</div>
-              <div className="text-gray-400 text-sm">
-                Check In / Check Out (last 12 days)
+        {/* Revenue/Bookings Center Card */}
+        <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col items-center w-full min-h-[300px]">
+          <div className="text-xl font-semibold mb-2">Monthly Revenue & Bookings</div>
+          <Line
+            data={{
+              labels: stats.monthLabels,
+              datasets: [
+                {
+                  label: 'Revenue (PHP)',
+                  data: stats.monthlyRevenueArr.map((usd: number) => usdToPhp(usd)),
+                  borderColor: '#3ecfff',
+                  backgroundColor: 'rgba(62,207,255,0.1)',
+                  yAxisID: 'y',
+                },
+                {
+                  label: 'Bookings',
+                  data: stats.monthlyBookingsArr,
+                  borderColor: '#ffe082',
+                  backgroundColor: 'rgba(255,224,130,0.1)',
+                  yAxisID: 'y1',
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: { display: true, labels: { color: '#fff' } },
+                tooltip: { enabled: true },
+              },
+              scales: {
+                y: {
+                  type: 'linear',
+                  display: true,
+                  position: 'left',
+                  ticks: { color: '#3ecfff', callback: (v: any) => formatPeso(v) },
+                  title: { display: true, text: 'Revenue (PHP)', color: '#3ecfff' },
+                },
+                y1: {
+                  type: 'linear',
+                  display: true,
+                  position: 'right',
+                  grid: { drawOnChartArea: false },
+                  ticks: { color: '#ffe082' },
+                  title: { display: true, text: 'Bookings', color: '#ffe082' },
+                },
+                x: {
+                  ticks: { color: '#fff' },
+                },
+              },
+            }}
+            height={220}
+          />
+          <div className="flex flex-row gap-8 mt-6 w-full justify-center">
+            <div className="flex flex-col items-center">
+              <div className="text-lg font-semibold mb-1">Revenue (This Month)</div>
+              <div className="text-2xl font-bold text-[#3ecfff]">
+                {formatPeso(usdToPhp(stats.monthlyRevenue))}
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="text-lg font-semibold mb-1">Bookings (This Month)</div>
+              <div className="text-2xl font-bold text-[#ffe082]">
+                {stats.monthlyBookingsArr[stats.monthlyBookingsArr.length - 1]}
               </div>
             </div>
           </div>
-          <AnalyticsChart analytics={stats.analytics} />
-          <RecentBookingsTable recentBookings={stats.recentBookings} />
         </div>
-        {/* calendar*/}
+        {/* calendar right column */}
         <div className="flex flex-col gap-4">
           <DashboardCalendar />
-          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col items-center mt-4">
-            <div className="text-lg font-semibold mb-1">Total Revenue (This Month)</div>
-            <div className="text-3xl font-bold text-[#3ecfff]">
-              {require('@/lib/utils').formatPeso(stats.monthlyRevenue)}
+        </div>
+      </div>
+
+      {/* Booking Statistics and Recent Bookings Section */}
+      <div className="rounded-2xl bg-[#232334] p-8 shadow-lg flex flex-col w-full mt-8">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <div className="text-2xl font-semibold">Booking Statistics</div>
+            <div className="text-gray-400 text-sm">
+              Check In / Check Out (last 12 days)
             </div>
           </div>
+        </div>
+        <AnalyticsChart analytics={stats.analytics} />
+        <div className="mt-8">
+          <RecentBookingsTable recentBookings={stats.recentBookings} />
         </div>
       </div>
     </div>

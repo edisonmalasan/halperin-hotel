@@ -6,7 +6,7 @@ import { DiningCardSlider } from "@/app/client/dining/data/DiningCardSlider";
 import { dining } from "../data/dining";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
-import { usdToPhp } from '@/lib/utils';
+import { usdToPhp } from "@/lib/utils";
 
 export default function DiningPage() {
   const pageSize = 6;
@@ -16,6 +16,12 @@ export default function DiningPage() {
   const startIdx = (page - 1) * pageSize;
   const endIdx = Math.min(startIdx + pageSize, totalResults);
   const pagedSuites = dining.slice(startIdx, endIdx);
+
+  const pagedDiningWithType: any[] = pagedSuites.map((dining) => ({
+    ...dining,
+    typeName: dining.title,
+    price: usdToPhp(dining.price), // convert to php currency
+  }));
 
   return (
     <div>
@@ -106,8 +112,8 @@ export default function DiningPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedSuites.map((dining, idx) => (
-              <BookCard key={dining.title + idx} {...dining} price={usdToPhp(50 + idx * 25)} typeName={dining.title} />
+            {pagedDiningWithType.map((dining, idx) => (
+              <BookCard key={dining.title + idx} {...dining} />
             ))}
           </div>
 

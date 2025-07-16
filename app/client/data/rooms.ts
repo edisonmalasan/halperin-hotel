@@ -11,6 +11,7 @@ export const rooms = [
       "LOTS OF NATURAL LIGHT",
     ],
     slug: "Superior",
+    price: 200, // USD
   },
   {
     title: "Superior Room with Balcony",
@@ -20,6 +21,7 @@ export const rooms = [
     image: "/images/rooms/superior-balcony/superior-room-balcony-mm.png",
     features: ["37M²/400FT²", "PRIVATE BALCONY", "CITY VIEWS", "WORKING AREA"],
     slug: "Superior-Balcony",
+    price: 300, // USD (so PHP = 16,800)
   },
   {
     title: "Deluxe Room",
@@ -28,6 +30,7 @@ export const rooms = [
     image: "/images/rooms/deluxe/deluxe-mm.png",
     features: ["49M²/525FT²", "GARDEN VIEWS", "LOTS OF NATURAL LIGHT", "WORKING AREA"],
     slug: "Deluxe",
+    price: 250, // USD
   },
   {
     title: "Deluxe Room with Balcony",
@@ -37,6 +40,7 @@ export const rooms = [
     image: "/images/rooms/deluxe-balcony/deluxe-balcony-mm.png",
     features: ["49M²/525FT²", "PRIVATE BALCONY", "GARDEN OR CITY VIEWS", "LOTS OF NATURAL LIGHT"],
     slug: "Deluxe-Balcony",
+    price: 275, // USD
   },
   {
     title: "Deluxe Room with Patio",
@@ -46,6 +50,7 @@ export const rooms = [
     image: "/images/rooms/deluxe-patio/deluxe-patio-mm.png",
     features: ["49M²/525FT²", "PRIVATE PATIO", "GARDEN VIEWS", "WORKING AREA"],
     slug: "Deluxe-Patio",
+    price: 280, // USD
   },
   {
     title: "Bungalow Room",
@@ -55,6 +60,7 @@ export const rooms = [
     image: "/images/rooms/bungalow/bungalow-mm.png",
     features: ["44m²/475ft²", "LOTS OF NATURAL LIGHT", "GARDEN VIEW", "WORKING AREA"],
     slug: "Bungalow",
+    price: 320, // USD
   },
   {
     title: "Bungalow Room with Patio",
@@ -64,6 +70,7 @@ export const rooms = [
     image: "/images/rooms/bungalow-patio/bungalow-patio-mm.png",
     features: ["52m²/565ft²", "PRIVATE PATIO", "GARDEN VIEW", "PEACEFUL SETTING"],
     slug: "Bungalow-Patio",
+    price: 350, // USD
   },
   {
     title: "Bungalow Studio with Balcony",
@@ -73,5 +80,6 @@ export const rooms = [
     image: "/images/rooms/bungalow-studio-balcony/bungalow-studio-balcony-mm.png",
     features: ["51m²/545ft²", "PRIVATE BALCONY", "GARDEN VIEW", "WORKING AREA"],
     slug: "Bungalow-Studio-Balcony",
+    price: 370, // USD
   },
 ];

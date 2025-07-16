@@ -95,6 +95,32 @@ export async function GET() {
   });
   const monthlyRevenue = monthlyRevenueResult._sum.price || 0;
 
+  // --- Monthly Revenue and Bookings for the last 12 months ---
+  const monthlyRevenueArr: number[] = [];
+  const monthlyBookingsArr: number[] = [];
+  const monthLabels: string[] = [];
+  for (let i = 11; i >= 0; i--) {
+    const month = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const monthStart = new Date(month.getFullYear(), month.getMonth(), 1, 0, 0, 0, 0);
+    const monthEnd = new Date(month.getFullYear(), month.getMonth() + 1, 0, 23, 59, 59, 999);
+    monthLabels.push(month.toLocaleString('default', { month: 'short', year: '2-digit' }));
+    const revenueResult = await prisma.booking.aggregate({
+      _sum: { price: true },
+      where: {
+        date: { gte: monthStart, lte: monthEnd },
+        status: { in: ['booked', 'checked-out'] },
+      },
+    });
+    const bookingsCount = await prisma.booking.count({
+      where: {
+        date: { gte: monthStart, lte: monthEnd },
+        status: { in: ['booked', 'checked-out'] },
+      },
+    });
+    monthlyRevenueArr.push(revenueResult._sum.price || 0);
+    monthlyBookingsArr.push(bookingsCount);
+  }
+
   return NextResponse.json({
     totalRooms,
     availableRooms,
@@ -116,6 +142,9 @@ export async function GET() {
       checkOut: checkOutData,
     },
     recentBookings: recentBookingData,
-    monthlyRevenue, // <-- add this
+    monthlyRevenue,
+    monthlyRevenueArr,
+    monthlyBookingsArr,
+    monthLabels,
   });
 }

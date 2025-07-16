@@ -11,6 +11,7 @@ export const dining = [
       "MCCARTHY SALAD",
     ],
     slug: "polo-lounge",
+    price: 50, // USD (PHP = 2,800)
   },
   {
     title: "The Cabana Cafe",
@@ -24,6 +25,7 @@ export const dining = [
       "LA SUNSHINE",
     ],
     slug: "cabana-cafe",
+    price: 60, // USD (PHP = 3,360)
   },
   {
     title: "The Fountain Coffee Room",
@@ -37,5 +39,6 @@ export const dining = [
       "FRESHLY PRESSED JUICES",
     ],
     slug: "fountain-coffee-room",
+    price: 40, // USD (PHP = 2,240)
   },
 ];

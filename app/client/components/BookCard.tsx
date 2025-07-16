@@ -187,7 +187,7 @@ const BookCard: React.FC<BookCardProps> = ({
             className="text-xs font-semibold uppercase tracking-wider mb-2"
             style={{ color: gold }}
           >
-            {resolveRoute(href).replace(/^\//, "").split("/")[0].toUpperCase()}
+            {resolveRoute(href).replace(/^\//, "").split("/")[1].toUpperCase()}
           </div>
           <div className="text-2xl font-normal mb-3 text-neutral-800">
             {title}

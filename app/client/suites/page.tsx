@@ -6,7 +6,7 @@ import { SuitesCardSlider } from "@/app/client/suites/data/SuitesCardSlider";
 import { suites } from "../data/suites";
 import BookCard from "../components/BookCard";
 import { useState } from "react";
-import { usdToPhp } from '@/lib/utils';
+import { usdToPhp } from "@/lib/utils";
 
 export default function SuitesPage() {
   const pageSize = 6;
@@ -16,6 +16,22 @@ export default function SuitesPage() {
   const startIdx = (page - 1) * pageSize;
   const endIdx = Math.min(startIdx + pageSize, totalResults);
   const pagedSuites = suites.slice(startIdx, endIdx);
+
+  const titleToTypeName = {
+    "The Hollywood Suite": "Hollywood Suite",
+    "The Beverly Hills Suite": "Beverly Hills Suite",
+    "The Sunset Boulevard Suite": "Sunset Boulevard Suite",
+    "The Santa Monica Suite": "Santa Monica Suite",
+    "The Venice Beach Suite": "Venice Beach Suite",
+    "The Malibu Suite": "Malibu Suite",
+  };
+  const pagedSuitesWithType: any[] = pagedSuites.map((suite) => ({
+    ...suite,
+    typeName:
+      titleToTypeName[suite.title as keyof typeof titleToTypeName] ||
+      suite.title,
+    price: usdToPhp(suite.price), // convert to php currency
+  }));
 
   return (
     <div>
@@ -106,8 +122,8 @@ export default function SuitesPage() {
 
           {/* Card Grid */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-20 justify-center">
-            {pagedSuites.map((suite, idx) => (
-              <BookCard key={suite.title + idx} {...suite} price={usdToPhp(400 + idx * 150)} typeName={suite.title} />
+            {pagedSuitesWithType.map((suite, idx) => (
+              <BookCard key={suite.title + idx} {...suite} />
             ))}
           </div>
 

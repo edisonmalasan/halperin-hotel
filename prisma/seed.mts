@@ -3,10 +3,14 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Delete all data in correct order to avoid FK errors
+  // gagamitin lang ung deleteMany if ung command is pushing the seeder
+  
   await prisma.booking.deleteMany();
   await prisma.room.deleteMany();
   await prisma.suite.deleteMany();
+  // clear prepared statement
+  await prisma.$disconnect();
+  await prisma.$connect();
   await prisma.diningTable.deleteMany();
   await prisma.event.deleteMany();
   await prisma.roomType.deleteMany();
@@ -40,12 +44,20 @@ async function main() {
 
   let allRooms: any[] = [];
   for (const type of roomTypeRecords) {
+    let price = 200; // default
+    if (type.prefix === 'Superior-Balcony') price = 300;
+    else if (type.prefix === 'Deluxe') price = 250;
+    else if (type.prefix === 'Deluxe-Balcony') price = 275;
+    else if (type.prefix === 'Deluxe-Patio') price = 280;
+    else if (type.prefix === 'Bungalow') price = 320;
+    else if (type.prefix === 'Bungalow-Patio') price = 350;
+    else if (type.prefix === 'Bungalow-Studio-Balcony') price = 370;
     allRooms = allRooms.concat(
       Array.from({ length: 10 }).map((_, i) => ({
         number: `${type.prefix}-${i + 1}`,
         status: 'available',
         typeId: type.id,
-        price: 200 + (i % 3) * 50, // 200, 250, 300
+        price,
       }))
     );
   }
@@ -77,12 +89,20 @@ async function main() {
 
   let allSuites: any[] = [];
   for (const type of suiteTypeRecords) {
+    let price = 400; // default
+    if (type.prefix === 'Junior-Patio') price = 450;
+    else if (type.prefix === 'Junior-Halperin') price = 500;
+    else if (type.prefix === 'Rodeo') price = 600;
+    else if (type.prefix === 'Crescent') price = 700;
+    else if (type.prefix === 'Premier') price = 800;
+    else if (type.prefix === 'Presidential') price = 1000;
+    else if (type.prefix === 'Grand-Deluxe') price = 1200;
     allSuites = allSuites.concat(
       Array.from({ length: 10 }).map((_, i) => ({
         number: `${type.prefix}-${i + 1}`,
         status: 'available',
         typeId: type.id,
-        price: 400 + (i % 4) * 150, // 400, 550, 700, 850
+        price,
       }))
     );
   }
@@ -109,12 +129,15 @@ async function main() {
 
   let allDiningTables: any[] = [];
   for (const venue of diningVenueRecords) {
+    let price = 50; // default
+    if (venue.slug === 'cabana-cafe') price = 60;
+    else if (venue.slug === 'fountain-coffee-room') price = 40;
     allDiningTables = allDiningTables.concat(
       Array.from({ length: 10 }).map((_, i) => ({
         number: `Table ${i + 1}`,
         status: 'available',
         venueId: venue.id,
-        price: 50 + (i % 3) * 25, // 50, 75, 100
+        price,
       }))
     );
   }
@@ -141,12 +164,15 @@ async function main() {
 
   let allEvents: any[] = [];
   for (const eventType of eventTypeRecords) {
+    let price = 2000; // default
+    if (eventType.prefix === 'social-event') price = 1500;
+    else if (eventType.prefix === 'meeting') price = 1000;
     allEvents = allEvents.concat(
       Array.from({ length: 10 }).map((_, i) => ({
         date: new Date(2024, 6, 10 + i, 12, 0, 0),
         status: 'available',
         typeId: eventType.id,
-        price: 2000 + (i % 4) * 1000, // 2000, 3000, 4000, 5000
+        price,
       }))
     );
   }

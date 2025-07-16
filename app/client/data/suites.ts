@@ -12,6 +12,7 @@ export const suites = [
       "WORKING AREA",
     ],
     slug: "Junior",
+    price: 400, // USD (PHP = 22,400)
   },
   {
     title: "Junior Suite with Patio",
@@ -26,6 +27,7 @@ export const suites = [
       "CONNECTING ROOM OPTION",
     ],
     slug: "Junior-Patio",
+    price: 450, // USD (PHP = 25,200)
   },
   {
     title: "Junior Halperin Suite",
@@ -40,6 +42,7 @@ export const suites = [
       "WORKING AREA",
     ],
     slug: "Junior-Halperin",
+    price: 500, // USD (PHP = 28,000)
   },
   {
     title: "Rodeo Suite",
@@ -54,6 +57,7 @@ export const suites = [
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
     slug: "Rodeo",
+    price: 600, // USD (PHP = 33,600)
   },
   {
     title: "Crescent Suite",
@@ -68,6 +72,7 @@ export const suites = [
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
     slug: "Crescent",
+    price: 700, // USD (PHP = 39,200)
   },
   {
     title: "Premier Suite",
@@ -82,6 +87,7 @@ export const suites = [
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
     slug: "Premier",
+    price: 800, // USD (PHP = 44,800)
   },
   {
     title: "Presidential Suite",
@@ -96,6 +102,7 @@ export const suites = [
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
     slug: "Presidential",
+    price: 1000, // USD (PHP = 56,000)
   },
   {
     title: "Grand Deluxe Suite",
@@ -110,5 +117,6 @@ export const suites = [
       "COMPLIMENTARY ROUND-TRIP TRANSFER",
     ],
     slug: "Grand-Deluxe",
+    price: 1200, // USD (PHP = 67,200)
   },
 ];
