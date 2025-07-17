@@ -94,7 +94,7 @@ const Logo = ({ open }: { open: boolean }) => {
         className="font-medium whitespace-pre text-white dark:text-white"
         style={{ display: open ? "inline-block" : "none" }}
       >
-        Halperin Hotel
+        Halperin PMS
       </motion.span>
     </a>
   );
