@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
                 {stats.monthlyBookingsArr[stats.monthlyBookingsArr.length - 1]}
               </div>
             </div>
-          </div>
+      </div>
         </div>
         {/* calendar right column */}
         <div className="flex flex-col gap-4">
@@ -269,7 +269,7 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         </div>
       </div>
       {/* Booking Statistics and Recent Bookings Section */}

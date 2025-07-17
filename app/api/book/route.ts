@@ -89,3 +89,88 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    const bookings = await prisma.booking.findMany({
+      orderBy: { date: 'desc' },
+      include: {
+        user: true,
+        room: true,
+        suite: true,
+        diningTable: true,
+        event: true,
+      },
+    });
+    const result = bookings.map((b) => ({
+      id: b.id,
+      guest: b.user?.name || b.user?.email || 'Guest',
+      room:
+        b.room?.number?.toString() ||
+        b.suite?.number?.toString() ||
+        b.diningTable?.number?.toString() ||
+        (b.event ? `Event ${b.event.id}` : ''),
+      dates: b.date instanceof Date ? b.date.toISOString().split('T')[0] : b.date,
+      status: b.status,
+    }));
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error('Booking fetch error:', error);
+    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const { id, action, guest, status } = await req.json();
+    if (!id && !guest && !status) {
+      return NextResponse.json({ error: 'Missing id, guest, or status.' }, { status: 400 });
+    }
+    // Edit guest or status directly
+    if (id && (guest !== undefined || status !== undefined) && !action) {
+      const updated = await prisma.booking.update({
+        where: { id },
+        data: {
+          ...(guest !== undefined ? { guest } : {}),
+          ...(status !== undefined ? { status } : {}),
+        },
+      });
+      return NextResponse.json({ success: true, booking: updated });
+    }
+    // Find booking
+    const booking = await prisma.booking.findUnique({ where: { id } });
+    if (!booking) {
+      return NextResponse.json({ error: 'Booking not found.' }, { status: 404 });
+    }
+    let newStatus = booking.status;
+    if (action === 'check-in') newStatus = 'Checked-in';
+    else if (action === 'check-out') newStatus = 'Checked-out';
+    else if (action === 'cancel') newStatus = 'Cancelled';
+    else return NextResponse.json({ error: 'Invalid action.' }, { status: 400 });
+
+    // Update related entity status if needed
+    if (booking.roomId) {
+      if (action === 'check-in') await prisma.room.update({ where: { id: booking.roomId }, data: { status: 'occupied' } });
+      if (action === 'check-out' || action === 'cancel') await prisma.room.update({ where: { id: booking.roomId }, data: { status: 'available' } });
+    }
+    if (booking.suiteId) {
+      if (action === 'check-in') await prisma.suite.update({ where: { id: booking.suiteId }, data: { status: 'occupied' } });
+      if (action === 'check-out' || action === 'cancel') await prisma.suite.update({ where: { id: booking.suiteId }, data: { status: 'available' } });
+    }
+    if (booking.diningTableId) {
+      if (action === 'check-in') await prisma.diningTable.update({ where: { id: booking.diningTableId }, data: { status: 'booked' } });
+      if (action === 'check-out' || action === 'cancel') await prisma.diningTable.update({ where: { id: booking.diningTableId }, data: { status: 'available' } });
+    }
+    if (booking.eventId) {
+      if (action === 'check-in') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'booked' } });
+      if (action === 'check-out' || action === 'cancel') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'available' } });
+    }
+
+    // Update booking status
+    const updated = await prisma.booking.update({ where: { id }, data: { status: newStatus } });
+    return NextResponse.json({ success: true, booking: updated });
+  } catch (error) {
+    console.error('Booking update error:', error);
+    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 });
+  }
+}
