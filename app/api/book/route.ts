@@ -192,7 +192,6 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid action.' }, { status: 400 });
     }
     updateData.status = newStatus;
-    // Update related entity status if needed
     if (booking.roomId) {
       if (action === 'check-in') await prisma.room.update({ where: { id: booking.roomId }, data: { status: 'occupied' } });
       if (action === 'check-out' || action === 'cancel') await prisma.room.update({ where: { id: booking.roomId }, data: { status: 'available' } });
@@ -209,7 +208,6 @@ export async function PATCH(req: NextRequest) {
       if (action === 'check-in') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'booked' } });
       if (action === 'check-out' || action === 'cancel') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'available' } });
     }
-    // Update booking status and checkIn/checkOut
     const updated = await prisma.booking.update({ where: { id }, data: updateData });
     return NextResponse.json({ success: true, booking: updated });
   } catch (error) {
