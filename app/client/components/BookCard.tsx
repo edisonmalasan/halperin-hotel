@@ -126,7 +126,7 @@ const BookCard: React.FC<BookCardProps> = ({
   typeName,
   prefix,
   slug,
-  price, // <-- add price prop if not present
+  price,
 }) => {
   const { isAuthenticated, user } = useKindeBrowserClient();
   const [availability, setAvailability] = useState<number | null>(null);
@@ -192,7 +192,6 @@ const BookCard: React.FC<BookCardProps> = ({
           <div className="text-2xl font-normal mb-3 text-neutral-800">
             {title}
           </div>
-          {/* Show price if available */}
           {typeof price === "number" && (
             <div className="text-lg font-semibold text-[#8b6c26] mb-2">
               {formatPeso(price)}
@@ -242,7 +241,6 @@ const BookCard: React.FC<BookCardProps> = ({
           </button>
         </Link>
       </div>
-      {/* render modal always*/}
       <Modal>
         <BookingModal
           title={title}
@@ -258,7 +256,7 @@ const BookCard: React.FC<BookCardProps> = ({
           description={description}
           slug={slug}
           getCategory={getCategory}
-          price={price} // <-- add price prop if not present
+          price={price}
         />
       </Modal>
     </div>
@@ -371,7 +369,9 @@ const BookingModal = ({
               </div>
             )}
             <div className="mb-4">
-              <label className="block mb-1 font-medium">Select Date & Time:</label>
+              <label className="block mb-1 font-medium">
+                Select Date & Time:
+              </label>
               <input
                 type="datetime-local"
                 className="border rounded px-2 py-1 text-black"
