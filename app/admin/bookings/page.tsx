@@ -4,73 +4,55 @@ import React, { useEffect, useState } from "react";
 import { BookingsTable, Booking } from "./components/BookingsTable";
 
 export default function AdminBookingsPage() {
+  const [stats, setStats] = useState({
+    totalCheckIns: 0,
+    totalCheckOuts: 0,
+  });
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchStats = async () => {
+    const res = await fetch("/api/admin/stats");
+    const data = await res.json();
+    setStats({
+      totalCheckIns: data.totalCheckIns || 0,
+      totalCheckOuts: data.totalCheckOuts || 0,
+    });
+  };
+
   useEffect(() => {
-    setLoading(true);
-    fetch("/api/book")
-      .then((res) => {
+    fetchStats();
+    async function fetchBookings() {
+      setLoading(true);
+      try {
+        const res = await fetch("/api/book");
         if (!res.ok) throw new Error("Failed to fetch bookings");
-        return res.json();
-      })
-      .then((data) => {
+        const data = await res.json();
         setBookings(data);
         setError(null);
-      })
-      .catch((err) => {
+      } catch (err: any) {
         setError(err.message || "Unknown error");
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBookings();
   }, []);
-
-  // helper functions to calculate booking stats
-  function getStats(bookings: Booking[]) {
-    const todayStr = new Date().toISOString().slice(0, 10);
-    let checkIns = 0,
-      checkOuts = 0,
-      upcoming = 0,
-      overdue = 0;
-
-    bookings.forEach((b) => {
-      const checkInDate = b.checkIn ? b.checkIn.slice(0, 10) : null;
-      const checkOutDate = b.checkOut ? b.checkOut.slice(0, 10) : null;
-
-      if (checkInDate === todayStr && b.status === "Booked") checkIns++;
-      if (checkOutDate === todayStr && b.status === "Checked-in") checkOuts++;
-      if (checkInDate && checkInDate > todayStr && b.status === "Booked")
-        upcoming++;
-      if (checkOutDate && checkOutDate < todayStr && b.status === "Checked-in")
-        overdue++;
-    });
-    return { checkIns, checkOuts, upcoming, overdue };
-  }
-
-  const stats = getStats(bookings);
 
   return (
     <div className="min-h-screen bg-[#181828] text-white p-6">
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-8">
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">{stats.checkIns}</div>
-          <div className="text-gray-300">Check-ins Today</div>
+          <div className="text-2xl font-bold">{stats.totalCheckIns}</div>
+          <div className="text-gray-300">Total Check-ins</div>
         </div>
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">{stats.checkOuts}</div>
-          <div className="text-gray-300">Check-outs Today</div>
-        </div>
-        <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">{stats.upcoming}</div>
-          <div className="text-gray-300">Upcoming</div>
-        </div>
-        <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">{stats.overdue}</div>
-          <div className="text-gray-300">Overdue</div>
+          <div className="text-2xl font-bold">{stats.totalCheckOuts}</div>
+          <div className="text-gray-300">Total Check-outs</div>
         </div>
       </div>
-
       {/* Bookings Table */}
       {loading ? (
         <div className="flex items-center justify-center h-screen w-full bg-[#181828]">
@@ -103,7 +85,7 @@ export default function AdminBookingsPage() {
       ) : error ? (
         <div className="text-center text-red-400 py-8 text-lg">{error}</div>
       ) : (
-        <BookingsTable data={bookings} />
+        <BookingsTable data={bookings} onAction={fetchStats} />
       )}
     </div>
   );

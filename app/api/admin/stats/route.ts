@@ -142,23 +142,28 @@ export async function GET() {
     if (checkOutDate && checkOutDate < todayStr && b.status === 'Checked-in') overdueBookings++;
   });
 
+  // quick stats for bookings route
+  const allBookingsForQuickStats = await prisma.booking.findMany({ select: { checkIn: true, checkOut: true } });
+  let totalCheckIns = 0;
+  let totalCheckOuts = 0;
+  allBookingsForQuickStats.forEach((b) => {
+    if (b.checkIn && !b.checkOut) totalCheckIns++;
+    if (b.checkOut) totalCheckOuts++;
+  });
+
   return NextResponse.json({
-    // Room
     totalRooms: roomStats.total,
     availableRooms: roomStats.available,
     occupiedRooms: roomStats.occupied,
 
-    // Suite
     totalSuites: suiteStats.total,
     availableSuites: suiteStats.available,
     occupiedSuites: suiteStats.occupied,
 
-    // Dining
     totalDiningTables: tableStats.total,
     availableDiningTables: tableStats.available,
     bookedDiningTables: tableStats.booked,
 
-    // Event
     totalEvents: eventStats.total,
     availableEvents: eventStats.available,
     bookedEvents: eventStats.booked,
@@ -177,5 +182,7 @@ export async function GET() {
     monthLabels,
     upcomingBookings,
     overdueBookings,
+    totalCheckIns,
+    totalCheckOuts,
   });
 }

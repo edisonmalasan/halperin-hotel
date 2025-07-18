@@ -193,7 +193,7 @@ export const columns: ColumnDef<Booking>[] = [
   },
 ];
 
-export function BookingsTable({ data }: { data: Booking[] }) {
+export function BookingsTable({ data, onAction }: { data: Booking[]; onAction?: () => void }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -266,10 +266,10 @@ export function BookingsTable({ data }: { data: Booking[] }) {
           if (!res.ok) throw new Error("Failed to update booking");
           const result = await res.json();
           if (!result.success) throw new Error(result.error || "Unknown error");
-          // Update the table data with the latest booking info
           setTableData((prev) =>
             prev.map((b) => (b.id === id ? { ...b, ...result.booking } : b))
           );
+          if (onAction) onAction();
           // Undo support for cancel
           if (action === "cancel" && options?.undoable && prev) {
             setUndoInfo({ id, prevStatus: prev.status });
@@ -300,6 +300,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     }
   };
 
+  // Add a function to handle deleting a booking
   const deleteBooking = async (id: number) => {
     try {
       const res = await fetch(`/api/book?id=${id}`, {
@@ -308,6 +309,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
       if (!res.ok) throw new Error("Failed to delete booking");
       setTableData((prev) => prev.filter((b) => b.id !== id));
       toast.success("Booking deleted");
+      if (onAction) onAction();
     } catch (err: any) {
       toast.error(err.message || "Failed to delete booking");
     }
@@ -328,6 +330,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
         .then(() => {
           setTableData((prev) => prev.filter((b) => !ids.includes(b.id)));
           toast.success("Bookings deleted");
+          if (onAction) onAction();
         })
         .catch((err) => {
           toast.error(err.message || "Failed to delete bookings");
@@ -512,6 +515,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                     )
                   );
                   toast.success("Booking updated");
+                  if (onAction) onAction();
                 } catch (err: any) {
                   toast.error(err.message || "Failed to update booking");
                 }
