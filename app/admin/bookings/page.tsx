@@ -25,24 +25,45 @@ export default function AdminBookingsPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // helper functions to calculate booking stats
+  function getStats(bookings: Booking[]) {
+    const todayStr = new Date().toISOString().slice(0, 10);
+    let checkIns = 0,
+      checkOuts = 0,
+      upcoming = 0,
+      overdue = 0;
+
+    bookings.forEach((b) => {
+      if (b.checkIn === todayStr && b.status === "Booked") checkIns++;
+      if (b.checkOut === todayStr && b.status === "Checked-in") checkOuts++;
+      if (b.checkIn && b.checkIn > todayStr && b.status === "Booked")
+        upcoming++;
+      if (b.checkOut && b.checkOut < todayStr && b.status === "Checked-in")
+        overdue++;
+    });
+    return { checkIns, checkOuts, upcoming, overdue };
+  }
+
+  const stats = getStats(bookings);
+
   return (
     <div className="min-h-screen bg-[#181828] text-white p-6">
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">2</div>
+          <div className="text-2xl font-bold">{stats.checkIns}</div>
           <div className="text-gray-300">Check-ins Today</div>
         </div>
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">1</div>
+          <div className="text-2xl font-bold">{stats.checkOuts}</div>
           <div className="text-gray-300">Check-outs Today</div>
         </div>
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">3</div>
+          <div className="text-2xl font-bold">{stats.upcoming}</div>
           <div className="text-gray-300">Upcoming</div>
         </div>
         <div className="rounded-xl bg-[#232334] p-6 flex flex-col items-center">
-          <div className="text-2xl font-bold">0</div>
+          <div className="text-2xl font-bold">{stats.overdue}</div>
           <div className="text-gray-300">Overdue</div>
         </div>
       </div>

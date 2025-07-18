@@ -50,7 +50,8 @@ export type Booking = {
   id: number;
   guest: string;
   room: string;
-  dates: string;
+  checkIn: string | null;
+  checkOut: string | null;
   status: "Booked" | "Checked-in" | "Checked-out" | "Cancelled";
 };
 
@@ -60,6 +61,20 @@ const statusColors: Record<string, string> = {
   "Checked-out": "bg-gray-500",
   Cancelled: "bg-red-500",
 };
+
+// 12 hr frmat
+function formatDateTime(dt: string | null) {
+  if (!dt) return "-";
+  const d = new Date(dt.replace(" ", "T"));
+  return d.toLocaleString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
 
 export const columns: ColumnDef<Booking>[] = [
   {
@@ -106,20 +121,36 @@ export const columns: ColumnDef<Booking>[] = [
     cell: ({ row }) => <span>{row.getValue("room")}</span>,
   },
   {
-    accessorKey: "dates",
-    header: "Dates",
-    cell: ({ row }) => <span>{row.getValue("dates")}</span>,
+    accessorKey: "booked",
+    header: "Booked",
+    cell: ({ row }) => <span>{formatDateTime(row.getValue("booked"))}</span>,
+  },
+  {
+    accessorKey: "checkIn",
+    header: "Check-in",
+    cell: ({ row }) => <span>{formatDateTime(row.getValue("checkIn"))}</span>,
+  },
+  {
+    accessorKey: "checkOut",
+    header: "Check-out",
+    cell: ({ row }) => <span>{formatDateTime(row.getValue("checkOut"))}</span>,
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const status = row.getValue("status") as string;
+      let status = row.getValue("status") as string;
+      // Capitalize first letter for display
+      status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+      let bgClass = statusColors[status] || "bg-gray-600";
+      // Force Booked to always use blue and capitalized
+      if (status.toLowerCase() === "booked") {
+        bgClass = "bg-blue-500";
+        status = "Booked";
+      }
       return (
         <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            statusColors[status] || "bg-gray-600"
-          }`}
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${bgClass}`}
         >
           {status}
         </span>
@@ -197,7 +228,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     setTableData(data);
   }, [data]);
 
-  // Filter data by status
+  // filter by status
   const filteredData = React.useMemo(() => {
     if (!statusFilter) return tableData;
     return tableData.filter((b) => b.status === statusFilter);
@@ -276,7 +307,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     }
   };
 
-  // Bulk action handlers with confirmation for destructive
+  // bulk action handler
   const selectedRows = table.getFilteredSelectedRowModel().rows;
   const handleBulkAction = (action: "check-in" | "check-out" | "cancel") => {
     const ids = selectedRows.map((row) => row.original.id);
@@ -288,7 +319,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     }
   };
 
-  // Action dropdown for each row
+  // action dropdown
   function columnsWithActions(): ColumnDef<Booking>[] {
     return columns.map((col) => {
       if (col.id !== "actions") return col;
@@ -358,7 +389,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     });
   }
 
-  // Confirmation modal
+  // confirmation modal
   const ConfirmModal = () => (
     <Modal>
       {confirm.open && (
@@ -396,7 +427,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     </Modal>
   );
 
-  // Edit modal
+  // Eedit modal
   const EditModal = () => {
     const { open, booking } = edit;
     const [guest, setGuest] = React.useState(booking?.guest || "");
@@ -407,7 +438,12 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     }, [booking]);
     if (!open || !booking) return null;
     return (
-      <Modal open={open}>
+      <Modal
+        open={open}
+        setOpen={(val) => {
+          if (!val) setEdit({ open: false, booking: null });
+        }}
+      >
         <ModalBody>
           <ModalContent className="text-black">
             <div className="text-lg font-semibold mb-4 text-black">
@@ -456,7 +492,8 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                   });
                   if (!res.ok) throw new Error("Failed to update booking");
                   const result = await res.json();
-                  if (!result.success) throw new Error(result.error || "Unknown error");
+                  if (!result.success)
+                    throw new Error(result.error || "Unknown error");
                   setTableData((prev) =>
                     prev.map((b) =>
                       b.id === booking.id ? { ...b, guest, status } : b
@@ -587,10 +624,19 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="hover:bg-[#232334]/60 transition"
+                  className={
+                    row.getIsSelected()
+                      ? "bg-white/80 text-black transition"
+                      : "hover:bg-[#232334]/60 transition"
+                  }
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-white">
+                    <TableCell
+                      key={cell.id}
+                      className={
+                        row.getIsSelected() ? "text-black" : "text-white"
+                      }
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

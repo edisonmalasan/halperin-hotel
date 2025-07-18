@@ -21,10 +21,19 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // find available entity and book
+    // local date and time 
+    let localDate;
+    if (typeof date === 'string' && date.includes('T')) {
+      const [datePart, timePart] = date.split('T');
+      const [year, month, day] = datePart.split('-').map(Number);
+      const [hour, minute] = timePart.split(':').map(Number);
+      localDate = new Date(year, month - 1, day, hour, minute);
+    } else {
+      localDate = new Date(date);
+    }
     let bookingData: any = {
       userId: dbUser.id,
-      date: new Date(date),
+      date: localDate,
       status: 'booked',
     };
     let updateStatus = 'occupied';
@@ -39,7 +48,7 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available rooms.' }, { status: 409 });
       bookingData.roomId = entity.id;
-      bookingData.price = entity.price; // set price from room
+      bookingData.price = entity.price; 
       await prisma.room.update({ where: { id: entity.id }, data: { status: updateStatus } });
 
     } else if (category === 'suite' && suiteTypeSlug) {
@@ -50,7 +59,7 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available suites.' }, { status: 409 });
       bookingData.suiteId = entity.id;
-      bookingData.price = entity.price; // set price from suite
+      bookingData.price = entity.price; 
       await prisma.suite.update({
         where: { id: entity.id }, data: { status: updateStatus }
       });
@@ -63,7 +72,7 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available tables.' }, { status: 409 });
       bookingData.diningTableId = entity.id;
-      bookingData.price = entity.price; // set price from dining table
+      bookingData.price = entity.price; 
       await prisma.diningTable.update({ where: { id: entity.id }, data: { status: 'booked' } });
 
     } else if (category === 'event' && eventTypeSlug) {
@@ -74,7 +83,7 @@ export async function POST(req: NextRequest) {
 
       if (!entity) return NextResponse.json({ error: 'No available events.' }, { status: 409 });
       bookingData.eventId = entity.id;
-      bookingData.price = entity.price; // set price from event
+      bookingData.price = entity.price; 
       await prisma.event.update({ where: { id: entity.id }, data: { status: 'booked' } });
 
     } else {
@@ -94,12 +103,17 @@ export async function GET() {
   try {
     const bookings = await prisma.booking.findMany({
       orderBy: { date: 'desc' },
-      include: {
-        user: true,
-        room: true,
-        suite: true,
-        diningTable: true,
-        event: true,
+      select: {
+        id: true,
+        date: true,
+        checkIn: true,
+        checkOut: true,
+        status: true,
+        user: { select: { name: true, email: true } },
+        room: { select: { number: true } },
+        suite: { select: { number: true } },
+        diningTable: { select: { number: true } },
+        event: { select: { id: true } },
       },
     });
     const result = bookings.map((b) => ({
@@ -110,7 +124,9 @@ export async function GET() {
         b.suite?.number?.toString() ||
         b.diningTable?.number?.toString() ||
         (b.event ? `Event ${b.event.id}` : ''),
-      dates: b.date instanceof Date ? b.date.toISOString().split('T')[0] : b.date,
+      booked: b.date ? b.date.toISOString().replace('T', ' ').slice(0, 19) : null,
+      checkIn: b.checkIn ? b.checkIn.toISOString().replace('T', ' ').slice(0, 19) : null,
+      checkOut: b.checkOut ? b.checkOut.toISOString().replace('T', ' ').slice(0, 19) : null,
       status: b.status,
     }));
     return NextResponse.json(result);
@@ -126,16 +142,35 @@ export async function PATCH(req: NextRequest) {
     if (!id && !guest && !status) {
       return NextResponse.json({ error: 'Missing id, guest, or status.' }, { status: 400 });
     }
-    // Edit guest or status directly
     if (id && (guest !== undefined || status !== undefined) && !action) {
-      const updated = await prisma.booking.update({
+      let updatedBooking;
+      if (guest !== undefined) {
+        const booking = await prisma.booking.findUnique({ where: { id } });
+        if (!booking) return NextResponse.json({ error: 'Booking not found.' }, { status: 404 });
+        await prisma.user.update({ where: { id: booking.userId }, data: { name: guest } });
+      }
+      if (status !== undefined) {
+        // handle check in checkout
+        let updateData: any = { status };
+        if (status === 'Checked-in') {
+          updateData.checkIn = new Date();
+          updateData.checkOut = null;
+        } else if (status === 'Checked-out') {
+          updateData.checkOut = new Date();
+        } else if (status === 'Booked') {
+          updateData.checkIn = null;
+          updateData.checkOut = null;
+        }
+        updatedBooking = await prisma.booking.update({ where: { id }, data: updateData });
+      } else {
+        updatedBooking = await prisma.booking.findUnique({ where: { id } });
+      }
+      // return
+      const bookingWithUser = await prisma.booking.findUnique({
         where: { id },
-        data: {
-          ...(guest !== undefined ? { guest } : {}),
-          ...(status !== undefined ? { status } : {}),
-        },
+        include: { user: true },
       });
-      return NextResponse.json({ success: true, booking: updated });
+      return NextResponse.json({ success: true, booking: bookingWithUser });
     }
     // Find booking
     const booking = await prisma.booking.findUnique({ where: { id } });
@@ -143,11 +178,20 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: 'Booking not found.' }, { status: 404 });
     }
     let newStatus = booking.status;
-    if (action === 'check-in') newStatus = 'Checked-in';
-    else if (action === 'check-out') newStatus = 'Checked-out';
-    else if (action === 'cancel') newStatus = 'Cancelled';
-    else return NextResponse.json({ error: 'Invalid action.' }, { status: 400 });
-
+    let updateData: any = {};
+    if (action === 'check-in') {
+      newStatus = 'Checked-in';
+      updateData.checkIn = new Date();
+      updateData.checkOut = null;
+    } else if (action === 'check-out') {
+      newStatus = 'Checked-out';
+      updateData.checkOut = new Date();
+    } else if (action === 'cancel') {
+      newStatus = 'Cancelled';
+    } else {
+      return NextResponse.json({ error: 'Invalid action.' }, { status: 400 });
+    }
+    updateData.status = newStatus;
     // Update related entity status if needed
     if (booking.roomId) {
       if (action === 'check-in') await prisma.room.update({ where: { id: booking.roomId }, data: { status: 'occupied' } });
@@ -165,9 +209,8 @@ export async function PATCH(req: NextRequest) {
       if (action === 'check-in') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'booked' } });
       if (action === 'check-out' || action === 'cancel') await prisma.event.update({ where: { id: booking.eventId }, data: { status: 'available' } });
     }
-
-    // Update booking status
-    const updated = await prisma.booking.update({ where: { id }, data: { status: newStatus } });
+    // Update booking status and checkIn/checkOut
+    const updated = await prisma.booking.update({ where: { id }, data: updateData });
     return NextResponse.json({ success: true, booking: updated });
   } catch (error) {
     console.error('Booking update error:', error);

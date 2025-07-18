@@ -371,9 +371,9 @@ const BookingModal = ({
               </div>
             )}
             <div className="mb-4">
-              <label className="block mb-1 font-medium">Select Date:</label>
+              <label className="block mb-1 font-medium">Select Date & Time:</label>
               <input
-                type="date"
+                type="datetime-local"
                 className="border rounded px-2 py-1 text-black"
                 value={bookingDate}
                 onChange={(e) => setBookingDate(e.target.value)}
