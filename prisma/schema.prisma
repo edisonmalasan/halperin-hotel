@@ -62,12 +62,14 @@ model DiningVenue {
 
 model DiningTable {
   id       Int         @id @default(autoincrement())
-  number   String      @unique
+  number   String
   venueId  Int
   status   String
   price    Float       @default(0)
   bookings Booking[]
   venue    DiningVenue @relation(fields: [venueId], references: [id])
+
+  @@unique([venueId, number])
 }
 
 model EventType {
@@ -81,11 +83,13 @@ model EventType {
 model Event {
   id       Int       @id @default(autoincrement())
   typeId   Int
-  date     DateTime  @unique
+  date     DateTime
   status   String
   price    Float     @default(0)
   bookings Booking[]
   type     EventType @relation(fields: [typeId], references: [id])
+
+  @@unique([typeId, date])
 }
 
 model Booking {

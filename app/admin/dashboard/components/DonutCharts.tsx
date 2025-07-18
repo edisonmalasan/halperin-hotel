@@ -4,15 +4,16 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 Chart.register(ArcElement, Tooltip, Legend);
 
 export default function DonutCharts({ stats }: { stats: any }) {
+  const total = stats.totalRooms + stats.totalSuites;
+  const occupied = stats.occupiedRooms + stats.occupiedSuites;
+  const available = total - occupied;
+
   const donutData = {
     labels: ["Occupied", "Available"],
     datasets: [
       {
-        data: [
-          stats.occupiedRooms + stats.occupiedSuites,
-          stats.availableRooms + stats.availableSuites,
-        ],
-        backgroundColor: ["#3ecfff", "#232334"],
+        data: [occupied, available],
+        backgroundColor: ["#232334", "#fff"],
         borderWidth: 0,
       },
     ],
@@ -35,7 +36,7 @@ export default function DonutCharts({ stats }: { stats: any }) {
     },
   };
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-10">
       <div className="rounded-2xl bg-[#232334] p-6 flex flex-col items-center shadow-lg">
         <div className="w-32 h-32 mb-2">
           <Doughnut data={donutData} options={donutOptions} />

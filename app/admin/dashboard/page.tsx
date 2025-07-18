@@ -37,13 +37,36 @@ export default function AdminDashboardPage() {
       .then(setStats);
   }, []);
 
-  if (isLoading || !user || !stats || !stats.monthlyRevenueArr || !stats.monthlyBookingsArr || !stats.monthLabels) {
+  if (
+    isLoading ||
+    !user ||
+    !stats ||
+    !stats.monthlyRevenueArr ||
+    !stats.monthlyBookingsArr ||
+    !stats.monthLabels
+  ) {
     return (
       <div className="flex items-center justify-center h-screen w-full bg-[#181828]">
         <div className="flex flex-col items-center">
-          <svg className="animate-spin h-16 w-16 text-white mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          <svg
+            className="animate-spin h-16 w-16 text-white mb-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8z"
+            ></path>
           </svg>
           <div className="text-3xl font-bold text-white">Loading stats...</div>
         </div>
@@ -140,136 +163,37 @@ export default function AdminDashboardPage() {
                 {stats.monthlyBookingsArr[stats.monthlyBookingsArr.length - 1]}
               </div>
             </div>
-      </div>
+          </div>
         </div>
         {/* calendar right column */}
         <div className="flex flex-col gap-4">
           <DashboardCalendar />
-          {/* Donut Chart for Check In/Out */}
-          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col items-center w-full mt-8">
-            <div className="flex gap-8 w-full justify-center mb-2">
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20">
-                  <Doughnut
-                    data={{
-                      labels: ["Check In", "Check Out"],
-                      datasets: [
-                        {
-                          data: [
-                            stats.analytics.checkIn.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ),
-                            stats.analytics.checkOut.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ),
-                          ],
-                          backgroundColor: ["#3ecfff", "#ffe082"],
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                    options={{
-                      cutout: "75%",
-                      plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: true },
-                      },
-                    }}
-                  />
-                </div>
-                <div className="text-2xl font-bold mt-2">
-                  {(() => {
-                    const total =
-                      stats.analytics.checkIn.reduce(
-                        (a: number, b: number) => a + b,
-                        0
-                      ) +
-                      stats.analytics.checkOut.reduce(
-                        (a: number, b: number) => a + b,
-                        0
-                      );
-                    const percent =
-                      total === 0
-                        ? 0
-                        : Math.round(
-                            (stats.analytics.checkIn.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ) /
-                              total) *
-                              100
-                          );
-                    return `${percent}%`;
-                  })()}{" "}
-                  <span className="text-base font-normal text-gray-400">
-                    Check In
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20">
-                  <Doughnut
-                    data={{
-                      labels: ["Check Out", "Check In"],
-                      datasets: [
-                        {
-                          data: [
-                            stats.analytics.checkOut.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ),
-                            stats.analytics.checkIn.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ),
-                          ],
-                          backgroundColor: ["#ffb085", "#3ecfff"],
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                    options={{
-                      cutout: "75%",
-                      plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: true },
-                      },
-                    }}
-                  />
-                </div>
-                <div className="text-2xl font-bold mt-2">
-                  {(() => {
-                    const total =
-                      stats.analytics.checkIn.reduce(
-                        (a: number, b: number) => a + b,
-                        0
-                      ) +
-                      stats.analytics.checkOut.reduce(
-                        (a: number, b: number) => a + b,
-                        0
-                      );
-                    const percent =
-                      total === 0
-                        ? 0
-                        : Math.round(
-                            (stats.analytics.checkOut.reduce(
-                              (a: number, b: number) => a + b,
-                              0
-                            ) /
-                              total) *
-                              100
-                          );
-                    return `${percent}%`;
-                  })()}{" "}
-                  <span className="text-base font-normal text-gray-400">
-                    Check Out
-                  </span>
-                </div>
-              </div>
+          {/* Donut Chart for Available Events */}
+          <div className="rounded-2xl bg-[#232334] p-6 shadow-lg flex flex-col items-center w-full mt-5">
+            <div className="w-24 h-24">
+              <Doughnut
+                data={{
+                  labels: ["Available", "Booked"],
+                  datasets: [
+                    {
+                      data: [stats.availableEvents, stats.bookedEvents],
+                      backgroundColor: ["#00b894", "#232334"],
+                      borderWidth: 0,
+                    },
+                  ],
+                }}
+                options={{
+                  cutout: "75%",
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: true },
+                  },
+                }}
+              />
             </div>
-        </div>
+            <div className="text-3xl font-bold">{stats.availableEvents}</div>
+            <div className="text-gray-400">Total Available Events</div>
+          </div>
         </div>
       </div>
       {/* Booking Statistics and Recent Bookings Section */}

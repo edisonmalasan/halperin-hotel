@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // gagamitin lang ung deleteMany if ung command is pushing the seeder
-  
+
   await prisma.booking.deleteMany();
   await prisma.room.deleteMany();
   await prisma.suite.deleteMany();
@@ -115,8 +115,15 @@ async function main() {
     { name: 'The Fountain Coffee Room', description: 'The Fountain Coffee Room', slug: 'fountain-coffee-room' },
   ];
 
-  const diningVenueRecords = [];
+  // Prices from client/data/dining.ts
+  const diningPrices = {
+    'polo-lounge': 50,
+    'cabana-cafe': 60,
+    'fountain-coffee-room': 40,
+  };
+
   for (const venue of diningVenues) {
+    // Create the venue and get its actual ID
     const v = await prisma.diningVenue.create({
       data: {
         name: venue.name,
@@ -124,24 +131,21 @@ async function main() {
         slug: venue.slug,
       },
     });
-    diningVenueRecords.push({ ...venue, id: v.id });
-  }
 
-  let allDiningTables: any[] = [];
-  for (const venue of diningVenueRecords) {
-    let price = 50; // default
-    if (venue.slug === 'cabana-cafe') price = 60;
-    else if (venue.slug === 'fountain-coffee-room') price = 40;
-    allDiningTables = allDiningTables.concat(
-      Array.from({ length: 10 }).map((_, i) => ({
-        number: `Table ${i + 1}`,
-        status: 'available',
-        venueId: venue.id,
-        price,
-      }))
-    );
+    const price = diningPrices[venue.slug as keyof typeof diningPrices];
+
+    // Create 30 tables for this venue, one by one
+    for (let i = 0; i < 30; i++) {
+      await prisma.diningTable.create({
+        data: {
+          number: `Table ${i + 1}`,
+          status: 'available',
+          venueId: v.id,
+          price,
+        },
+      });
+    }
   }
-  await prisma.diningTable.createMany({ data: allDiningTables, skipDuplicates: true });
 
   // event types and events
   const eventTypes = [

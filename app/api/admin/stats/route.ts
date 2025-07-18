@@ -95,7 +95,7 @@ export async function GET() {
     _sum: { price: true },
     where: {
       date: { gte: monthStart, lte: monthEnd },
-      status: { in: ['booked', 'checked-out'] },
+      // Removed status filter to count all bookings
     },
   });
   const monthlyRevenue = monthlyRevenueResult._sum.price || 0;
@@ -109,7 +109,7 @@ export async function GET() {
       SUM("price") AS revenue,
       COUNT(*) AS bookings
     FROM "Booking"
-    WHERE "date" >= $1 AND "status" IN ('booked', 'checked-out')
+    WHERE "date" >= $1
     GROUP BY year, month
     ORDER BY year, month;
   `, firstMonth);
