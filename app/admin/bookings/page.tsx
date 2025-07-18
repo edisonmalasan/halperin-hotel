@@ -34,11 +34,14 @@ export default function AdminBookingsPage() {
       overdue = 0;
 
     bookings.forEach((b) => {
-      if (b.checkIn === todayStr && b.status === "Booked") checkIns++;
-      if (b.checkOut === todayStr && b.status === "Checked-in") checkOuts++;
-      if (b.checkIn && b.checkIn > todayStr && b.status === "Booked")
+      const checkInDate = b.checkIn ? b.checkIn.slice(0, 10) : null;
+      const checkOutDate = b.checkOut ? b.checkOut.slice(0, 10) : null;
+
+      if (checkInDate === todayStr && b.status === "Booked") checkIns++;
+      if (checkOutDate === todayStr && b.status === "Checked-in") checkOuts++;
+      if (checkInDate && checkInDate > todayStr && b.status === "Booked")
         upcoming++;
-      if (b.checkOut && b.checkOut < todayStr && b.status === "Checked-in")
+      if (checkOutDate && checkOutDate < todayStr && b.status === "Checked-in")
         overdue++;
     });
     return { checkIns, checkOuts, upcoming, overdue };

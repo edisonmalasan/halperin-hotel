@@ -65,7 +65,16 @@ const statusColors: Record<string, string> = {
 // 12 hr frmat
 function formatDateTime(dt: string | null) {
   if (!dt) return "-";
-  const d = new Date(dt.replace(" ", "T"));
+  let d;
+  try {
+    // if dt contains t and z dont add another z
+    let isoString = dt.includes("T") ? dt : dt.replace(" ", "T");
+    if (!isoString.endsWith("Z")) isoString += "Z";
+    d = new Date(isoString);
+    if (isNaN(d.getTime())) throw new Error("Invalid date");
+  } catch {
+    return "-";
+  }
   return d.toLocaleString("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -73,6 +82,7 @@ function formatDateTime(dt: string | null) {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
+    timeZone: "Asia/Manila",
   });
 }
 
@@ -140,10 +150,8 @@ export const columns: ColumnDef<Booking>[] = [
     header: "Status",
     cell: ({ row }) => {
       let status = row.getValue("status") as string;
-      // Capitalize first letter for display
       status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
       let bgClass = statusColors[status] || "bg-gray-600";
-      // Force Booked to always use blue and capitalized
       if (status.toLowerCase() === "booked") {
         bgClass = "bg-blue-500";
         status = "Booked";
@@ -172,20 +180,6 @@ export const columns: ColumnDef<Booking>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            {booking.status === "Booked" && (
-              <DropdownMenuItem
-                onClick={() => alert(`Check-in: ${booking.guest}`)}
-              >
-                Check-in
-              </DropdownMenuItem>
-            )}
-            {booking.status === "Checked-in" && (
-              <DropdownMenuItem
-                onClick={() => alert(`Check-out: ${booking.guest}`)}
-              >
-                Check-out
-              </DropdownMenuItem>
-            )}
             <DropdownMenuItem onClick={() => alert(`Edit: ${booking.guest}`)}>
               Edit
             </DropdownMenuItem>
@@ -272,10 +266,9 @@ export function BookingsTable({ data }: { data: Booking[] }) {
           if (!res.ok) throw new Error("Failed to update booking");
           const result = await res.json();
           if (!result.success) throw new Error(result.error || "Unknown error");
+          // Update the table data with the latest booking info
           setTableData((prev) =>
-            prev.map((b) =>
-              b.id === id ? { ...b, status: result.booking.status } : b
-            )
+            prev.map((b) => (b.id === id ? { ...b, ...result.booking } : b))
           );
           // Undo support for cancel
           if (action === "cancel" && options?.undoable && prev) {
@@ -307,19 +300,43 @@ export function BookingsTable({ data }: { data: Booking[] }) {
     }
   };
 
-  // bulk action handler
+  const deleteBooking = async (id: number) => {
+    try {
+      const res = await fetch(`/api/book?id=${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete booking");
+      setTableData((prev) => prev.filter((b) => b.id !== id));
+      toast.success("Booking deleted");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to delete booking");
+    }
+  };
+
+  // BULK BTNS
   const selectedRows = table.getFilteredSelectedRowModel().rows;
-  const handleBulkAction = (action: "check-in" | "check-out" | "cancel") => {
+  const handleBulkAction = (action: "check-in" | "check-out" | "delete") => {
     const ids = selectedRows.map((row) => row.original.id);
     if (ids.length === 0) return;
-    if (action === "check-out" || action === "cancel") {
-      setConfirm({ open: true, ids, action });
+    if (action === "delete") {
+      Promise.all(
+        ids.map(async (id) => {
+          const res = await fetch(`/api/book?id=${id}`, { method: "DELETE" });
+          if (!res.ok) throw new Error("Failed to delete booking");
+        })
+      )
+        .then(() => {
+          setTableData((prev) => prev.filter((b) => !ids.includes(b.id)));
+          toast.success("Bookings deleted");
+        })
+        .catch((err) => {
+          toast.error(err.message || "Failed to delete bookings");
+        });
     } else {
       updateBookingStatus(ids, action);
     }
   };
 
-  // action dropdown
   function columnsWithActions(): ColumnDef<Booking>[] {
     return columns.map((col) => {
       if (col.id !== "actions") return col;
@@ -351,19 +368,6 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                       Check-in
                     </DropdownMenuItem>
                   )}
-                  {booking.status === "Checked-in" && (
-                    <DropdownMenuItem
-                      onClick={() =>
-                        setConfirm({
-                          open: true,
-                          ids: [booking.id],
-                          action: "check-out",
-                        })
-                      }
-                    >
-                      Check-out
-                    </DropdownMenuItem>
-                  )}
                   <DropdownMenuItem
                     onClick={() => setEdit({ open: true, booking })}
                   >
@@ -379,6 +383,12 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                     }
                   >
                     Cancel
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => deleteBooking(booking.id)}
+                    className="text-red-600"
+                  >
+                    Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -468,7 +478,9 @@ export function BookingsTable({ data }: { data: Booking[] }) {
               >
                 <option value="Booked">Booked</option>
                 <option value="Checked-in">Checked-in</option>
-                <option value="Checked-out">Checked-out</option>
+                <option value="Checked-out" disabled={!booking.checkIn}>
+                  Checked-out
+                </option>
                 <option value="Cancelled">Cancelled</option>
               </select>
             </div>
@@ -496,7 +508,7 @@ export function BookingsTable({ data }: { data: Booking[] }) {
                     throw new Error(result.error || "Unknown error");
                   setTableData((prev) =>
                     prev.map((b) =>
-                      b.id === booking.id ? { ...b, guest, status } : b
+                      b.id === booking.id ? { ...b, ...result.booking } : b
                     )
                   );
                   toast.success("Booking updated");
@@ -538,9 +550,9 @@ export function BookingsTable({ data }: { data: Booking[] }) {
           <Button
             variant="destructive"
             disabled={selectedRows.length === 0 || actionLoading}
-            onClick={() => handleBulkAction("cancel")}
+            onClick={() => handleBulkAction("delete")}
           >
-            {actionLoading ? "Processing..." : "Bulk Cancel"}
+            {actionLoading ? "Processing..." : "Bulk Delete"}
           </Button>
         </div>
         <div className="flex gap-2 ml-auto">
