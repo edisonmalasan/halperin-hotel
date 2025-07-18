@@ -35,7 +35,7 @@ const adminLinks = [
   },
   {
     label: "Rooms",
-    href: "/admin/rooms",
+    href: "/admin/facilities",
     icon: (
       <IconBed className="h-5 w-5 shrink-0 text-white dark:text-neutral-200" />
     ),
