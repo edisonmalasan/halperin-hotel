@@ -16,7 +16,6 @@ export default function DashboardCalendar() {
   const daysInMonth = getDaysInMonth(year, month);
   const firstDayOfWeek = getFirstDayOfWeek(year, month);
 
-  // Build calendar grid
   const weeks: (string | null)[][] = [];
   let week: (string | null)[] = Array(firstDayOfWeek).fill(null);
   for (let day = 1; day <= daysInMonth; day++) {
@@ -49,16 +48,32 @@ export default function DashboardCalendar() {
   }
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   return (
     <div className="rounded-2xl bg-[#232334] p-6 shadow-lg">
       <div className="flex items-center justify-between mb-4">
-        <button className="text-2xl" onClick={prevMonth}>&#8592;</button>
-        <div className="font-semibold text-lg">{monthNames[month]} {year}</div>
-        <button className="text-2xl" onClick={nextMonth}>&#8594;</button>
+        <button className="text-2xl" onClick={prevMonth}>
+          &#8592;
+        </button>
+        <div className="font-semibold text-lg">
+          {monthNames[month]} {year}
+        </div>
+        <button className="text-2xl" onClick={nextMonth}>
+          &#8594;
+        </button>
       </div>
       <div className="grid grid-cols-7 gap-1 text-center text-gray-400 mb-2">
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((d) => (
@@ -93,4 +108,4 @@ export default function DashboardCalendar() {
       </div>
     </div>
   );
-} 
+}
