@@ -50,7 +50,7 @@ export default function FacilitiesPage() {
     setModalOpen(false);
   };
 
-  // Placeholder data for facilities
+  // static data for facilities
   const facilities: Facility[] = [
     {
       id: 1,
@@ -98,7 +98,7 @@ export default function FacilitiesPage() {
             placeholder="Search by name or number..."
             className="border rounded px-3 py-2 bg-[#232334] text-white w-full md:w-64"
           />
-          {/* Add Facility Button */}
+          {/* Facility Button */}
           <Modal open={modalOpen} setOpen={setModalOpen}>
             <ModalTrigger className="bg-[#4F46E5] text-white px-4 py-2 rounded hover:bg-[#6366F1] transition">
               + Add Facility
