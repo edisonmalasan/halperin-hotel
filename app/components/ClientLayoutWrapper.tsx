@@ -132,7 +132,7 @@ export default function ClientLayoutWrapper({
             </div>
             <div className="border-t mt-8 pt-8 text-center text-sm text-gray-600">
               <p>
-                &copy; {new Date().getFullYear()} Halperin Hotel . All Rights
+                &copy; {new Date().getFullYear()} Edison Malasan . All Rights
                 Reserved.
               </p>
             </div>

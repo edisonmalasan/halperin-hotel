@@ -27,6 +27,7 @@ export default function FacilitiesPage() {
     status: "available",
     image: null as File | null,
   });
+  const [search, setSearch] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -70,6 +71,11 @@ export default function FacilitiesPage() {
     },
   ];
 
+  // filter
+  const filteredFacilities = facilities.filter((f) =>
+    f.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <ModalProvider>
       <div className="h-full p-8 bg-[#181828]">
@@ -93,9 +99,11 @@ export default function FacilitiesPage() {
             </select>
           </div>
           {/* Search Bar */}
-          <input
+          <Input
             type="text"
             placeholder="Search by name or number..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="border rounded px-3 py-2 bg-[#232334] text-white w-full md:w-64"
           />
           {/* Facility Button */}
@@ -203,7 +211,7 @@ export default function FacilitiesPage() {
           </Modal>
         </div>
         {/* Table */}
-        <FacilitiesTable data={facilities} />
+        <FacilitiesTable data={filteredFacilities} />
       </div>
     </ModalProvider>
   );
