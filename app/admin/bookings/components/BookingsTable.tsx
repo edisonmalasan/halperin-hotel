@@ -127,7 +127,7 @@ export const columns: ColumnDef<Booking>[] = [
   },
   {
     accessorKey: "room",
-    header: "Room",
+    header: "Facility",
     cell: ({ row }) => <span>{row.getValue("room")}</span>,
   },
   {
@@ -193,7 +193,13 @@ export const columns: ColumnDef<Booking>[] = [
   },
 ];
 
-export function BookingsTable({ data, onAction }: { data: Booking[]; onAction?: () => void }) {
+export function BookingsTable({
+  data,
+  onAction,
+}: {
+  data: Booking[];
+  onAction?: () => void;
+}) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

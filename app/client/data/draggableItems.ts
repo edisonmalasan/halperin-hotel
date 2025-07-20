@@ -6,39 +6,39 @@ export const draggableItems = [
   //   className: "absolute top-70 left-[20%] rotate-[-5deg]",
   // },
   {
-    title: "The Narrator",
+    title: "superior-balcony",
     image:
-      "https://images.unsplash.com/photo-1697909623564-3dae17f6c20b?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/rooms/superior-balcony/superior-balcony-tab-2.png",
     className: "absolute top-100 left-[25%] rotate-[-7deg]",
   },
   {
-    title: "Iceland",
+    title: "bungalow-patio",
     image:
-      "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=2600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/rooms/bungalow-patio/bungalow-patio-tab-2.png",
     className: "absolute top-65 left-[40%] rotate-[8deg]",
   },
   {
-    title: "Japan",
+    title: "Cabana Cafe",
     image:
-      "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=3648&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/dining/cabana-cafe/cabana-cafe-tab-2.png",
     className: "absolute top-102 left-[55%] rotate-[10deg]",
   },
   {
-    title: "Norway",
+    title: "Polo Lounge",
     image:
-      "https://images.unsplash.com/photo-1421789665209-c9b2a435e3dc?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/occasions/meetings/meetings-open.png",
     className: "absolute top-90 right-[35%] rotate-[2deg]",
   },
   {
-    title: "New Zealand",
+    title: "Pool Area",
     image:
-      "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/homepage/TabsData/pool.png",
     className: "absolute top-94 left-[45%] rotate-[-7deg]",
   },
   {
-    title: "Canada",
+    title: "Halperin Hotel Entrance",
     image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "/images/homepage/TabsData/occasions.png",
     className: "absolute top-78 left-[30%] rotate-[4deg]",
   },
 ];
