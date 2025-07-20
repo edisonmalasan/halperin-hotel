@@ -4,8 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import ClientLayoutWrapper from "./components/ClientLayoutWrapper"; // make sure path is correct
-
+import ClientLayoutWrapper from "./components/ClientLayoutWrapper";
 const notoSans = Noto_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],

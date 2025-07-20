@@ -20,12 +20,12 @@ import { tabsData } from "./client/data/tabsData";
 export default function HomePage() {
   /* SECTION 1 VARS */
 
-  // Video player state
+  // video state
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Autoplay video on mount
+  //auto play video on load
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true;
@@ -36,7 +36,7 @@ export default function HomePage() {
     }
   }, []);
 
-  // Toggle play/pause functionality
+  //  play/pause
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
@@ -48,7 +48,7 @@ export default function HomePage() {
     }
   };
 
-  // Toggle mute/unmute functionality
+  //mute/unmute
   const toggleMute = () => {
     if (!videoRef.current) return;
     videoRef.current.muted = !videoRef.current.muted;
@@ -80,7 +80,7 @@ export default function HomePage() {
         {/* vid layr */}
         <video
           ref={videoRef}
-          src="/videos/halperin-hotel.mp4"
+          src="/videos/halperin-hotel-1.mp4"
           autoPlay
           muted={isMuted}
           loop
