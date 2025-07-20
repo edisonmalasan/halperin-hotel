@@ -80,7 +80,7 @@ export default function HomePage() {
         {/* vid layr */}
         <video
           ref={videoRef}
-          src="/videos/halperin-hotel-1.mp4"
+          src="/videos/halperin-hotel.mp4"
           autoPlay
           muted={isMuted}
           loop
