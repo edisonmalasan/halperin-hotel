@@ -67,7 +67,7 @@ function formatDateTime(dt: string | null) {
   if (!dt) return "-";
   let d;
   try {
-    // if dt contains t & z dont add another z
+    // if dt contains t and z dont add another z
     let isoString = dt.includes("T") ? dt : dt.replace(" ", "T");
     if (!isoString.endsWith("Z")) isoString += "Z";
     d = new Date(isoString);
